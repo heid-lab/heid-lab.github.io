@@ -1,0 +1,1359 @@
+/* ============================================================
+   HEID Lab
+   Lato throughout — light headings, regular body
+   White · near-black · soft-yellow accent · big imagery
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f6f6f4;
+  --text: #1c1e21;
+  --muted: #616a74;
+  --faint: #9aa0a8;
+  --border: #e2e2e2;
+  --border-strong: #cfd1d4;
+  --accent: #fddc70;
+  --accent-strong: #f6cf49;
+  --ink: #000000;
+  --deep: #1f2a37; /* dark steel-blue sampled from the hero — for deep bands */
+
+  --head: 'Lato', Helvetica, Arial, sans-serif;
+  --body: 'Lato', Helvetica, Arial, sans-serif;
+
+  --max: 78rem;
+  --measure: 95ch;
+  --pad-x: clamp(1.25rem, 4vw, 3rem);
+}
+
+* { box-sizing: border-box; }
+/* 90% root size: scales every rem-based length. Viewport units (vw/vh)
+   deliberately left alone, so this matches browser zoom at 90%. */
+html { font-size: 90%; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--body);
+  color: var(--text);
+  background: var(--bg);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 { font-family: var(--head); font-weight: 300; line-height: 1.25; margin: 0; letter-spacing: 0; }
+
+a { color: var(--text); text-decoration: none; }
+a:hover { color: #000; }
+::selection { background: var(--accent); color: #1c1e21; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad-x); }
+
+/* Eyebrow / overline */
+.eyebrow {
+  display: block;
+  font-family: var(--head);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  margin: 0 0 1.4rem;
+}
+.eyebrow::after {
+  content: ""; display: block; width: 42px; height: 3px;
+  background: var(--accent); margin-top: 0.9rem;
+}
+
+.lead { font-family: var(--body); font-size: 1.28rem; line-height: 1.7; color: var(--muted); max-width: var(--measure); margin: 0; }
+.lead_group { font-family: var(--body); font-size: 1.28rem; line-height: 1.7; max-width: var(--measure); margin: 0; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--head); font-size: 0.8rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  padding: 0.95rem 1.8rem; border-radius: 2px;
+  border: 2px solid transparent; cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.btn .arrow { transition: transform 0.2s ease; }
+.btn:hover .arrow { transform: translateX(4px); }
+.btn-primary { background: var(--accent); color: #1c1e21; }
+.btn-primary:hover { background: var(--accent-strong); color: #1c1e21; }
+.btn-outline { border-color: currentColor; color: var(--text); }
+.btn-outline:hover { background: var(--text); color: #fff; border-color: var(--text); }
+/* Lighter, thinner outline: hairline border in muted tone, tighter padding. */
+.btn-outline--light {
+  border-width: 1px; border-color: var(--border); color: var(--muted);
+  padding: 0.7rem 1.4rem;
+}
+.btn-outline--light:hover { background: var(--text); color: #fff; border-color: var(--text); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem; }
+
+/* Arrow link */
+.link-arrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--head); font-weight: 700; font-size: 0.85rem;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--text);
+}
+.link-arrow .arrow { transition: transform 0.2s ease; }
+.link-arrow:hover .arrow { transform: translateX(4px); }
+.link-arrow:hover { color: #000; }
+
+/* ---------- Header / Nav ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 60;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-wrap {
+  max-width: var(--max); margin: 0 auto; padding: 1.05rem var(--pad-x);
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
+  transition: padding 0.25s ease;
+}
+/* Condensed state, toggled by header.js once the page is scrolled. */
+.site-header.is-scrolled { box-shadow: 0 6px 22px -16px rgba(0, 0, 0, 0.45); }
+.site-header.is-scrolled .nav-wrap { padding-top: 0.55rem; padding-bottom: 0.55rem; }
+.site-header.is-scrolled .main-nav a.nav-cta { padding-top: 0.45rem; padding-bottom: 0.45rem; }
+
+.brand { font-family: var(--head); font-weight: 700; font-size: 1.15rem; letter-spacing: 0.02em; color: var(--text); text-transform: uppercase; }
+.brand:hover { color: #000; }
+.brand span { font-weight: 300; }
+
+.main-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 1.6rem; }
+.main-nav a {
+  position: relative; font-family: var(--head);
+  font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.main-nav a:hover { color: var(--text); }
+.main-nav a.active { color: var(--text); }
+.main-nav a.active::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 3px; background: var(--accent);
+}
+.main-nav a.nav-cta {
+  color: #1c1e21; background: var(--accent); padding: 0.55rem 1.1rem; border-radius: 2px;
+  transition: padding 0.25s ease, background 0.2s ease;
+}
+.main-nav a.nav-cta:hover { background: var(--accent-strong); color: #1c1e21; }
+.main-nav a.nav-cta::after { display: none; }
+
+/* ---------- Full-bleed cover hero ---------- */
+.hero-cover {
+  position: relative; min-height: 88vh;
+  display: flex; align-items: flex-end; overflow: hidden;
+}
+/* The photo is sized by its own aspect ratio so its full height shows inside
+   the 88vh band; the leftover width either side is filled by the gradients
+   below, which are anchored to the photo's edges (right/left: 100%) and so
+   start on its exact edge color at any window size. Below the width where
+   the photo would need to exceed 100%, max-width caps it and object-fit
+   crops as before, so narrow screens are unaffected. Edge colors sampled
+   from the image — resample if you swap the photo. */
+.hero-cover .hero-media {
+  position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto;
+  height: 100%; max-width: 100%;
+  aspect-ratio: 6768 / 3909;
+}
+.hero-cover .hero-bg {
+  display: block; width: 100%; height: 100%;
+  object-fit: cover; object-position: center 25%;
+}
+/* Mirrored copies extend the photo sideways. A flat color can't work here:
+   the photo's edge tone shifts from bright wall to dark glass down its
+   height, so any single color steps visibly at the seam. Mirroring is
+   continuous by construction — the pixel touching the seam is the same image
+   column on both sides, at every height. Same box and object-fit as the sharp
+   copy, so the crop matches. */
+.hero-cover .hero-edge {
+  position: absolute; top: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center 25%;
+  transform: scaleX(-1);
+}
+.hero-cover .hero-edge--l { right: 100%; }
+.hero-cover .hero-edge--r { left: 100%; }
+/* Fade outward from the photo's edges. Transparent at the seam, so it tints
+   the extension without ever introducing a hard line. */
+.hero-cover .hero-media::before,
+.hero-cover .hero-media::after {
+  content: ""; position: absolute; top: 0; bottom: 0; width: 50vw;
+}
+.hero-cover .hero-media::before {
+  right: 100%;
+  background: linear-gradient(to left, rgba(18, 24, 31, 0) 0%, rgba(18, 24, 31, 0.55) 70%, rgba(18, 24, 31, 0.68) 100%);
+}
+.hero-cover .hero-media::after {
+  left: 100%;
+  background: linear-gradient(to right, rgba(18, 24, 31, 0) 0%, rgba(18, 24, 31, 0.55) 70%, rgba(18, 24, 31, 0.68) 100%);
+}
+.hero-cover::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.72) 100%);
+}
+.hero-cover .hero-content {
+  position: relative; z-index: 2; width: 100%;
+  max-width: var(--max); margin: 0 auto;
+  /* The extra 3.9rem lifts the block so the eyebrow rests just above the
+     horizontal mullion in the photo rather than colliding with it. */
+  padding: 0 var(--pad-x) calc(clamp(3rem, 7vw, 6rem) - 1.5rem);
+  color: #fff;
+}
+.hero-cover .eyebrow { color: var(--accent); }
+.hero-cover .eyebrow::after { background: var(--accent); }
+.hero-cover h1 {
+  color: #fff; font-weight: 400;
+  font-size: clamp(2.6rem, 7vw, 5rem); line-height: 1.15; letter-spacing: 0;
+  max-width: 16ch;
+}
+.hero-cover .lead { color: rgba(255, 255, 255, 0.88); margin-top: 1.5rem; max-width: 52ch; }
+/* Photographer credit pinned to the hero corner, above the dark overlay. */
+.hero-cover .hero-credit {
+  position: absolute; z-index: 3; right: 0.9rem; bottom: 0.6rem;
+  margin: 0; font-family: var(--head); font-size: 0.66rem; font-weight: 400;
+  letter-spacing: 0.04em; color: rgba(255, 255, 255, 0.62);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- Sections ---------- */
+.section { padding: clamp(3.5rem, 8vw, 7rem) 0; }
+.section--alt { background: var(--bg-alt); }
+.section-head { max-width: var(--measure); margin-bottom: 2.5rem; }
+.section-head h2 { font-size: clamp(1.9rem, 4vw, 3rem); }
+.section-head p { color: var(--muted); margin: 1rem 0 0; }
+
+/* Split image + text */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+.split-media img { display: block; width: 100%; height: 100%; max-height: 35rem; object-fit: cover; border-radius: 3px; }
+.split-body h2 { font-size: clamp(1.9rem, 4vw, 3rem); margin-bottom: 1.25rem; }
+
+/* Crossfading slideshow */
+.slideshow { position: relative; aspect-ratio: 6 / 5; max-height: 35rem; border-radius: 3px; overflow: hidden; background: var(--ink); }
+.slideshow-track { position: absolute; inset: 0; }
+.slideshow img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; max-height: none; object-fit: cover;
+  opacity: 0; transition: opacity 1.4s ease;
+}
+.slideshow img.is-active { opacity: 1; }
+
+/* Abstract chevron arrows */
+.slideshow-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 2; width: 44px; height: 44px; padding: 0;
+  display: grid; place-items: center;
+  background: none; border: 0; cursor: pointer;
+  color: #fff; opacity: 0.7;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.slideshow-arrow svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5)); }
+.slideshow-arrow:hover { opacity: 1; }
+.slideshow-arrow--prev { left: 0.35rem; }
+.slideshow-arrow--next { right: 0.35rem; }
+.slideshow-arrow--prev:hover { transform: translateY(-50%) translateX(-3px); }
+.slideshow-arrow--next:hover { transform: translateY(-50%) translateX(3px); }
+.slideshow-arrow:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; opacity: 1; }
+
+/* Position dots */
+.slideshow-dots {
+  position: absolute; right: 0.9rem; bottom: 0.9rem; z-index: 2;
+  display: flex; gap: 0.5rem;
+}
+.slideshow-dots button {
+  width: 9px; height: 9px; padding: 0; border-radius: 50%;
+  background: none; border: 1.5px solid rgba(255, 255, 255, 0.85);
+  cursor: pointer; transition: background 0.25s ease;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+}
+.slideshow-dots button[aria-current="true"] { background: #fff; }
+.slideshow-dots button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .slideshow img { transition: none; }
+}
+
+/* Nudge the group slideshow a little lower so it sits better against the text
+   column. Desktop split only — the stacked mobile layout keeps it in place. */
+@media (min-width: 861px) {
+  .slideshow { transform: translateY(2rem); }
+}
+
+.split-body p { color: var(--muted); margin: 0 0 1.15rem; }
+@media (max-width: 860px) {
+  .split { grid-template-columns: 1fr; }
+  .split-media img { max-height: 60vh; }
+}
+
+/* ---------- Dark statement band ---------- */
+.band { background: var(--ink); color: #fff; }
+.band .wrap { padding-top: clamp(3.5rem, 7vw, 5.5rem); padding-bottom: clamp(3.5rem, 7vw, 5.5rem); }
+.band .eyebrow { color: var(--accent); }
+.band h2 { color: #fff; font-size: clamp(2rem, 4.5vw, 3.2rem); }
+.band p { color: rgba(255, 255, 255, 0.72); margin: 1.2rem 0 0; max-width: 95ch; }
+.band .btn-outline { color: #fff; }
+.band .btn-outline:hover { background: #fff; color: #000; }
+
+/* Funder logo on a white plaque — the EU/ERC marks need to sit on a light
+   background with clear space around them per their brand guidelines. */
+.funding-badge {
+  display: inline-block; background: #fff; border-radius: 6px;
+  padding: clamp(0.75rem, 2vw, 1.05rem) clamp(1rem, 2.5vw, 1.5rem);
+}
+.funding-badge img { display: block; height: clamp(3.25rem, 6vw, 4.5rem); width: auto; }
+
+
+/* Two grant boxes side by side on the funding band — subtle translucent panels
+   on the dark ground; each funder logo keeps its required white plaque. Links
+   bottom-align (margin-top: auto) so both cards read evenly regardless of copy. */
+.grant-cards { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.25rem, 3vw, 2rem); margin-top: clamp(2rem, 4vw, 2.75rem); }
+.grant-card {
+  display: flex; flex-direction: column; align-items: flex-start;
+  background: rgba(47, 62, 82, 0.4); border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 4px; padding: clamp(1.5rem, 3vw, 2rem);
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+.grant-card:hover { border-color: rgba(255, 255, 255, 0.32); background: rgba(47, 62, 82, 0.7); transform: translateY(-3px); }
+.grant-card .funding-badge { margin-bottom: 1.35rem; }
+.grant-card .funding-badge img { height: clamp(2.4rem, 4.5vw, 3rem); }
+/* ERC logo reads smaller than the FWF mark, so enlarge it — but shrink the
+   plaque's vertical padding by the same amount so the white box height matches
+   the FWF card exactly. (+1rem logo, -0.5rem top & bottom padding.) The box is
+   allowed to grow wider (more horizontal padding); only its height is pinned. */
+.grant-card .funding-badge--erc {
+  padding-top: clamp(0.25rem, 0.9vw, 0.55rem); padding-bottom: clamp(0.25rem, 0.9vw, 0.55rem);
+  padding-left: clamp(1.35rem, 3.4vw, 2rem); padding-right: clamp(1.35rem, 3.4vw, 2rem);
+}
+.grant-card .funding-badge--erc img { height: clamp(3.4rem, 6.7vw, 4rem); }
+.grant-meta { font-family: var(--head); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin: 0 0 0.5rem; }
+.grant-card h3 { font-family: var(--head); font-weight: 700; font-size: 1.3rem; color: #fff; margin: 0 0 0.6rem; }
+.band .grant-card p { color: rgba(255, 255, 255, 0.72); margin: 0; max-width: none; font-size: 0.96rem; line-height: 1.65; }
+.grant-card .link-arrow { margin-top: auto; padding-top: 1.35rem; }
+@media (max-width: 700px) { .grant-cards { grid-template-columns: 1fr; } }
+
+/* ---------- Interior pages (plain <main>) ---------- */
+main { display: block; max-width: var(--max); margin: 0 auto; padding: clamp(3.5rem, 8vw, 5.5rem) var(--pad-x) clamp(4rem, 9vw, 6.5rem); }
+main > h1 { font-size: clamp(2.4rem, 5.5vw, 3.6rem); margin: 0 0 1.4rem; }
+main > h1 + p { font-size: 1.28rem; line-height: 1.7; color: var(--muted); max-width: var(--measure); margin: 0 0 1.4rem; }
+main > p, main > ul.clean { max-width: var(--measure); }
+main > p { color: var(--muted); margin: 0 0 1.2rem; }
+main h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin: 3.5rem 0 1rem; }
+main h3 { font-size: 1.2rem; font-family: var(--head); font-weight: 700; margin: 2rem 0 0.5rem; }
+main :is(p, li) a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
+main :is(p, li) a:hover { color: #000; }
+
+/* ---------- Cards / grids ---------- */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr)); gap: 1.5rem; margin-top: 2.25rem; }
+.card {
+  border: 1px solid var(--border); background: var(--bg); padding: 1.75rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.card:hover { border-color: var(--border-strong); box-shadow: 0 18px 44px -26px rgba(0, 0, 0, 0.25); transform: translateY(-3px); }
+.card h3 { font-family: var(--head); font-size: 1.25rem; font-weight: 700; margin: 0 0 0.5rem; }
+.card h3 a { color: var(--text); }
+.card h3 a:hover { color: #000; }
+.card .role { font-family: var(--head); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin: 0 0 0.9rem; }
+.card p { margin: 0; color: var(--muted); font-size: 0.96rem; line-height: 1.65; }
+.card p + p { margin-top: 0.7rem; }
+.card .link-arrow { margin-top: 1.2rem; }
+
+.avatar {
+  width: 4.75rem; height: 4.75rem; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--bg-alt);
+  margin-bottom: 1.1rem; display: flex; align-items: center; justify-content: center;
+  font-family: var(--head); font-weight: 700; color: var(--faint); font-size: 1rem;
+  object-fit: cover; overflow: hidden;
+}
+
+/* Social icons */
+.icon { width: 1.1875rem; height: 1.1875rem; fill: currentColor; vertical-align: -0.18em; }
+a:has(> svg.icon) { color: var(--faint); display: inline-flex; }
+a:has(> svg.icon):hover { color: var(--text); }
+
+/* Profile */
+.profile { display: flex; gap: clamp(2rem, 5vw, 3.5rem); align-items: flex-start; flex-wrap: wrap; }
+.profile .photo {
+  width: 260px; height: 320px; border-radius: 3px; border: 1px solid var(--border); background: var(--bg-alt);
+  flex-shrink: 0; overflow: hidden; display: flex; align-items: center; justify-content: center;
+  color: var(--faint); font-family: var(--head); font-size: 2rem;
+}
+.profile .bio { flex: 1; min-width: 18.75rem; }
+.profile .bio h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); margin: 0 0 0.4rem; }
+.profile .bio .role { font-family: var(--head); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin: 0 0 1.3rem; }
+.profile .bio p { color: var(--muted); margin: 0 0 1.15rem; }
+
+/* Clean lists */
+ul.clean { list-style: none; padding: 0; margin: 2rem 0 0; max-width: var(--measure); }
+ul.clean li { padding: 1.4rem 0; border-bottom: 1px solid var(--border); }
+ul.clean li:first-child { border-top: 1px solid var(--border); }
+ul.clean li strong { font-family: var(--head); font-weight: 700; }
+.pub-year { display: block; font-family: var(--head); font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--faint); margin-bottom: 0.35rem; }
+
+/* Publications — two-column citation layout.
+   The whole list runs to the full container width (overriding the narrow
+   --measure that ul.clean uses elsewhere) so titles and author lists get the
+   room on the right. Each entry is a grid: a fixed meta rail on the left
+   (journal · volume · year, plus any tag) and the title + authors on the
+   right. Rows are kept tight. */
+main > ul.clean.pubs { max-width: var(--max); }
+.pubs .pub {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 0.4rem;
+  padding: 1rem 0;
+}
+.pub .pub-meta {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 0.55rem;
+  font-family: var(--head); font-size: 0.74rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.5;
+  color: var(--muted); margin: 0;
+}
+.pub .pub-tag { display: inline-block; font-family: var(--head); font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); background: var(--bg-alt); border: 1px solid var(--border-strong); border-radius: 999px; padding: 0.1rem 0.55rem; line-height: 1.4; }
+.pub-title { display: block; font-family: var(--head); font-weight: 700; color: var(--text); font-size: 1.06rem; line-height: 1.4; }
+a.pub-title { color: var(--text); }
+a.pub-title:hover { color: #000; }
+.pub .authors { display: block; color: var(--muted); margin: 0.3rem 0 0; font-size: 0.9rem; line-height: 1.5; }
+.tags { margin: 0 0 0.9rem; }
+.tag { display: inline-block; font-family: var(--head); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); background: var(--bg-alt); border: 1px solid var(--border); padding: 0.25rem 0.75rem; margin: 0 0.4rem 0.4rem 0; }
+
+/* ---------- Current courses — featured banner (teaching) ---------- */
+/* A flat off-white panel that lifts the courses currently being taught out of
+   the plain page flow, in the same language as the rest of the site: soft gray
+   fill, hairline border, and a soft-yellow accent rail on the left. The courses
+   themselves are clickable cards linking to TISS. */
+.current-courses {
+  max-width: var(--max); margin: 2.25rem 0 0;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent-strong);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+}
+.current-courses-head { margin-bottom: 1.5rem; }
+.current-courses-head .eyebrow { margin-bottom: 0.7rem; }
+.current-courses-head h2 { margin: 0; font-size: clamp(1.5rem, 2.6vw, 1.95rem); }
+.course-cards {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.15rem;
+}
+.course-card {
+  display: flex; flex-direction: column;
+  background: var(--bg); border: 1px solid var(--border);
+  padding: 1.5rem;
+  color: var(--text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.course-card:hover {
+  border-color: var(--accent-strong);
+  box-shadow: 0 18px 44px -26px rgba(0, 0, 0, 0.25);
+  transform: translateY(-3px);
+  color: var(--text);
+}
+.course-card .course-meta {
+  font-family: var(--head); font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted);
+}
+.course-card h3 {
+  font-family: var(--head); font-weight: 700; font-size: 1.18rem; line-height: 1.35;
+  margin: 0.55rem 0 0;
+}
+.course-card p { margin: 0.7rem 0 0; color: var(--muted); font-size: 0.94rem; line-height: 1.6; }
+.course-card .course-link {
+  margin-top: auto; padding-top: 1.1rem;
+  font-family: var(--head); font-size: 0.78rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em; color: var(--text);
+}
+.course-card .course-link span { display: inline-block; transition: transform 0.2s ease; }
+.course-card:hover .course-link span { transform: translateX(4px); }
+
+/* ---------- Data table (teaching: recurring courses) ---------- */
+/* Wide content scrolls inside its own container so the page body never scrolls
+   sideways on narrow screens. */
+.table-scroll { max-width: var(--measure); margin: 2rem 0 0; overflow-x: auto; }
+.course-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.96rem; line-height: 1.5;
+}
+.course-table th, .course-table td {
+  text-align: left; padding: 0.85rem 1.25rem 0.85rem 0;
+  border-bottom: 1px solid var(--border); vertical-align: top;
+  white-space: nowrap;
+}
+.course-table td:last-child, .course-table th:last-child {
+  padding-right: 0; white-space: normal;
+}
+.course-table thead th {
+  font-family: var(--head); font-size: 0.74rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted);
+  border-bottom: 1px solid var(--border-strong);
+}
+.course-table tbody td { color: var(--text); }
+.course-table tbody td:first-child {
+  font-family: var(--head); font-weight: 700; color: var(--muted);
+}
+.course-table tbody tr:hover td { background: var(--bg-alt); }
+
+/* ---------- Inner-page hero ---------- */
+/* Same language as the landing hero, shorter, and without the mirrored-edge
+   treatment — inner heroes use group photos that fill the width happily. */
+.page-hero {
+  --hero-h: 62vh;      /* band height */
+  --hero-zoom: 100vw;  /* THE zoom — the photo's on-screen width.
+                          100vw = full-bleed (no mirror). Lower it to zoom out;
+                          once it's below the window width the mirrored copies
+                          fill the leftover sides automatically. */
+  --hero-y: 60px;      /* moves the visible window UP — higher value = more
+                          headroom above the heads (crops more off the bottom) */
+  position: relative; min-height: var(--hero-h);
+  display: flex; align-items: flex-end; overflow: hidden;
+  background: var(--ink);
+}
+/* The photo is sized --hero-zoom wide at its true aspect (never distorted or
+   side-cropped) and anchored to the bottom so the group stays in frame; the
+   band clips the top. Mirrored copies sit flush at its left/right edges and
+   only appear once it's narrower than the window. aspect-ratio = image size. */
+.page-hero .hero-media {
+  position: absolute; left: 50%; bottom: calc(-1 * var(--hero-y));
+  transform: translateX(-50%);
+  width: var(--hero-zoom); aspect-ratio: 2400 / 1577;
+}
+.page-hero .hero-bg { display: block; width: 100%; height: 100%; object-fit: cover; }
+.page-hero .hero-edge {
+  position: absolute; top: 0; width: 100%; height: 100%;
+  object-fit: cover; transform: scaleX(-1);
+}
+.page-hero .hero-edge--l { right: 100%; }
+.page-hero .hero-edge--r { left: 100%; }
+.page-hero::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.12) 42%, rgba(0,0,0,0.78) 100%);
+}
+.page-hero .hero-content {
+  position: relative; z-index: 2; width: 100%;
+  max-width: var(--max); margin: 0 auto;
+  padding: 0 var(--pad-x) clamp(2.25rem, 4.5vw, 3.75rem);
+  color: #fff;
+}
+/* Soft dark panel behind the text for legibility over the photo. It hugs the
+   text block (an inline-block wrapper, so it's exactly as wide as the widest
+   line), and filter:blur() feathers the edges into a halo rather than a box.
+   The inset keeps it tight to the text — small above, a little to the sides. */
+.page-hero .hero-text { position: relative; display: inline-block; max-width: 100%; }
+.page-hero .hero-text > * { position: relative; z-index: 1; }
+.page-hero .hero-text::before {
+  content: ""; position: absolute; z-index: 0;
+  inset: -0.55rem -1.6rem -0.85rem;
+  background: rgba(12, 16, 22, 0.54);
+  border-radius: 1.5rem;
+  filter: blur(24px);
+}
+.page-hero .eyebrow { color: var(--accent); }
+.page-hero .eyebrow::after { background: var(--accent); }
+.page-hero h1 {
+  color: #fff; font-weight: 400;
+  font-size: clamp(2.2rem, 5.5vw, 3.9rem); line-height: 1.15; max-width: 18ch;
+}
+.page-hero .lead { color: rgba(255, 255, 255, 0.88); margin-top: 1.15rem; max-width: 48ch; }
+
+/* ---------- Team roster ---------- */
+/* Row per person rather than a card grid: the bios vary from two lines to
+   three paragraphs, which makes equal-height cards look broken. Rows just
+   grow, and the hairline rules keep the rhythm. */
+.roster { list-style: none; margin: 2.5rem 0 0; padding: 0; }
+.roster > li {
+  display: grid; grid-template-columns: 11.5rem 1fr;
+  gap: clamp(1.5rem, 3.5vw, 3rem);
+  padding: clamp(1.75rem, 3vw, 2.5rem) 0;
+  border-top: 1px solid var(--border);
+}
+.roster > li:last-child { border-bottom: 1px solid var(--border); }
+.roster--lead > li { grid-template-columns: 21rem 1fr; border-top: 0; padding-top: 0; align-items: stretch; }
+.roster--lead > li:last-child { border-bottom: 0; }
+/* Drop the PI portrait so its top edge lines up with the name heading rather
+   than the top of the text column, then let it stretch so its bottom edge
+   lines up with the bottom of the bio text alongside it. */
+.roster--lead .person-photo { margin-top: 0.6rem; display: flex; flex-direction: column; }
+.roster--lead .person-photo img {
+  aspect-ratio: auto; flex: 1 1 auto; min-height: 0;
+}
+/* On the PI's full profile (pi.html) the content column is far taller than the
+   short About-us bio, which would stretch the portrait to an oversized shape.
+   Pin it back to the exact same fixed 4/5 portrait used on the About-us page
+   instead of letting it stretch to the row height. */
+.section--alt .roster--lead .person-photo img {
+  aspect-ratio: 4 / 5; flex: 0 0 auto;
+}
+
+.person-photo img, .person-photo .initials {
+  display: block; width: 100%; aspect-ratio: 4 / 5;
+  object-fit: cover; border-radius: 3px;
+}
+/* Photographer credit under a portrait. */
+.photo-credit {
+  margin: 0.4rem 0 0; font-family: var(--head);
+  font-size: 0.66rem; font-weight: 400; letter-spacing: 0.04em;
+  color: var(--faint);
+}
+.person-photo .initials {
+  display: grid; place-items: center;
+  background: var(--bg-alt); border: 1px solid var(--border);
+  font-family: var(--head); font-weight: 300; font-size: 2.2rem;
+  letter-spacing: 0.06em; color: var(--faint);
+}
+.person-body h3 { font-family: var(--head); font-size: 1.4rem; font-weight: 700; margin: 0 0 0.3rem; }
+.roster--lead .person-body h3 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 300; }
+.person-role {
+  font-family: var(--head); font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
+  margin: 0 0 1.1rem;
+}
+.person-body > p { color: var(--muted); margin: 0 0 1rem; max-width: var(--measure); }
+.person-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem; margin: 1.25rem 0 0; }
+.person-links a { display: inline-flex; align-items: center; color: var(--muted); }
+.person-links a:hover { color: var(--text); }
+.person-links .mail {
+  font-size: 0.92rem;
+  text-decoration: underline; text-underline-offset: 3px;
+  text-decoration-color: var(--accent); text-decoration-thickness: 2px;
+}
+
+/* Award badges beneath the PI role — the ERC / FWF honours as small pill
+   links, each carrying through to its grant page. Sits between the role line
+   and the bio, so the two flagship grants read at a glance. */
+.person-body > p.pi-badges { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0 0 1.5rem; }
+.pi-badge {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-family: var(--head); font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.01em; color: var(--text);
+  background: var(--bg-alt); border: 1px solid var(--border-strong);
+  border-radius: 999px; padding: 0.4rem 0.9rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.pi-badge:hover { color: #000; border-color: var(--accent-strong); background: #fff; }
+
+/* PI lead row: photo and bio as two columns, with a full-width contact/action
+   bar beneath — email + social links on the left, Full profile on the right,
+   set off by a hairline. */
+.person-foot {
+  grid-column: 1 / -1;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 0.9rem 2rem; margin-top: clamp(1.25rem, 2.5vw, 2rem);
+  padding-top: 1.3rem; border-top: 1px solid var(--border);
+}
+.person-foot .person-links { margin: 0; }
+
+/* PI contact/action row: sits beneath the bio inside the text column. The
+   "Full profile" outline button on the left, email + social icons on the right. */
+.pi-cta-box {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 0.9rem 2rem;
+  margin-top: clamp(1.25rem, 2.5vw, 2rem);
+}
+.pi-cta-box .person-links { margin: 0; }
+
+@media (max-width: 40rem) {
+  .roster > li, .roster--lead > li { grid-template-columns: 1fr; }
+  .person-photo { max-width: 10rem; }
+}
+
+/* CV timeline — dates in a fixed left column against a rail, so the eye can
+   scan the chronology without reading every entry. */
+.cv { --rail: 10.5rem; list-style: none; position: relative; margin: 2.5rem 0 0; padding: 0; }
+.cv::before {
+  content: ""; position: absolute; left: var(--rail); top: 0.5rem; bottom: 0.5rem;
+  width: 2px; background: var(--border);
+}
+.cv > li {
+  position: relative; display: grid;
+  grid-template-columns: var(--rail) 1fr; gap: clamp(1.75rem, 3vw, 2.5rem);
+  padding-bottom: 2.25rem;
+}
+.cv > li:last-child { padding-bottom: 0; }
+.cv > li::before {
+  content: ""; position: absolute; left: calc(var(--rail) - 5px); top: 0.4rem;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--ink); border: 2px solid var(--bg);
+}
+.cv-when {
+  text-align: right; padding-right: 1.5rem; padding-top: 0.15rem;
+  font-family: var(--head); font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted);
+}
+.cv-what h3 { font-family: var(--head); font-size: 1.15rem; font-weight: 700; margin: 0 0 0.2rem; }
+.cv-where { font-size: 0.95rem; color: var(--text); margin: 0 0 0.4rem; }
+.cv-what p { color: var(--muted); margin: 0; max-width: var(--measure); font-size: 0.95rem; }
+@media (max-width: 40rem) {
+  .cv { --rail: 0px; }
+  .cv::before { left: 5px; }
+  .cv > li { grid-template-columns: 1fr; gap: 0.4rem; padding-left: 1.9rem; }
+  .cv > li::before { left: 0; }
+  .cv-when { text-align: left; padding-right: 0; }
+}
+
+/* Awards grouped by year — one big numeral per year instead of fourteen
+   identical bullets. */
+.awards { margin-top: 2.5rem; }
+.award-year {
+  display: grid; grid-template-columns: 7rem 1fr;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding: 1.6rem 0; border-top: 1px solid var(--border);
+}
+.award-year:last-child { border-bottom: 1px solid var(--border); }
+.ay-num {
+  font-family: var(--head); font-weight: 300; line-height: 1; white-space: nowrap;
+  font-size: clamp(1.9rem, 4vw, 2.7rem); color: var(--accent-strong);
+}
+.award-year ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
+.award-year li { color: var(--muted); max-width: var(--measure); }
+.award-year li strong { font-family: var(--head); font-weight: 700; color: var(--text); }
+@media (max-width: 34rem) {
+  .award-year { grid-template-columns: 1fr; gap: 0.75rem; }
+}
+
+/* ---------- Contact ---------- */
+.section-head h1 { font-size: clamp(2.4rem, 5.5vw, 3.6rem); margin: 0 0 0.5rem; }
+.contact-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.75rem); margin-top: 1rem;
+}
+.contact-block h3 {
+  font-family: var(--head); font-size: 0.74rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
+  margin: 0 0 0.9rem; padding-bottom: 0.7rem; border-bottom: 1px solid var(--border);
+}
+.contact-block p { margin: 0 0 0.55rem; color: var(--muted); }
+.contact-block p:last-child { margin-bottom: 0; }
+.contact-block a {
+  text-decoration: underline; text-underline-offset: 3px;
+  text-decoration-color: var(--accent); text-decoration-thickness: 2px;
+}
+.contact-block a:hover { color: #000; }
+.contact-block .big { font-size: 1.05rem; color: var(--text); }
+.contact-note { color: var(--muted); margin: 1.4rem 0 0; max-width: var(--measure); }
+.contact-note a {
+  text-decoration: underline; text-underline-offset: 3px;
+  text-decoration-color: var(--accent); text-decoration-thickness: 2px;
+}
+.contact-note a:hover { color: #000; }
+
+/* Map */
+.map { border: 1px solid var(--border); line-height: 0; }
+.map iframe { display: block; width: 100%; height: clamp(20rem, 46vh, 32rem); border: 0; }
+.map-note { margin: 1.1rem 0 0; }
+/* Sitting in the black band: light frame, and the arrow link has to invert. */
+.band .map { border-color: rgba(255, 255, 255, 0.22); }
+.band .link-arrow { color: #fff; }
+.band .link-arrow:hover { color: var(--accent); }
+
+/* ---------- Research: vision box ---------- */
+.vision {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  background: var(--bg-alt);
+  border-left: 4px solid var(--accent);
+  border-radius: 3px;
+  padding: clamp(1.75rem, 4vw, 3rem);
+}
+.vision .eyebrow { margin-bottom: 1rem; }
+.vision .statement {
+  font-family: var(--head); font-weight: 300;
+  font-size: clamp(1.2rem, 2.3vw, 1.6rem); line-height: 1.45;
+  color: var(--text); margin: 0; max-width: 62ch;
+}
+/* Expandable detail — native <details>, no JS. Indented inward from the
+   statement to read as a nested, secondary block. */
+.vision-more { margin-top: 1.6rem; margin-left: clamp(1rem, 2.5vw, 2rem); }
+.vision-more > summary {
+  list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--head); font-weight: 700; font-size: 0.85rem;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--text);
+}
+.vision-more > summary::-webkit-details-marker { display: none; }
+.vision-more > summary:hover { color: #000; }
+.vision-more > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.vision-more .chev { font-size: 0.8em; transition: transform 0.2s ease; }
+.vision-more[open] .chev { transform: rotate(180deg); }
+.vision-more .label-less { display: none; }
+.vision-more[open] .label-more { display: none; }
+.vision-more[open] .label-less { display: inline; }
+.vision-more-body { margin-top: 1.3rem; }
+.vision-more-body p { color: var(--muted); margin: 0 0 1rem; max-width: var(--measure); }
+.vision-more-body ul { margin: 0 0 1.15rem; padding-left: 2.65rem; max-width: var(--measure); color: var(--muted); }
+.vision-more-body li { margin: 0 0 0.5rem; }
+.vision-more-body li::marker { color: var(--accent-strong); }
+.vision .link-arrow { margin-top: 1.6rem; }
+
+/* Vision as a dark, full-bleed banner — sets the guiding perspective apart as
+   a header ahead of the research threads. Reuses the .band dark treatment, and
+   presents the vision as a single translucent card on the dark ground — the
+   same panel language as the grant cards on the landing page (one card here,
+   since the vision is a single statement rather than a pair of grants). A thin
+   accent rule tops the card to tie it back to the yellow-accent system. */
+.vision-band .vision {
+  margin: 0;
+  background: rgba(47, 62, 82, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-top: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: clamp(1.75rem, 4vw, 3rem);
+}
+.vision-band .statement { color: #fff; }
+/* The Read-more panel divides from the statement with a hairline, so the
+   expanded detail reads as a second tier within the same card. */
+.vision-band .vision-more {
+  margin-left: 0; margin-top: clamp(1.5rem, 3vw, 2rem);
+  padding-top: clamp(1.5rem, 3vw, 2rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+.vision-band .vision-more > summary { color: #fff; }
+.vision-band .vision-more > summary:hover { color: var(--accent); }
+.vision-band .vision-more-body p,
+.vision-band .vision-more-body ul { color: rgba(255, 255, 255, 0.72); }
+.vision-band .vision-more-body strong { color: #fff; }
+/* Indent the revealed content so it reads as nested under the "Show less"
+   toggle, set in from the vision statement above. */
+.vision-band .vision-more-body,
+.vision-band .vision-more[open] .btn { margin-left: clamp(1rem, 2.5vw, 2rem); }
+.vision-band .vision-more .btn-outline { color: #fff; }
+.vision-band .vision-more .btn-outline:hover { background: #fff; color: #000; border-color: #fff; }
+
+/* Keep the intro, banner and transition reading as one connected cluster.
+   The intro's default section padding + the section-head margin left ~9.5rem
+   of empty white above the banner; these tighten each gap so the banner sits
+   close to the copy it belongs with rather than floating. */
+.section--intro { padding-bottom: clamp(1.75rem, 3.5vw, 2.75rem); }
+.section--intro .section-head { margin-bottom: 0; }
+.vision-band .wrap { padding-top: clamp(2.5rem, 5vw, 3.75rem); padding-bottom: clamp(2.5rem, 5vw, 3.75rem); }
+/* Short transition that reintroduces the light ground before the threads. */
+.section--lead { padding-top: clamp(1.75rem, 3.5vw, 2.75rem); padding-bottom: clamp(1.5rem, 3vw, 2.25rem); }
+
+/* Compact two-part signpost at the top of the research page — in-page links
+   that scroll down to each part. A top hairline and an "On this page" label
+   anchor it to the intro copy so it reads as one deliberate element rather than
+   two labels floating in the section's white space; a leading accent arrow on
+   each link marks them as jump-to targets. */
+.parts {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: clamp(0.85rem, 2.5vw, 1.5rem) clamp(1.5rem, 3.5vw, 2.75rem);
+  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+  padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-top: 1px solid var(--border);
+}
+.parts-label {
+  font-family: var(--head); font-weight: 700; font-size: 0.72rem;
+  text-transform: uppercase; letter-spacing: 0.16em; color: var(--faint);
+  margin-right: 0.25rem;
+}
+.part {
+  position: relative; display: inline-flex; align-items: baseline; gap: 0.5rem;
+  font-family: var(--head); font-weight: 700;
+  font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--muted); padding-bottom: 0.3rem;
+}
+.part-arrow { color: var(--accent-strong); transition: transform 0.2s ease; }
+.part::after {
+  content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 0;
+  background: var(--accent); transition: width 0.2s ease;
+}
+.part:hover { color: var(--text); }
+.part:hover::after { width: 100%; }
+.part:hover .part-arrow { transform: translateX(3px); }
+@media (max-width: 34rem) {
+  .parts { flex-direction: column; align-items: flex-start; gap: 0.7rem; }
+  .parts-label { margin-bottom: 0.15rem; }
+}
+#vision, #areas { scroll-margin-top: 6rem; }
+
+/* ---------- Research themes ---------- */
+/* Each theme is a single prose column with the figure floated to one side, so
+   the copy wraps around and beneath it — no fixed 50/50 split, no dead space
+   next to short sections. Sides alternate down the page (--right / --left). */
+.theme .eyebrow { display: flex; align-items: baseline; gap: 0.7rem; }
+.theme .theme-num {
+  font-size: 1.5rem; font-weight: 300; letter-spacing: 0; color: var(--accent-strong);
+  -webkit-text-fill-color: var(--accent-strong);
+}
+/* "Related work" closes each theme section, sitting after the prose. It clears
+   the floated figure so it always starts a fresh full-width row beneath both
+   the copy and the image, with a hairline separating it from the body. */
+.theme-papers {
+  clear: both; margin: 2rem 0 0; padding-top: 1.6rem;
+  border-top: 1px solid var(--border);
+}
+.theme-papers .label {
+  display: block; font-family: var(--head); font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--faint); margin-bottom: 0.7rem;
+}
+.theme-papers ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; }
+.theme-papers li { color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
+.theme-papers a {
+  color: var(--text); text-decoration: underline;
+  text-underline-offset: 3px; text-decoration-color: var(--accent); text-decoration-thickness: 2px;
+}
+.theme-papers a:hover { color: #000; }
+
+/* Paired hover: hovering the inline paper link highlights its matching entry in
+   the Related work list, and vice versa. An inline link and its list item are
+   paired by sharing the same data-paper value. To add a new pair, tag both the
+   inline <a class="paper-link" data-paper="x"> and its <li data-paper="x">, then
+   add "x" to the list below. */
+.paper-link,
+.theme-papers a {
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.theme-text:has(.paper-link[data-paper="chemtorch"]:hover) .theme-papers li[data-paper="chemtorch"] a,
+.theme-text:has(.theme-papers li[data-paper="chemtorch"]:hover) .paper-link[data-paper="chemtorch"],
+.theme-text:has(.paper-link[data-paper="barriers"]:hover) .theme-papers li[data-paper="barriers"] a,
+.theme-text:has(.theme-papers li[data-paper="barriers"]:hover) .paper-link[data-paper="barriers"],
+.theme-text:has(.paper-link[data-paper="sr-smiles"]:hover) .theme-papers li[data-paper="sr-smiles"] a,
+.theme-text:has(.theme-papers li[data-paper="sr-smiles"]:hover) .paper-link[data-paper="sr-smiles"],
+.theme-text:has(.paper-link[data-paper="goflow"]:hover) .theme-papers li[data-paper="goflow"] a,
+.theme-text:has(.theme-papers li[data-paper="goflow"]:hover) .paper-link[data-paper="goflow"],
+.theme-text:has(.paper-link[data-paper="fkflow"]:hover) .theme-papers li[data-paper="fkflow"] a,
+.theme-text:has(.theme-papers li[data-paper="fkflow"]:hover) .paper-link[data-paper="fkflow"],
+.theme-text:has(.paper-link[data-paper="goflow-t1"]:hover) .theme-papers li[data-paper="goflow-t1"] a,
+.theme-text:has(.theme-papers li[data-paper="goflow-t1"]:hover) .paper-link[data-paper="goflow-t1"],
+.theme-text:has(.paper-link[data-paper="motsart"]:hover) .theme-papers li[data-paper="motsart"] a,
+.theme-text:has(.theme-papers li[data-paper="motsart"]:hover) .paper-link[data-paper="motsart"] {
+  color: #1c1e21;
+  background: rgba(253, 220, 112, 0.35);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  text-decoration-color: var(--accent-strong);
+}
+
+/* The figure floats to one side as an aside; the body prose wraps alongside it
+   and then fills the space below, with the "Related work" links closing the
+   section full-width beneath both. Sides alternate down the page
+   (--media-right / --media-left). */
+.theme-cols { display: block; }
+/* Top margin drops the figure so its top edge lines up with the section's
+   <h2> title rather than the eyebrow above it — the eyebrow row (label + rule
+   + margin) is a fixed ~3rem tall, so a static offset holds across viewports.
+   Overridden in the stacked layout below, where the aside sits after the text. */
+.theme-aside {
+  margin: 3.7rem 0 1.2rem; width: min(48%, 33rem);
+}
+.theme-cols--media-right .theme-aside { float: right; margin-left: clamp(1.75rem, 4vw, 3.5rem); }
+.theme-cols--media-left  .theme-aside { float: left;  margin-right: clamp(1.75rem, 4vw, 3.5rem); }
+.theme-media { margin: 0; }
+.theme-media img {
+  display: block; width: 100%; height: auto;
+  border: 1px solid var(--border); border-radius: 4px; background: #fff;
+}
+
+.theme-text { display: contents; }
+.theme-text h2 { font-size: clamp(1.9rem, 4vw, 3rem); margin-bottom: 1.25rem; }
+/* Justified prose — flush left and right for a clean block. Hyphenation keeps
+   the inter-word spacing even instead of opening up rivers of whitespace. */
+.theme-text p {
+  color: var(--muted); margin: 0 0 1.15rem;
+  text-align: justify; hyphens: auto;
+}
+/* Section 04 has no "Related work" block to close it, so its final paragraph
+   would half-wrap under the floated figure and read as unfinished. Clearing the
+   float drops it to a clean full-width block below the image — the same defined
+   closing edge the .theme-papers rule gives the other sections. */
+.theme-text p.theme-close { clear: both; }
+@media (max-width: 820px) {
+  /* Stack: heading + prose + related work first, then the figure — so the
+     figure no longer jumps above the section heading (the float order on
+     desktop puts the aside first in the DOM, which reads wrong stacked). */
+  .theme-cols { display: flex; flex-direction: column; }
+  .theme-text { display: contents; }
+  .theme-aside, .theme-cols--media-right .theme-aside, .theme-cols--media-left .theme-aside {
+    float: none; order: 2; width: 100%; max-width: 34rem; margin: 1.75rem 0 0;
+  }
+  /* With the figure pushed to the bottom, the related-work rule would butt
+     against it — reset the clear/border so it reads as part of the prose. */
+  .theme-papers { clear: none; }
+}
+
+/* A crisp dark rule tops each theme — the structural device instead of filled
+   dark blocks. Keeps the page light and editorial while adding contrast.
+   Spans the full content width above both columns. */
+.section.theme { padding-top: 0; padding-bottom: clamp(3rem, 5.5vw, 4.5rem); }
+.theme > .wrap {
+  border-top: 1.5px solid var(--text);
+  padding-top: clamp(2.75rem, 5vw, 4rem);
+}
+
+/* Body copy sitting directly in a .wrap (outside <main>) */
+.prose { color: var(--muted); max-width: var(--measure); margin: 0; }
+.section--cta .btn-row { margin-top: 0; }
+
+/* Skills / service */
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: clamp(1.5rem, 3vw, 2.5rem); margin-top: 2.5rem; }
+.skill h3 {
+  font-family: var(--head); font-size: 0.74rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
+  margin: 0 0 0.9rem; padding-bottom: 0.7rem; border-bottom: 1px solid var(--border);
+}
+.skill p { color: var(--muted); margin: 0; font-size: 0.95rem; }
+.skill .tags { margin: 0; }
+
+/* Closing call to action — shorter than a full section, so it reads as a
+   sign-off rather than another content block. */
+.section--cta { padding: clamp(2.75rem, 5vw, 4.5rem) 0; }
+.section--cta .section-head { margin-bottom: 1.75rem; }
+.section--cta .section-head h2 { font-size: clamp(1.5rem, 2.8vw, 2.1rem); }
+
+/* News timeline */
+.timeline { list-style: none; position: relative; margin: 2.5rem 0 0; padding: 0; max-width: 56.25rem; }
+.timeline::before {
+  content: ""; position: absolute; left: 7px; top: 10px; bottom: 10px;
+  width: 2px; background: var(--border);
+}
+.timeline > li { position: relative; padding: 0 0 2.4rem 2.6rem; }
+.timeline > li:last-child { padding-bottom: 0; }
+.timeline > li::before {
+  content: ""; position: absolute; left: 2px; top: 8px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--ink); border: 2px solid var(--bg);
+}
+/* Month heading on the rail — a tick instead of a dot, so months read as
+   structure and items as events. Costs one small line per month. */
+.timeline > li.timeline-month {
+  padding: 0.1rem 0 1.1rem 2.6rem;
+  font-family: var(--head); font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.16em; color: var(--faint);
+}
+.timeline > li.timeline-month + li { padding-top: 0; }
+.timeline > li.timeline-month::before {
+  left: 1px; top: 0.38rem;
+  width: 14px; height: 2px; border-radius: 0;
+  background: var(--border-strong); border: 0;
+}
+
+.timeline-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.85rem; }
+.timeline-date {
+  display: inline-flex; align-items: stretch; flex: none;
+  font-family: var(--head); font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.timeline-date span { background: var(--bg-alt); color: var(--text); padding: 0.35rem 0.65rem; }
+.timeline-date b { background: var(--ink); color: #fff; font-weight: 700; padding: 0.35rem 0.65rem; }
+.timeline-head h3 { font-family: var(--head); font-size: 1.15rem; font-weight: 700; margin: 0; }
+.timeline > li > p { color: var(--muted); margin: 0.6rem 0 0; }
+.timeline p a {
+  text-decoration: underline; text-underline-offset: 3px;
+  text-decoration-color: var(--accent); text-decoration-thickness: 2px;
+}
+.timeline p a:hover { color: #000; }
+
+/* Expand control for older entries */
+.timeline-more {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 1rem; max-width: 56.25rem;
+  margin-top: 1.75rem; padding-top: 1.4rem; border-top: 1px solid var(--border);
+}
+.timeline-toggle {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font-family: var(--head); font-size: 0.85rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--text);
+}
+.timeline-toggle:hover { color: #000; }
+.timeline-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.timeline-toggle .count { color: var(--faint); }
+.timeline-toggle .chev { font-size: 0.85em; transition: transform 0.2s ease; }
+.timeline-toggle[aria-expanded="true"] .chev { transform: rotate(180deg); }
+.timeline-top { background: none; border: 0; padding: 0; cursor: pointer; }
+.timeline-top:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.timeline-top[hidden] { display: none; }
+
+/* Optional photos on a news item — small square thumbs so the timeline
+   still reads as a list. Click opens the full image in the lightbox. */
+.timeline-media { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
+.timeline-thumb {
+  /* Clean, flat thumbnails — no mat, border, or shadow. Just the photo, with a
+     subtle hover lift to signal it's clickable. */
+  padding: 0; border: 0; background: none;
+  cursor: pointer; line-height: 0;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+.timeline-thumb img {
+  display: block; width: 7rem; height: 7rem;
+  object-fit: cover; background: var(--bg-alt);
+  transition: filter 0.18s ease;
+}
+.timeline-thumb:hover { transform: translateY(-2px); opacity: 0.92; }
+.timeline-thumb:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- News photo gallery (coverflow below the timeline) ----------
+   One photo in focus, its neighbours fanned out behind it, smaller and dimmed.
+   Arrows / drag move the focus; clicking the focused photo opens the lightbox. */
+.gallery {
+  margin-top: clamp(3.5rem, 8vw, 5.5rem);
+  /* Full-bleed off-white band: break out of <main>'s padding to the viewport
+     edges, then re-pad inside so content still lines up with the page. The
+     negative bottom margin cancels <main>'s bottom padding so the band runs
+     straight into the footer with no white stripe between. */
+  background: var(--bg-alt);
+  margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
+  margin-bottom: calc(-1 * clamp(4rem, 9vw, 6.5rem));
+  padding: clamp(2.25rem, 4vw, 3rem) var(--pad-x);
+}
+.gallery > * { max-width: var(--max); margin-left: auto; margin-right: auto; }
+.gallery-heading { margin-top: 0; text-align: center; }
+.gallery-viewport {
+  position: relative; margin-top: 1.25rem;
+  /* Just enough for the focused photo (scaled 1.04) plus its drop shadow. */
+  height: clamp(12rem, 26vw, 18.5rem);
+  overflow: hidden;
+  perspective: 1600px;   /* Gives the rotateY on neighbours real depth. */
+}
+.gallery-stage {
+  position: absolute; inset: 0;
+  cursor: grab; touch-action: pan-y;
+}
+.gallery-stage:active { cursor: grabbing; }
+
+.gallery-slide {
+  position: absolute; top: 50%; left: 50%;
+  margin: 0; padding: 0; border: 0; background: none; line-height: 0;
+  cursor: pointer;
+  /* --i is the slide's signed offset from the focused photo. Neighbours slide
+     sideways, shrink, rotate away and dim; the |i| clamps keep far ones tame. */
+  --shift: clamp(-2, var(--i), 2);
+  transform:
+    translate(-50%, -50%)
+    translateX(calc(var(--i) * clamp(6.5rem, 15vw, 11rem)))
+    scale(calc(1 - min(0.16 * (var(--i) * var(--i)), 0.42)))
+    rotateY(calc(var(--shift) * -18deg));
+  transform-origin: center;
+  transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.4s ease, opacity 0.4s ease;
+}
+.gallery-slide img {
+  display: block; width: clamp(15rem, 34vw, 24rem);
+  height: clamp(11rem, 24vw, 17rem);
+  object-fit: cover; background: var(--bg-alt);
+  /* Portrait shots get cropped top & bottom; bias the crop upward so faces
+     stay in frame instead of being sliced through the middle. */
+  object-position: center 28%;
+  border-radius: 0; user-select: none;
+  border: 1px solid #fff;
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.5);
+  transition: filter 0.4s ease;
+}
+/* Neighbours sit back: darker the further they are from focus. */
+.gallery-slide:not(.is-active) img { filter: brightness(0.5); }
+.gallery-slide.is-active {
+  z-index: 10;
+  /* Focused photo lifts slightly toward the viewer. */
+  transform: translate(-50%, -50%) scale(1.04);
+}
+.gallery-slide.is-active img { box-shadow: 0 26px 55px -20px rgba(0, 0, 0, 0.6); }
+.gallery-slide:focus-visible { outline: none; }
+.gallery-slide:focus-visible img { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.gallery-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 20; width: 2.9rem; height: 2.9rem;
+  display: grid; place-items: center;
+  border: 1px solid var(--border-strong); border-radius: 50%;
+  background: #fff; color: var(--text); cursor: pointer;
+  box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.35);
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+.gallery-nav:hover { background: var(--accent); }
+.gallery-nav:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.gallery-nav svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.gallery-prev { left: clamp(0.25rem, 2vw, 1.5rem); }
+.gallery-next { right: clamp(0.25rem, 2vw, 1.5rem); }
+.gallery-nav.is-disabled { opacity: 0; pointer-events: none; }
+
+/* Lightbox */
+.lightbox {
+  position: fixed; inset: 0; z-index: 200;
+  display: grid; place-items: center;
+  padding: clamp(1rem, 4vw, 3rem);
+  background: rgba(8, 11, 15, 0.94);
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.22s ease, visibility 0.22s;
+}
+.lightbox.is-open { opacity: 1; visibility: visible; }
+.lightbox figure { margin: 0; max-width: min(68rem, 100%); }
+.lightbox img { display: block; max-width: 100%; max-height: 82vh; object-fit: contain; border-radius: 3px; }
+.lightbox figcaption {
+  margin-top: 0.9rem; text-align: center;
+  font-family: var(--head); font-size: 0.8rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255, 255, 255, 0.6);
+}
+.lightbox button {
+  position: absolute; background: none; border: 0; padding: 0;
+  color: #fff; opacity: 0.7; cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.lightbox button:hover { opacity: 1; }
+/* The display rules below would otherwise beat [hidden]'s display:none. */
+.lightbox button[hidden] { display: none; }
+.lightbox button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; opacity: 1; }
+.lightbox svg { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.lightbox-close { top: clamp(0.75rem, 2vw, 1.5rem); right: clamp(0.75rem, 2vw, 1.5rem); width: 2.75rem; height: 2.75rem; display: grid; place-items: center; }
+.lightbox-close svg { width: 24px; height: 24px; }
+.lightbox-nav { top: 50%; transform: translateY(-50%); width: 3.25rem; height: 3.25rem; display: grid; place-items: center; }
+.lightbox-nav svg { width: 30px; height: 30px; }
+.lightbox-prev { left: clamp(0.25rem, 1.5vw, 1rem); }
+.lightbox-next { right: clamp(0.25rem, 1.5vw, 1rem); }
+.lightbox-prev:hover { transform: translateY(-50%) translateX(-3px); }
+.lightbox-next:hover { transform: translateY(-50%) translateX(3px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox, .timeline-thumb, .lightbox button { transition: none; }
+  .gallery-slide, .gallery-slide img, .gallery-nav { transition: none; }
+  .nav-wrap, .main-nav a.nav-cta { transition: none; }
+}
+
+/* ============================================================
+   Team page — masonry profile cards
+   PI stays a featured row (.roster--lead); everyone else moves into a
+   masonry of cards: small square avatar + name + role + full bio + links.
+   ============================================================ */
+
+/* Filter tabs — scope the roster by group */
+.team-filter {
+  display: flex; flex-wrap: wrap; gap: 0.6rem;
+  margin: 2.25rem 0 0; padding: 0; list-style: none;
+}
+.team-filter button {
+  font-family: var(--head); font-size: 0.74rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--muted); background: var(--bg);
+  border: 1px solid var(--border); border-radius: 999px;
+  padding: 0.5rem 1.1rem; cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+.team-filter button:hover { color: var(--text); border-color: var(--border-strong); }
+.team-filter button[aria-pressed="true"] {
+  background: var(--ink); color: #fff; border-color: var(--ink);
+}
+.team-filter button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.team-filter .count { color: currentColor; opacity: 0.55; margin-left: 0.35rem; font-weight: 400; }
+
+/* A group of cards under one heading */
+.team-group { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+.team-group[hidden] { display: none; }
+.team-group > h2 {
+  font-family: var(--head); font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 300;
+  margin: 0 0 1.5rem; scroll-margin-top: 6rem;
+}
+
+/* Masonry: CSS multi-column packs cards of varying height with no gaps.
+   Cards must not break across columns (break-inside: avoid). */
+.team-grid {
+  list-style: none; margin: 0; padding: 0;
+  column-width: 24rem;
+  column-gap: clamp(1.1rem, 2.2vw, 1.75rem);
+}
+@media (max-width: 34rem) { .team-grid { column-width: auto; columns: 1; } }
+/* Force a card to start the next column (pins the left/right split in the
+   otherwise height-balanced masonry). No effect in the single-column layout. */
+.team-card--colbreak { break-before: column; }
+@media (max-width: 34rem) { .team-card--colbreak { break-before: auto; } }
+
+/* One person card */
+.team-card {
+  break-inside: avoid;
+  margin: 0 0 clamp(1.1rem, 2.2vw, 1.75rem);
+  background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+  padding: clamp(1.25rem, 2.4vw, 1.75rem);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.team-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.4);
+}
+
+/* Header row: square avatar + name/role */
+.team-card-head { display: grid; grid-template-columns: 6.75rem 1fr; gap: 1.2rem; align-items: center; }
+.team-card-avatar {
+  width: 6.75rem; height: 6.75rem; border-radius: 8px; overflow: hidden;
+  background: var(--bg-alt); border: 1px solid var(--border);
+}
+.team-card-avatar img,
+.team-card-avatar .initials {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+  /* Default focal point: slightly above center, which suits most portraits. */
+  object-position: 50% 25%;
+}
+/* Per-photo focal-point nudges. Photos vary in aspect ratio and framing, so
+   a single object-position can't keep every head in frame — these modifiers
+   move the crop's focal point per person. Higher % = crop lower in the photo. */
+.team-card-avatar--top    img { object-position: 50% 6%; }   /* tall portraits, head high */
+.team-card-avatar--high   img { object-position: 50% 15%; }  /* head a touch high */
+.team-card-avatar--low    img { object-position: 50% 32%; }  /* headroom above; drop crop onto the face */
+/* Landscape / loosely-framed photos: the square already crops the sides;
+   zoom in a touch so the face fills the frame like the portraits do. */
+.team-card-avatar--zoom    img { transform: scale(1.25); transform-origin: 50% 35%; }
+.team-card-avatar--zoom-sm img { transform: scale(1.15); transform-origin: 50% 30%; }
+.team-card-avatar .initials {
+  display: grid; place-items: center;
+  font-family: var(--head); font-weight: 300; font-size: 1.5rem;
+  letter-spacing: 0.05em; color: var(--faint);
+}
+.team-card-head h3 { font-family: var(--head); font-size: 1.3rem; font-weight: 700; margin: 0 0 0.25rem; line-height: 1.2; }
+.team-card-role {
+  font-family: var(--head); font-size: 0.7rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);
+  margin: 0;
+}
+
+/* Bio — full, always visible */
+.team-card-bio { color: var(--muted); margin: 1.1rem 0 0; }
+.team-card-bio p { margin: 0 0 0.9rem; }
+.team-card-bio p:last-child { margin-bottom: 0; }
+
+/* Footer: icon links */
+.team-card .person-links { margin: 1.25rem 0 0; padding-top: 1.1rem; border-top: 1px solid var(--border); }
+.team-card .person-links:empty { display: none; }
+
+/* No-JS fallback: filters do nothing without JS, so hide them */
+.no-js .team-filter { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .team-card, .team-filter button { transition: none; }
+  .team-card:hover { transform: none; }
+}
+
+/* Footer */
+.site-footer { border-top: 4px solid var(--accent); background: var(--ink); color: rgba(255, 255, 255, 0.7); }
+.footer-inner {
+  max-width: var(--max); margin: 0 auto; padding: 2.75rem var(--pad-x);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;
+  font-family: var(--head); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+}
+
+@media (max-width: 820px) { .main-nav { gap: 1.1rem; } }
+
+/* ---------- TU Wien signet (footer) ----------
+   Signet on the dark footer band, where its native white box reads cleanly. */
+.footer-inner .tu-logo { height: 2.4rem; width: auto; display: block; }
+.footer-brand { display: inline-flex; align-items: center; gap: 0.7rem; }
+
+/* Footer GitHub link + inline mark */
+.footer-inner .footer-end { display: inline-flex; align-items: center; gap: 1.25rem; }
+.footer-github { display: inline-flex; align-items: center; gap: 0.45rem; color: rgba(255, 255, 255, 0.7); }
+.footer-github:hover { color: #fff; }
+.footer-github .gh-icon { display: block; }
+
+/* GitHub mark inside outline buttons (open-source section) */
+.btn .gh-icon { margin-right: 0.15rem; vertical-align: -0.2em; }
+
+/* ---------- Open-source closing CTA ----------
+   A light section (on --bg-alt) between the last research theme and the dark
+   footer, with the "Open source" eyebrow + heading + a GitHub button. The top
+   border separates it from the theme above; the light→dark break to the footer
+   stays clean. Padding is kept moderate so it closes the page without the tall
+   full-section feel. */
+.opensource { background: var(--bg-alt); border-top: 1px solid var(--border); }
+.opensource-inner {
+  max-width: 60rem;
+  padding-top: clamp(2.5rem, 5vw, 3.75rem); padding-bottom: clamp(2.5rem, 5vw, 3.75rem);
+}
+.opensource h2 { font-size: clamp(1.9rem, 4vw, 2.9rem); margin: 0.25rem 0 0; }
+.opensource p { color: var(--muted); margin: 1rem 0 0; max-width: 62ch; }
+.opensource .btn { margin-top: 1.75rem; }

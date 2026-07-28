@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heid Lab — Esther Heid</title>
+  <link rel="stylesheet" href="style.css?v=77" />
+</head>
+<body>
+  <!-- Social icon sprite (referenced via <use href="#i-..."> below) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
+    <symbol id="i-scholar" viewBox="0 0 24 24"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html">Heid <span>Lab</span></a>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="team.html" class="active">About us</a>
+        <a href="news.html">News</a>
+        <a href="research.html">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="teaching.html">Teaching</a>
+        <a href="contact.html" class="nav-cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Intro — portrait carries the top of the page instead of a hero image.
+       Built on the roster-lead layout (as on the About Us page) so the photo
+       stretches to match the bio height rather than leaving a gap beneath it. -->
+  <section class="section section--alt">
+    <div class="wrap">
+      <ul class="roster roster--lead">
+        <li>
+          <div class="person-photo">
+            <img src="imgs/team_members/esther-heid-portrait.jpg" alt="Esther Heid" />
+            <p class="photo-credit">Photo: © Ulrich Zinell</p>
+          </div>
+          <div class="person-body">
+            <p class="eyebrow">Principal Investigator</p>
+            <h3>Esther Heid</h3>
+            <p class="person-role">Assistant Professor · Machine Learning for Sustainable Chemistry · TU Wien</p>
+            <p class="pi-badges">
+              <a class="pi-badge" href="#awards">🏆 ERC Starting Grant · 2024</a>
+              <a class="pi-badge" href="#awards">🏆 FWF START Prize · 2024</a>
+            </p>
+            <p>
+              Esther Heid is an Assistant Professor for Machine Learning for
+              Sustainable Chemistry in the Faculty of Technical Chemistry, TU Wien,
+              Austria, and head of the TU-wide dataTUdiscovery AI/ML service center.
+              She received her Ph.D. in Theoretical Chemistry from the University of
+              Vienna in 2019. She subsequently held postdoctoral positions at MIT
+              (2020–2022) and TU Wien (2022–2024), where she advanced her work at the
+              interface of chemistry and machine learning. In 2024, she was awarded a
+              prestigious ERC Starting Grant along with an FWF START Prize, and started
+              her own research group at TU Wien.
+            </p>
+            <p>
+              As a scientist, teacher and mentor, Esther Heid works at the interface of
+              machine learning and chemistry, using computers to simulate, predict and
+              optimize chemical processes. Her current research focuses on
+              machine-learned reaction property prediction, drawing on graph theory,
+              cheminformatics and deep learning to better understand chemical reactions
+              and, in the longer term, to develop computational approaches for the
+              eco-friendly synthesis of a wide range of target molecules.
+            </p>
+            <p>
+              She also develops and maintains scientific software, including a Python
+              package that predicts molecule and reaction properties with
+              graph-convolutional neural networks. Her further expertise spans the
+              simulation of soft matter and the quantum-mechanical calculation of
+              molecular and atomic properties.
+            </p>
+            <div class="person-foot">
+              <p class="person-links">
+                <a class="mail" href="mailto:esther.heid@tuwien.ac.at">esther.heid@tuwien.ac.at</a>
+                <a href="https://github.com/hesther"><svg class="icon" role="img" aria-label="GitHub"><use href="#i-github"></use></svg></a>
+                <a href="https://www.linkedin.com/in/esther-heid-ab20001a6/"><svg class="icon" role="img" aria-label="LinkedIn"><use href="#i-linkedin"></use></svg></a>
+                <a href="https://scholar.google.com/citations?user=NDE5issAAAAJ&hl=en"><svg class="icon" role="img" aria-label="Google Scholar"><use href="#i-scholar"></use></svg></a>
+                <!-- TODO: add the TU Wien staff profile URL. -->
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Career & education -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Curriculum Vitae</p>
+        <h2>Career &amp; education</h2>
+      </div>
+      <ol class="cv">
+        <li>
+          <div class="cv-when">Since Dec 2024</div>
+          <div class="cv-what">
+            <h3>Assistant Professor</h3>
+            <p class="cv-where">TU Wien, Austria</p>
+            <p>Machine Learning for Sustainable Chemistry.</p>
+          </div>
+        </li>
+        <li>
+          <div class="cv-when">Jan 2022 – Nov 2024</div>
+          <div class="cv-what">
+            <h3>Postdoctoral Fellow</h3>
+            <p class="cv-where">TU Wien, Austria</p>
+            <p>“Computer-aided design of multi-enzyme cascades”, with Prof. Georg Madsen.</p>
+          </div>
+        </li>
+        <li>
+          <div class="cv-when">Jan 2020 – Jan 2022</div>
+          <div class="cv-what">
+            <h3>Postdoctoral Fellow</h3>
+            <p class="cv-where">Massachusetts Institute of Technology, USA</p>
+            <p>“Computer-aided design of multi-enzyme cascades”, with Prof. William H. Green.</p>
+          </div>
+        </li>
+        <li>
+          <div class="cv-when">Oct 2016 – Dec 2019</div>
+          <div class="cv-what">
+            <h3>Doctoral Program, Natural Sciences: Chemistry</h3>
+            <p class="cv-where">University of Vienna, Austria — Supervisor: Prof. Christian Schröder</p>
+            <p>Thesis: “Concepts of solvation dynamics in molecular dynamics simulation”.</p>
+          </div>
+        </li>
+        <li>
+          <div class="cv-when">Aug – Sep 2018</div>
+          <div class="cv-what">
+            <h3>Visiting Scientist</h3>
+            <p class="cv-where">University of Maryland, Baltimore, USA</p>
+            <p>“Prediction of atomic polarizabilities”, with Prof. Alexander MacKerell.</p>
+          </div>
+        </li>
+        <li>
+          <div class="cv-when">Jan – Feb 2017</div>
+          <div class="cv-what">
+            <h3>Visiting Scientist</h3>
+            <p class="cv-where">Imperial College London, UK</p>
+            <p>“Atomic polarizabilities of chromophores”, with Prof. Patricia Hunt.</p>
+          </div>
+        </li>
+        <li>
+          <div class="cv-when">Oct 2014 – Sep 2016</div>
+          <div class="cv-what">
+            <h3>Master of Science, Chemistry</h3>
+            <p class="cv-where">University of Vienna, Austria — Supervisor: Prof. Christian Schröder</p>
+            <p>Thesis: “Computational solvation dynamics of oxyquinoline linked to trehalose”.</p>
+          </div>
+        </li>
+        <li>
+          <div class="cv-when">Mar 2011 – Jul 2014</div>
+          <div class="cv-what">
+            <h3>Bachelor of Science, Chemistry</h3>
+            <p class="cv-where">University of Vienna, Austria — Supervisor: Prof. Christian Schröder</p>
+            <p>Thesis: “Inter- and intramolecular vibrations in ionic liquids”.</p>
+          </div>
+        </li>
+        <li>
+          <div class="cv-when">Sep – Dec 2010</div>
+          <div class="cv-what">
+            <h3>Stay Abroad</h3>
+            <p class="cv-where">England and Wales, UK</p>
+            <p>Voluntary work in the social sector.</p>
+          </div>
+        </li>
+        <li>
+          <div class="cv-when">Jun 2010</div>
+          <div class="cv-what">
+            <h3>School Leaving Examination</h3>
+            <p class="cv-where">BG/BRG Keimgasse, Mödling, Austria</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Awards -->
+  <section class="section section--alt" id="awards">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Recognition</p>
+        <h2>Awards &amp; fellowships</h2>
+      </div>
+      <div class="awards">
+        <div class="award-year">
+          <div class="ay-num">2024</div>
+          <ul>
+            <li><strong>ERC Starting Grant</strong> — “Deep learning of chemical reactions”</li>
+            <li><strong>START Prize</strong> — Austrian Science Fund (FWF)</li>
+          </ul>
+        </div>
+        <div class="award-year">
+          <div class="ay-num">2022</div>
+          <ul>
+            <li><strong>Poster Award</strong> — Austrian Marshall Plan Foundation</li>
+          </ul>
+        </div>
+        <div class="award-year">
+          <div class="ay-num">2020</div>
+          <ul>
+            <li><strong>Award of Excellence</strong> — Federal Ministry of the Republic of Austria, given annually for the 40 best dissertations in all fields</li>
+            <li><strong>Loschmidt Award</strong> — Chemical-Physical Society of Vienna, for an excellent doctoral thesis in chemistry and physics</li>
+            <li><strong>Karl Schlögl Award</strong> — Austrian Academy of Sciences, given annually to two awardees for an outstanding doctoral thesis in chemistry</li>
+            <li><strong>Rising Star in Chemical Engineering</strong> — named by MIT</li>
+          </ul>
+        </div>
+        <div class="award-year">
+          <div class="ay-num">2019</div>
+          <ul>
+            <li><strong>Schrödinger Fellowship</strong> — Austrian Science Fund, for postdoctoral studies</li>
+          </ul>
+        </div>
+        <div class="award-year">
+          <div class="ay-num">2018</div>
+          <ul>
+            <li><strong>Best oral presentation</strong> — 2nd “Advances in Green Chemistry” conference</li>
+            <li><strong>NaturTalente</strong> — selected for the high-potential program, University of Vienna</li>
+          </ul>
+        </div>
+        <div class="award-year">
+          <div class="ay-num">2017</div>
+          <ul>
+            <li><strong>DOC Fellowship</strong> — Austrian Academy of Sciences, for PhD studies</li>
+            <li><strong>Best poster award</strong> — 7th Visegrád Symposium on Structural Systems Biology</li>
+          </ul>
+        </div>
+        <div class="award-year">
+          <div class="ay-num">2014</div>
+          <ul>
+            <li><strong>Excellence scholarship (MSc)</strong> — University of Vienna, two consecutive years (2014–2016)</li>
+          </ul>
+        </div>
+        <div class="award-year">
+          <div class="ay-num">2011</div>
+          <ul>
+            <li><strong>Excellence scholarship (BSc)</strong> — University of Vienna, three consecutive years (2011–2014)</li>
+          </ul>
+        </div>
+        <div class="award-year">
+          <div class="ay-num">2010</div>
+          <ul>
+            <li><strong>Ring of Honor</strong> — BG/BRG Keimgasse, for outstanding grades at school</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills & service -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Beyond the research</p>
+        <h2>Skills &amp; service</h2>
+      </div>
+      <div class="skills">
+        <div class="skill">
+          <h3>Languages</h3>
+          <p>German (native) · English (excellent, TOEFL 119/120)</p>
+        </div>
+        <div class="skill">
+          <h3>Programming</h3>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">Cython</span><span class="tag">Fortran</span><span class="tag">Bash</span><span class="tag">Unix</span><span class="tag">HPC</span>
+          </div>
+        </div>
+        <div class="skill">
+          <h3>Machine learning</h3>
+          <div class="tags">
+            <span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">Keras</span><span class="tag">scikit-learn</span>
+          </div>
+        </div>
+        <div class="skill">
+          <h3>Chemistry &amp; simulation</h3>
+          <div class="tags">
+            <span class="tag">Gaussian09</span><span class="tag">Psi4</span><span class="tag">CHARMM</span><span class="tag">MDAnalysis</span><span class="tag">LaTeX</span><span class="tag">Gnuplot</span>
+          </div>
+        </div>
+        <div class="skill">
+          <h3>Outreach</h3>
+          <p>
+            Young Investigators Academy, TU Wien · WoChem (Women in Chemistry),
+            University of Vienna · board member of POWER, a network for female
+            postdocs at MIT
+          </p>
+        </div>
+        <div class="skill">
+          <h3>Societies</h3>
+          <p>Chemisch-Physikalische Gesellschaft (CPG)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing -->
+  <section class="section section--cta section--alt">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Publications</p>
+        <h2>See the full publication list</h2>
+        <p>
+          Papers, preprints, and software from the group — or get in touch about
+          collaborating.
+        </p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="publications.html">Publications <span class="arrow">→</span></a>
+        <a class="btn btn-outline" href="contact.html">Get in touch <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <!-- TU LOGO — footer -->
+      <span class="footer-brand">
+        <img class="tu-logo" src="imgs/TU-signet/TU_Signet_RGB.svg" alt="TU Wien" />
+        Heid Lab · TU Wien · Institute of Materials Chemistry
+      </span>
+      <span class="footer-end">
+        <a class="footer-github" href="https://github.com/heid-lab" target="_blank" rel="noopener" aria-label="Heid Lab on GitHub">
+          <svg class="gh-icon" viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+        <span>© 2026 Heid Lab · All rights reserved</span>
+      </span>
+    </div>
+  </footer>
+  <script src="header.js?v=1"></script>
+  <script>
+    // Copy the third-person short bio to the clipboard.
+    document.querySelector('[data-copy-bio]')?.addEventListener('click', async (e) => {
+      const btn = e.currentTarget;
+      const text = document.getElementById('short-bio')?.textContent.trim();
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        const r = document.createRange(); const sel = getSelection();
+        const el = document.getElementById('short-bio');
+        el.hidden = false; r.selectNodeContents(el); sel.removeAllRanges(); sel.addRange(r);
+        document.execCommand('copy'); sel.removeAllRanges(); el.hidden = true;
+      }
+      const label = btn.querySelector('.arrow');
+      const orig = btn.firstChild.textContent;
+      btn.firstChild.textContent = 'Copied ';
+      if (label) label.textContent = '✓';
+      setTimeout(() => { btn.firstChild.textContent = orig; if (label) label.textContent = '⧉'; }, 1600);
+    });
+  </script>
+</body>
+</html>
