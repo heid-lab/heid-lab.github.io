@@ -1,13 +1,18 @@
 name: Deploy to GitHub Pages
 
-# Build the Astro site and publish it to GitHub Pages on every push to main.
-# In the repo settings, set Pages → "Build and deployment" → Source to
-# "GitHub Actions" (once) for this workflow to take effect.
+# Build the Astro site and publish it to GitHub Pages.
+#
+# NOT YET LIVE. Deployment is planned for the future, so auto-deploy on push is
+# disabled — the workflow only runs when triggered manually from the Actions tab.
+#
+# To go live later:
+#   1. Uncomment the `push:` block below (re-enables deploy on every push to main).
+#   2. In repo settings: Pages → "Build and deployment" → Source → "GitHub Actions".
 
 on:
-  push:
-    branches: [main]
-  # Allow running manually from the Actions tab.
+  # push:
+  #   branches: [main]
+  # Run manually from the Actions tab.
   workflow_dispatch:
 
 # Permissions the deploy job needs to publish to Pages.
