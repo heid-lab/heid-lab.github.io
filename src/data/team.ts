@@ -137,7 +137,7 @@ export const members: Member[] = [
     colbreak: true,
     bio: [
       "Konstantin Alexander Mark is a doctoral researcher working on the mathematical and methodological foundations of generative machine learning for chemical reactions. His research focuses on probabilistic models that generate molecular geometries and reactive structures, particularly flow-matching and related stochastic approaches. He investigates how these models can be made more efficient, controllable, and consistent with physical and chemical constraints. He is especially interested in transition-state generation, guided sampling, Schrödinger bridges, and the mathematical principles underlying generative processes. In this role, he helps connect the group's chemical applications to developments in generative modeling, probability theory, and scientific machine learning. In the group, he brings a strongly mathematics-driven perspective to projects at the interface of machine learning, reaction modeling, and computational chemistry.",
-      'Before starting his doctoral research, he studied Technical Mathematics at TU Wien, specializing in functional analysis, numerics and optimisation.',
+      'Before starting his doctoral research, he studied Technical Mathematics at TU Wien, specializing in functional analysis, numerics and optimization.',
     ],
     links: {
       github: 'https://github.com/MarkKon',
@@ -240,6 +240,18 @@ export const alumni: { year: string; people: { name: string; note: string }[] }[
     ],
   },
 ];
+
+// Turn a name into a URL-anchor slug (e.g. "Leon Ganser" → "leon-ganser").
+// Used as the per-person card id on the team page so other pages can deep-link
+// straight to someone (e.g. /team#jonathan-zheng).
+export function slug(name: string): string {
+  return name
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // strip combining diacritical marks (o-umlaut -> o, e-acute -> e)
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
 
 // Compute initials from a name for the photo fallback (e.g. "Leon Ganser" → "LG").
 export function initials(name: string): string {

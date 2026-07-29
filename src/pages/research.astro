@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
-<Layout title="Heid Lab — Research" active="research" scripts={["header.js"]}>
+<Layout title="Heid Lab — Research" active="research" scripts={["header.js", "research-tabs.js"]}>
   <!-- Intro -->
   <section class="section section--intro">
     <div class="wrap">
@@ -77,11 +77,32 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         models themselves, through the automated pipelines that put them to work,
         to the data everything depends on.
       </p>
+
+      <!-- Tabs — one per theme below. JS shows one panel at a time (01 by
+           default); without JS the links still jump to the full stacked panels. -->
+      <div class="area-cards" role="tablist" aria-label="Areas of research">
+        <a class="area-card" id="tab-01" role="tab" aria-controls="area-01" href="#area-01">
+          <span class="area-card-num">01</span>
+          <span class="area-card-title">Prediction</span>
+        </a>
+        <a class="area-card" id="tab-02" role="tab" aria-controls="area-02" href="#area-02">
+          <span class="area-card-num">02</span>
+          <span class="area-card-title">TS Generation</span>
+        </a>
+        <a class="area-card" id="tab-03" role="tab" aria-controls="area-03" href="#area-03">
+          <span class="area-card-num">03</span>
+          <span class="area-card-title">Automation</span>
+        </a>
+        <a class="area-card" id="tab-04" role="tab" aria-controls="area-04" href="#area-04">
+          <span class="area-card-num">04</span>
+          <span class="area-card-title">Data</span>
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- 01 · Property prediction -->
-  <section class="section theme">
+  <section class="section theme" id="area-01" role="tabpanel" aria-labelledby="tab-01">
     <div class="wrap theme-cols theme-cols--media-right">
       <aside class="theme-aside">
         <figure class="theme-media">
@@ -133,7 +154,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   </section>
 
   <!-- 02 · Generative TS models -->
-  <section class="section theme">
+  <section class="section theme" id="area-02" role="tabpanel" aria-labelledby="tab-02">
     <div class="wrap theme-cols theme-cols--media-left">
       <aside class="theme-aside">
         <figure class="theme-media">
@@ -163,7 +184,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           transition states, marking an important step toward chirality-aware TS generation.
         </p>
         <p>
-          Beyond chemical reactions, the GoFlow framework generalises to other
+          Beyond chemical reactions, the GoFlow framework generalizes to other
           excited-state geometry prediction tasks. <a href="https://chemrxiv.org/doi/full/10.26434/chemrxiv.15003682/v1" target="_blank" rel="noopener noreferrer" class="paper-link" data-paper="goflow-t1">GoFlow-T1</a>
           adapts the same backbone for direct prediction of minimum-energy triplet
           excited-state geometries across chemically diverse organic molecules,
@@ -183,7 +204,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   </section>
 
   <!-- 03 · Automated workflows -->
-  <section class="section theme">
+  <section class="section theme" id="area-03" role="tabpanel" aria-labelledby="tab-03">
     <div class="wrap theme-cols theme-cols--media-right">
       <aside class="theme-aside">
         <figure class="theme-media">
@@ -191,7 +212,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         </figure>
       </aside>
       <div class="theme-text">
-        <p class="eyebrow"><span class="theme-num">03</span> Automated search</p>
+        <p class="eyebrow"><span class="theme-num">03</span> Automated workflows</p>
         <h2>ML-accelerated automated transition state search</h2>
         <p>
         Generating accurate TS geometries is only one part of the challenge,
@@ -223,7 +244,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   </section>
 
   <!-- 04 · Data creation & analysis -->
-  <section class="section theme">
+  <section class="section theme" id="area-04" role="tabpanel" aria-labelledby="tab-04">
     <div class="wrap theme-cols theme-cols--media-left">
       <aside class="theme-aside">
         <figure class="theme-media">
@@ -253,6 +274,30 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           observable, and reaction spaces grow combinatorially, making
           data-driven, intelligent sampling of the reaction space essential.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ERC funding callout — the flagship grant behind much of this work, grouped
+       with the open-source CTA as the page's closing "about the lab" blocks.
+       ERC-focused (not framed as the whole DeepRxn project, which the FWF grant
+       also supports). -->
+  <section class="section section--erc">
+    <div class="wrap">
+      <div class="erc-callout">
+        <div class="erc-callout-text">
+          <p class="eyebrow">Funded by the ERC</p>
+          <h2>Backed by a European Research Council Starting Grant</h2>
+          <p>
+            Much of this research is supported by an ERC Starting Grant, awarded to
+            Esther Heid in 2024 to develop data-driven deep-learning frameworks for
+            organic and enzymatic reactions.
+          </p>
+          <a class="link-arrow" href={`${base}/grants-erc`}>Explore the ERC project <span class="arrow">→</span></a>
+        </div>
+        <span class="erc-callout-logo">
+          <img src={`${base}/imgs/grants/erc-eu-logo.png`} alt="Funded by the European Union — European Research Council" />
+        </span>
       </div>
     </div>
   </section>

@@ -1,68 +1,216 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { initials, slug } from '../data/team';
+import { pubsByFunding } from '../data/publications';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Publications acknowledging the ERC grant — tagged funding: ['erc'] in
+// publications.ts, so this list stays in sync when papers are added there.
+const relatedPubs = pubsByFunding('erc');
+
+// CORDIS subject/keyword tags for the project (cordis.europa.eu/project/id/101162908).
+const keywords = [
+  'Machine learning',
+  'Deep learning',
+  'Reaction properties',
+  'Enzymatic cascade design',
+  'Asymmetric organocatalysis',
+];
+
+// Headline figures for the stat strip.
+const stats = [
+  { num: '€1.5M', label: 'ERC funding' },
+  { num: '5 yrs', label: '2024 – 2029' },
+  { num: '2024', label: 'Starting Grant awarded' },
+];
+
+// The three research strands, each drawn as a card.
+const goals = [
+  {
+    tag: 'Reaction energetics',
+    title: 'Activation energies',
+    body: 'Predicting barrier heights and transition-state geometries fast enough for high-throughput screening.',
+  },
+  {
+    tag: 'Biocatalysis',
+    title: 'Enzymatic pathways',
+    body: 'Exploring biocatalytic routes and supporting the data-driven design of enzymatic cascades.',
+  },
+  {
+    tag: 'Asymmetric organocatalysis',
+    title: 'Modeling stereoselectivity',
+    body: 'Predicting enantio- and diastereoselectivity for asymmetric organocatalytic reactions.',
+  },
+];
+
+// Official project facts (from the CORDIS record).
+const facts = [
+  { label: 'Project', value: 'DeepRxn — Deep learning of chemical reactions' },
+  { label: 'Funder', value: 'European Research Council (ERC)' },
+  { label: 'Scheme', value: 'ERC Starting Grant · Horizon Europe (ERC-2024-STG)' },
+  { label: 'Grant agreement', value: 'No. 101162908' },
+  { label: 'Duration', value: 'October 2024 – September 2029' },
+  { label: 'EU contribution', value: '€1,499,285' },
+  { label: 'Host institution', value: 'TU Wien — Institute of Materials Chemistry' },
+];
+
+// People currently working on the ERC project. `photo` is a filename in
+// imgs/team_members/ (omit to fall back to the initials circle).
+const people = [
+  { name: 'Esther Heid', note: 'Principal investigator', href: `${base}/pi`, photo: 'esther-heid-portrait.jpg' },
+  { name: 'Jonathan Zheng', note: 'Postdoc · enzymatic reactions', href: `${base}/team#${slug('Jonathan Zheng')}`, photo: 'jonathan-zheng.jpg' },
+  { name: 'Jasper De Landsheere', note: 'PhD · reaction property prediction', href: `${base}/team#${slug('Jasper De Landsheere')}`, photo: 'jasper-de-landsheere.jpg' },
+  { name: 'Leon Ganser', note: 'PhD · asymmetric organocatalysis', href: `${base}/team#${slug('Leon Ganser')}` },
+];
+
+// Former contributors to the project.
+const pastPeople = [
+  { name: 'Johannes Karwounopoulos', note: 'Postdoc · 2025–2026', href: `${base}/team#${slug('Johannes Karwounopoulos')}`, photo: 'johannes-karwounopoulos.jpg' },
+  { name: 'Charlotte Gerhaher', note: 'PhD · 2025–2026', href: `${base}/team#${slug('Charlotte Gerhaher')}`, photo: 'charlotte-gerhaher.jpg' },
+  { name: 'Konstantin Mark', note: 'PhD · 2025–2026', href: `${base}/team#${slug('Konstantin Mark')}`, photo: 'konstantin-mark.jpg' },
+];
 ---
-<Layout title="Heid Lab — ERC Starting Grant" scripts={["header.js"]}>
-  <main>
-    <p class="eyebrow">European Research Council · Since 2024</p>
-    <h1>ERC Starting Grant</h1>
-    <p>
-      “Deep learning of chemical reactions” — awarded to Esther Heid in September
-      2024 to develop generative and predictive deep-learning models for chemical
-      reactions across gas-phase, organocatalytic, and biocatalytic systems.
-    </p>
+<Layout title="Heid Lab — ERC Starting Grant (DeepRxn)" scripts={["header.js"]}>
+  <main class="grant-page">
+    <section class="grant-hero">
+      <div class="grant-hero-inner">
+        <div class="grant-hero-text">
+          <p class="eyebrow">European Research Council · Starting Grant · 2024–2029</p>
+          <h1>DeepRxn - Deep learning of chemical reactions</h1>
+          <p class="grant-lead">
+            <strong>DeepRxn</strong> is a research project funded by an ERC Starting Grant,
+            awarded to Asst. Prof. Esther Heid in 2024. It develops new, data-driven deep-learning
+            frameworks that predict how organic and enzymatic reactions proceed — their
+            products, rates, and, above all, their chemo-, regio-, and stereoselectivity.
+          </p>
+        </div>
+        <div class="grant-hero-logos">
+          <span class="grant-hero-logo">
+            <img src={`${base}/imgs/grants/deeprxn-logo.png`} alt="DeepRxn — deep learning for chemical reactions" />
+          </span>
+          <span class="grant-hero-logo grant-hero-logo--erc">
+            <img src={`${base}/imgs/grants/erc-eu-logo.png`} alt="Funded by the European Union — European Research Council" />
+          </span>
+        </div>
+        <div class="tags grant-tags">
+          {keywords.map((k) => <span class="tag">{k}</span>)}
+        </div>
+      </div>
+    </section>
 
-    <h2>The project</h2>
-    <p>
-      Predicting how a reaction will proceed — its products, its rate, its
-      selectivity — remains one of the hardest problems in computational
-      chemistry. The project builds models that learn reaction behavior directly
-      from data while staying grounded in mechanism, so that predictions
-      generalise beyond the reactions they were trained on.
-    </p>
-    <p><!-- TODO: project aims in more detail — objectives, work packages, expected outcomes. --></p>
-
-    <h2>Facts</h2>
-    <ul class="clean">
-      <li>
-        <span class="pub-year">Funder</span>
-        <strong>European Research Council</strong> — Starting Grant, awarded
-        September 2024.
-      </li>
-      <li>
-        <span class="pub-year">Host institution</span>
-        <strong>TU Wien</strong> — Institute of Materials Chemistry.
-      </li>
-      <li>
-        <span class="pub-year">Principal investigator</span>
-        <strong><a href={`${base}/pi`}>Esther Heid</a></strong>
-      </li>
-      <!-- TODO: add grant number, project acronym, duration (start/end), and budget. -->
-      <!-- TODO: add link to the CORDIS project page once available. -->
+    <ul class="grant-stats">
+      {stats.map((s) => (
+        <li>
+          <span class="grant-stat-num">{s.num}</span>
+          <span class="grant-stat-label">{s.label}</span>
+        </li>
+      ))}
     </ul>
 
+    <div class="grant-row">
+      <h2 class="grant-row-head">The challenge</h2>
+      <p class="grant-row-body">
+        Exploring reactions is a central topic in chemistry, yet compared to the success of
+        machine learning for molecules, the modeling of reactions is lagging behind —
+        especially for stereo- and regioselective reactions. Current efforts toward sustainable
+        synthesis, such as asymmetric organocatalysis and biocatalysis, rely on accurately
+        predicting enantio- and regioselective reaction pathways. Meeting that need calls for
+        new modeling approaches that go beyond the two-dimensional representations, reaction
+        rules, and fixed three-dimensional inputs that today's methods depend on.
+      </p>
+    </div>
+
+    <div class="grant-row">
+      <h2 class="grant-row-head">Our approach</h2>
+      <p class="grant-row-body">
+        DeepRxn develops new, data-driven deep-learning frameworks for modeling organic and
+        enzymatic reactions, focusing on the chemo-, regio-, and stereoselectivity that arises
+        through intermolecular interactions with the reagent, solvent, or catalyst. We extend
+        molecular graph-convolutional neural networks and graph transformers to reactions in a
+        rule-free manner, and introduce hidden three-dimensional representations that capture
+        stereochemistry and account for atom-mapping on the fly. The result is a versatile,
+        open-source toolbox for reaction deep learning.
+      </p>
+    </div>
+
+    <p class="grant-goals-lead">The DeepRxn project tackles three key areas:</p>
+    <ul class="grant-goals">
+      {goals.map((g) => (
+        <li>
+          <span class="pub-year">{g.tag}</span>
+          <strong>{g.title}</strong>
+          <p>{g.body}</p>
+        </li>
+      ))}
+    </ul>
+
+    <h2>Official project information</h2>
+    <div class="fact-box">
+      <dl class="fact-list">
+        {facts.map((f) => (
+          <div class="fact-row">
+            <dt>{f.label}</dt>
+            <dd>{f.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <a class="link-arrow" href="https://cordis.europa.eu/project/id/101162908/en" target="_blank" rel="noopener">
+        View on CORDIS <span class="arrow">→</span>
+      </a>
+    </div>
+
     <h2>People on the project</h2>
-    <p>
-      Several group members work on the ERC project — see the
-      <a href={`${base}/team`}>Team</a> page.
-    </p>
-    <p><!-- TODO: list the specific ERC-funded positions and people. --></p>
+    <ul class="grant-people">
+      {people.map((p) => (
+        <li>
+          {p.photo
+            ? <img class="grant-person-photo" src={`${base}/imgs/team_members/${p.photo}`} alt={p.name} loading="lazy" />
+            : <span class="grant-person-initials">{initials(p.name)}</span>}
+          <span class="grant-person-text">
+            <strong><a href={p.href}>{p.name}</a></strong>
+            <span class="grant-person-note">{p.note}</span>
+          </span>
+        </li>
+      ))}
+    </ul>
+    <h3 class="grant-people-past-head">Past contributors</h3>
+    <ul class="grant-people grant-people--past">
+      {pastPeople.map((p) => (
+        <li>
+          {p.photo
+            ? <img class="grant-person-photo" src={`${base}/imgs/team_members/${p.photo}`} alt={p.name} loading="lazy" />
+            : <span class="grant-person-initials">{initials(p.name)}</span>}
+          <span class="grant-person-text">
+            <strong><a href={p.href}>{p.name}</a></strong>
+            <span class="grant-person-note">{p.note}</span>
+          </span>
+        </li>
+      ))}
+    </ul>
 
     <h2>Related publications</h2>
-    <p>
-      Output from the project appears on the
-      <a href={`${base}/publications`}>Publications</a> page.
-    </p>
-    <p><!-- TODO: filter to the publications that acknowledge this grant. --></p>
+    <p>Publications acknowledging this grant. See the full list on the <a href={`${base}/publications`}>Publications</a> page.</p>
+    <ul class="clean pubs grant-pubs">
+      {relatedPubs.map((pub) => (
+        <li class="pub">
+          <span class="pub-meta">
+            {pub.preprint && <button class="pub-tag">Preprint</button>}
+            {pub.meta}
+          </span>
+          {pub.titleHtml
+            ? <a class="pub-title" href={pub.href} set:html={pub.titleHtml} />
+            : <a class="pub-title" href={pub.href}>{pub.title}</a>}
+          <span class="authors" set:html={pub.authors} />
+        </li>
+      ))}
+    </ul>
 
     <h2>Acknowledgment</h2>
-    <p>
-      Funded by the European Union (ERC, Deep learning of chemical reactions).
-      Views and opinions expressed are however those of the author(s) only and do
-      not necessarily reflect those of the European Union or the European Research
-      Council. Neither the European Union nor the granting authority can be held
-      responsible for them.
-      <!-- TODO: confirm the exact wording and grant number required by your grant agreement, and add the EU emblem. -->
+    <p class="grant-ack">
+      Funded by the European Union (ERC, DeepRxn, 101162908). Views and opinions expressed are
+      however those of the author(s) only and do not necessarily reflect those of the European
+      Union or the European Research Council. Neither the European Union nor the granting
+      authority can be held responsible for them.
     </p>
   </main>
 </Layout>

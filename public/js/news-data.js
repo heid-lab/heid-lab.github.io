@@ -28,7 +28,6 @@ window.NEWS = [
     body: 'Max has been awarded the competitive DOC Fellowship of the Austrian Academy of Sciences. His project focuses on curating high-quality chemical reaction datasets that meaningfully cover reaction space to train more reliable AI models for synthetic chemistry. Congratulations, Max! \
     Read the full press release <a href="https://stipendien.oeaw.ac.at/en/stipendien/doc/doc-gefoerderte-personen">here</a>.',
     images: [
-      // TODO: replace with a photo of Max / the award.
       { src: "imgs/news/2026-07-max-1.jpeg", alt: "" },
       { src: "imgs/news/2026-07-max-2.jpeg", alt: "" }
     ]
@@ -37,11 +36,9 @@ window.NEWS = [
     date: "2026-07",
     title: "Charlotte co-organized WiML @ ICML 2026",
     body: 'Charlotte took on the role of Finance &amp; Sponsorship Chair for the Women in Machine Learning (WiML) <a href="https://sites.google.com/wimlworkshop.org/wimlsymposium-2026/committee">Symposium</a> at ICML 2026 in Seoul.'
-    // TODO: add a link to the WiML symposium page, and a photo if you have one.
   },
   {
     date: "2026-07",
-    // TODO: replace the three [names] below.
     title: "Three new students joining the group",
     body: 'We\'re excited to welcome three new students to the lab this summer:' +
       '<ul>' +
@@ -62,7 +59,6 @@ window.NEWS = [
   },
   {
     date: "2026-06",
-    // TODO: what is the ESPRIT project about? Replace [topic].
     title: "Johannes returns on an ESPRIT fellowship",
     body: 'We are super excited to welcome back Johannes Karwounopoulos, who rejoins the group with his own <a href="https://www.fwf.ac.at/en/research-radar/10.55776/ESP1292125">FWF ESPRIT fellowship</a> for this project titled "Towards Accurate Binding Free Energies using Machine-Learned Potentials". For this he will explore how machine-learned potentials can improve free-energy predictions. Welcome back!'
   },
@@ -84,6 +80,11 @@ window.NEWS = [
       { src: "imgs/news/2026-03-esther-oeaw-1.jpg", alt: "Esther Heid" },
       { src: "imgs/news/2026-03-esther-oeaw-2.jpg", alt: "Esther Heid" }
     ]
+  },
+  {
+    date: "2026-03-01",
+    title: "Jonathan joins the group as a postdoc",
+    body: 'We are thrilled to welcome Jonathan Zheng, who joins the group as a postdoctoral researcher after successfully defending his PhD at MIT and moving across the Atlantic to Vienna. As part of the ERC project, he will be working on modeling enzymatic reactions. Welcome, Jonathan!'
   },
   {
     date: "2026-03-01",

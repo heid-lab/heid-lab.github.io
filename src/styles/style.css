@@ -30,7 +30,7 @@
 * { box-sizing: border-box; }
 /* 90% root size: scales every rem-based length. Viewport units (vw/vh)
    deliberately left alone, so this matches browser zoom at 90%. */
-html { font-size: 90%; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { font-size: 90%; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: clip; }
 
 body {
   margin: 0;
@@ -56,7 +56,7 @@ a:hover { color: #000; }
 .eyebrow {
   display: block;
   font-family: var(--head);
-  font-size: 0.78rem;
+  font-size: 0.86rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.22em;
@@ -103,6 +103,9 @@ a:hover { color: #000; }
 .link-arrow .arrow { transition: transform 0.2s ease; }
 .link-arrow:hover .arrow { transform: translateX(4px); }
 .link-arrow:hover { color: #000; }
+/* Secondary link — same shape, lighter weight so it reads as the subordinate
+   action next to a primary link-arrow in the same row. */
+.link-arrow--secondary { font-weight: 500; opacity: 0.72; }
 
 /* ---------- Header / Nav ---------- */
 .site-header {
@@ -306,6 +309,15 @@ a:hover { color: #000; }
 }
 .funding-badge img { display: block; height: clamp(3.25rem, 6vw, 4.5rem); width: auto; }
 
+/* Band intro: grant blurb on the left, DeepRxn project mark on its white
+   plaque to the right; stacks on narrow screens. */
+.funding-intro { display: flex; align-items: center; gap: clamp(1.5rem, 4vw, 3rem); flex-wrap: wrap; }
+.funding-intro-text { flex: 1 1 22rem; }
+.funding-intro-text p:last-child { margin-bottom: 0; }
+.funding-badge--deeprxn { flex: 0 0 auto; padding: clamp(0.3rem, 0.8vw, 0.45rem) clamp(0.5rem, 1.2vw, 0.7rem); }
+.funding-badge--deeprxn img { height: clamp(2.6rem, 5vw, 3.6rem); }
+@media (max-width: 700px) { .funding-intro { flex-direction: column; align-items: flex-start; } }
+
 
 /* Two grant boxes side by side on the funding band — subtle translucent panels
    on the dark ground; each funder logo keeps its required white plaque. Links
@@ -332,7 +344,7 @@ a:hover { color: #000; }
 .grant-meta { font-family: var(--head); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin: 0 0 0.5rem; }
 .grant-card h3 { font-family: var(--head); font-weight: 700; font-size: 1.3rem; color: #fff; margin: 0 0 0.6rem; }
 .band .grant-card p { color: rgba(255, 255, 255, 0.72); margin: 0; max-width: none; font-size: 0.96rem; line-height: 1.65; }
-.grant-card .link-arrow { margin-top: auto; padding-top: 1.35rem; }
+.grant-links { margin-top: auto; padding-top: 1.35rem; display: flex; flex-wrap: wrap; gap: 0.6rem 2.25rem; }
 @media (max-width: 700px) { .grant-cards { grid-template-columns: 1fr; } }
 
 /* ---------- Interior pages (plain <main>) ---------- */
@@ -345,6 +357,166 @@ main h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin: 3.5rem 0 1rem; }
 main h3 { font-size: 1.2rem; font-family: var(--head); font-weight: 700; margin: 2rem 0 0.5rem; }
 main :is(p, li) a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
 main :is(p, li) a:hover { color: #000; }
+
+/* ---------- Grant / project page ---------- */
+/* DeepRxn brand accents sampled from the flask logo (crimson R + brackets,
+   purple & orange bubbles). Scoped to the grant page so they don't leak. */
+.grant-page {
+  --dr-crimson: #b5394f;
+  --dr-purple: #9a5f90;
+  --dr-orange: #dd8c55;
+  --dr-ink: #241a20; /* near-black plum for the hero ground */
+}
+
+/* Full-bleed dark hero. Breaks out of main's centered column with a 50vw trick
+   so the plum band spans edge to edge; the inner wrap re-centers the content. */
+.grant-hero {
+  position: relative; width: 100vw; box-sizing: border-box;
+  margin-top: calc(-1 * clamp(3.5rem, 8vw, 5.5rem));
+  margin-bottom: clamp(3rem, 6vw, 4.5rem);
+  margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
+  padding: clamp(3.5rem, 8vw, 5.5rem) 0 clamp(3rem, 6vw, 4rem);
+  background:
+    radial-gradient(120% 140% at 88% 8%, rgba(221, 140, 85, 0.22), transparent 55%),
+    radial-gradient(120% 120% at 8% 92%, rgba(154, 95, 144, 0.28), transparent 55%),
+    var(--dr-ink);
+  color: #fff; overflow: hidden;
+}
+.grant-hero-inner {
+  position: relative; z-index: 1;
+  max-width: var(--max); margin: 0 auto; padding: 0 var(--pad-x);
+  display: flex; align-items: center; gap: clamp(1.5rem, 5vw, 4rem); flex-wrap: wrap;
+}
+.grant-hero-text { flex: 1 1 26rem; }
+.grant-hero .eyebrow { color: var(--dr-orange); }
+.grant-hero .eyebrow::after { background: var(--dr-orange); }
+.grant-hero h1 { color: #fff; margin: 0 0 1.2rem; font-weight: 400; font-size: clamp(2.4rem, 5.5vw, 3.6rem); }
+.grant-lead { font-size: clamp(1.15rem, 2vw, 1.32rem); line-height: 1.7; color: rgba(255, 255, 255, 0.82); margin: 0; max-width: 46ch; }
+.grant-lead strong { color: #fff; }
+/* Two funder marks stacked on the hero's right: the DeepRxn project logo and
+   the required EU/ERC emblem. Crisp, equal-width white plaques — thin corners,
+   a hairline edge, and only a whisper of depth (no heavy drop shadow). */
+.grant-hero-logos { flex: 0 0 auto; display: flex; flex-direction: column; gap: 0.6rem; width: clamp(14rem, 22vw, 17rem); }
+.grant-hero-logo {
+  display: grid; place-items: center; background: #fff;
+  border-radius: 4px; padding: clamp(0.7rem, 1.6vw, 1rem) clamp(1rem, 2.2vw, 1.4rem);
+  box-shadow: 0 10px 30px -22px rgba(0, 0, 0, 0.55);
+}
+.grant-hero-logo img { display: block; width: 100%; height: auto; }
+/* The EU/ERC emblem is a wider, shorter lockup than the DeepRxn mark, so pull it
+   in slightly to keep the two panels optically balanced rather than equal-px. */
+.grant-hero-logo--erc img { width: 92%; }
+/* Tags sit inside the hero on the dark ground — restyle from the light .tag. */
+.grant-hero .grant-tags { margin: clamp(1.6rem, 3vw, 2.2rem) 0 0; flex-basis: 100%; }
+.grant-hero .grant-tags .tag {
+  color: rgba(255, 255, 255, 0.82); background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2); text-decoration: none;
+}
+
+/* Stat strip — the headline figures as big display numbers. */
+.grant-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 3vw, 2rem);
+  margin: 0 0 clamp(1rem, 3vw, 1.5rem); padding: 0; list-style: none; max-width: none;
+}
+.grant-stats li { padding: 0; border: 0; }
+.grant-stat-num { display: block; font-family: var(--head); font-weight: 700; font-size: clamp(2.1rem, 5vw, 3rem); line-height: 1; color: var(--dr-crimson); }
+.grant-stat-label { display: block; margin-top: 0.5rem; color: var(--muted); font-size: 0.86rem; }
+@media (max-width: 620px) { .grant-stats { grid-template-columns: 1fr; gap: 1.25rem; text-align: left; } }
+
+/* Keep the challenge / approach prose on a comfortable reading measure rather
+   than the very wide 95ch default, so lines don't run to the page edge. */
+.grant-page > p { max-width: 72ch; }
+
+/* Section as a two-column row: the heading sits in a narrow left column, the
+   prose fills a wide right column that runs out to the page edge (aligned with
+   the CONTACT button, since both share main's max-width). */
+.grant-row { display: grid; grid-template-columns: 14rem 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); margin-top: clamp(2.5rem, 5vw, 3.5rem); align-items: start; }
+.grant-row-head { position: relative; margin: 0; }
+/* A crimson arrow under the heading points rightward toward the text column,
+   tying the label to its content. Two background layers: a thin shaft (gradient
+   line, vertically centred) plus a fixed-size arrowhead SVG pinned to the right
+   end, so the head never stretches as the shaft width changes. The element runs
+   past the heading into the column gutter. */
+.grant-row-head::after {
+  content: ""; display: block; height: 10px; margin-top: 0.95rem;
+  width: calc(100% + clamp(1.5rem, 4vw, 3.5rem) - 0.75rem);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M0 0 L10 5 L0 10 Z' fill='%23b5394f'/%3E%3C/svg%3E") no-repeat right center / 10px 10px,
+    linear-gradient(var(--dr-crimson), var(--dr-crimson)) no-repeat left center / calc(100% - 8px) 2px;
+}
+.grant-row-body { max-width: none; margin: 0.35rem 0 0; }
+@media (max-width: 720px) {
+  .grant-row { grid-template-columns: 1fr; gap: 0.75rem; }
+  .grant-row-head::after { width: 4rem; }
+}
+
+/* Lead-in line above the goal triptych. */
+.grant-goals-lead { font-family: var(--head); font-weight: 700; font-size: 1.05rem; color: var(--text); margin: clamp(2.5rem, 5vw, 3.5rem) 0 0; max-width: none; }
+
+/* Goal triptych — the three project strands as cards, each with a colored top
+   rule drawn from a different DeepRxn accent. */
+.grant-goals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1.25rem; padding: 0; list-style: none; max-width: none; }
+.grant-goals li {
+  position: relative; padding: 1.75rem 1.5rem 1.6rem; border: 1px solid var(--border);
+  border-top: 3px solid var(--goal-accent, var(--dr-crimson)); background: var(--bg);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.grant-goals li:hover { box-shadow: 0 18px 44px -26px rgba(0, 0, 0, 0.25); transform: translateY(-3px); }
+.grant-goals li:nth-child(1) { --goal-accent: var(--dr-purple); }
+.grant-goals li:nth-child(2) { --goal-accent: var(--dr-orange); }
+.grant-goals li:nth-child(3) { --goal-accent: var(--dr-crimson); }
+.grant-goals .pub-year { color: var(--goal-accent); }
+.grant-goals li strong { display: block; font-size: 1.1rem; margin-bottom: 0.4rem; color: var(--text); }
+.grant-goals li p { margin: 0; color: var(--muted); font-size: 0.95rem; line-height: 1.6; }
+@media (max-width: 760px) { .grant-goals { grid-template-columns: 1fr; } }
+
+/* Official-info panel — hard facts set apart from the narrative. */
+.fact-box {
+  background: var(--bg-alt); border: 1px solid var(--border);
+  border-left: 3px solid var(--dr-crimson);
+  border-radius: 6px; padding: clamp(1.4rem, 3vw, 2rem);
+  margin-top: 1.5rem; max-width: var(--measure);
+}
+.fact-list { margin: 0; }
+.fact-row { display: grid; grid-template-columns: 12rem 1fr; gap: 0.5rem 1.5rem; padding: 0.7rem 0; border-bottom: 1px solid var(--border); }
+.fact-row:first-child { padding-top: 0; }
+.fact-row:last-child { border-bottom: 0; }
+.fact-row dt { font-family: var(--head); font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--faint); align-self: center; }
+.fact-row dd { margin: 0; color: var(--text); }
+.fact-box .link-arrow { margin-top: 1.35rem; color: var(--dr-crimson); }
+.fact-box .link-arrow:hover { color: #000; }
+@media (max-width: 560px) { .fact-row { grid-template-columns: 1fr; gap: 0.15rem; } }
+
+/* People as compact avatar-less cards with initials chips. */
+.grant-people { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 1rem; margin-top: 1.5rem; padding: 0; list-style: none; max-width: none; }
+.grant-people li {
+  display: flex; align-items: center; gap: 0.9rem; padding: 1rem 1.1rem;
+  border: 1px solid var(--border); border-radius: 6px; background: var(--bg);
+  transition: border-color 0.2s ease;
+}
+.grant-people li:hover { border-color: var(--border-strong); }
+.grant-person-initials {
+  flex: 0 0 auto; display: grid; place-items: center;
+  width: 2.6rem; height: 2.6rem; border-radius: 50%;
+  background: var(--dr-crimson); color: #fff;
+  font-family: var(--head); font-weight: 700; font-size: 0.9rem;
+}
+.grant-person-photo {
+  flex: 0 0 auto; width: 2.6rem; height: 2.6rem; border-radius: 50%;
+  object-fit: cover; background: var(--bg-alt);
+}
+.grant-people li:nth-child(3n+2) .grant-person-initials { background: var(--dr-purple); }
+.grant-people li:nth-child(3n) .grant-person-initials { background: var(--dr-orange); }
+.grant-person-text { min-width: 0; }
+.grant-person-text strong { display: block; }
+.grant-person-text strong a { color: var(--text); text-decoration: none; }
+.grant-person-text strong a:hover { color: var(--dr-crimson); }
+.grant-person-note { display: block; color: var(--muted); font-size: 0.86rem; margin-top: 0.15rem; }
+.grant-people-past-head { margin-top: 2.25rem; color: var(--faint); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; }
+.grant-people-past-head + .grant-people { margin-top: 0.85rem; }
+.grant-people--past .grant-person-initials { background: var(--faint); }
+
+.grant-ack { font-size: 0.9rem; color: var(--faint); border-top: 1px solid var(--border); padding-top: 1.4rem; }
 
 /* ---------- Cards / grids ---------- */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr)); gap: 1.5rem; margin-top: 2.25rem; }
@@ -739,6 +911,38 @@ a.pub-title:hover { color: #000; }
 }
 .contact-note a:hover { color: #000; }
 
+/* The three ways to get involved — one line each, accent-marked. */
+.join-list {
+  list-style: none; margin: 1.1rem 0 1.4rem; padding: 0;
+  max-width: var(--measure); color: var(--muted);
+}
+.join-list li {
+  position: relative; padding-left: 1.1rem; margin: 0 0 0.7rem;
+  line-height: 1.55;
+}
+.join-list li:last-child { margin-bottom: 0; }
+.join-list li::before {
+  content: ""; position: absolute; left: 0; top: 0.62em;
+  width: 0.5rem; height: 2px; background: var(--accent);
+}
+.join-list strong { color: var(--text); font-weight: 600; }
+
+/* Map + address side by side; map takes the wider column. */
+/* Tighter vertical rhythm on the contact page: less gap after the email button
+   and less air above/below the map band than the site-wide .section default. */
+.contact-intro { padding-bottom: clamp(2rem, 4vw, 3rem); }
+.contact-map-band { padding-top: clamp(2rem, 4vw, 3rem); padding-bottom: clamp(2rem, 4vw, 3rem); }
+
+.map-grid {
+  display: grid; grid-template-columns: minmax(0, 2.6fr) minmax(12rem, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.75rem); align-items: start;
+}
+@media (max-width: 720px) {
+  .map-grid { grid-template-columns: 1fr; }
+}
+.map-address .big { margin-bottom: 0; }
+.map-address .map-note { margin-top: 1.1rem; }
+
 /* Map */
 .map { border: 1px solid var(--border); line-height: 0; }
 .map iframe { display: block; width: 100%; height: clamp(20rem, 46vh, 32rem); border: 0; }
@@ -828,6 +1032,28 @@ a.pub-title:hover { color: #000; }
 .vision-band .wrap { padding-top: clamp(2.5rem, 5vw, 3.75rem); padding-bottom: clamp(2.5rem, 5vw, 3.75rem); }
 /* Short transition that reintroduces the light ground before the threads. */
 .section--lead { padding-top: clamp(1.75rem, 3.5vw, 2.75rem); padding-bottom: clamp(1.5rem, 3vw, 2.25rem); }
+/* With tabs enhanced, drop the lead's bottom padding so the tablist sits flush
+   against the filled panel below it. */
+.js-tabs .section--lead { padding-bottom: 0; }
+.js-tabs .area-cards { margin-bottom: 0; }
+
+/* ERC funding callout — the EU/ERC emblem on a white plaque beside a short blurb
+   and a link to the ERC project page. Sits between the vision band and the
+   research areas. */
+.section--erc { padding-top: clamp(2rem, 4vw, 3rem); padding-bottom: clamp(2rem, 4vw, 3rem); }
+.erc-callout {
+  display: grid; grid-template-columns: 1fr auto; align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+.erc-callout-logo {
+  display: grid; place-items: center;
+}
+.erc-callout-logo img { display: block; width: clamp(12rem, 19vw, 16rem); height: auto; }
+.erc-callout-text .eyebrow { margin-bottom: 0.7rem; }
+.erc-callout-text h2 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin: 0 0 0.7rem; }
+.erc-callout-text > p { color: var(--muted); margin: 0 0 1rem; max-width: 78ch; }
+.erc-callout-text .link-arrow { color: var(--text); }
+@media (max-width: 640px) { .erc-callout { grid-template-columns: 1fr; text-align: left; } }
 
 /* Compact two-part signpost at the top of the research page — in-page links
    that scroll down to each part. A top hairline and an "On this page" label
@@ -852,7 +1078,7 @@ a.pub-title:hover { color: #000; }
   font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.14em;
   color: var(--muted); padding-bottom: 0.3rem;
 }
-.part-arrow { color: var(--accent-strong); transition: transform 0.2s ease; }
+.part-arrow { color: var(--text); font-size: 1.15em; font-weight: 900; line-height: 1; transition: transform 0.2s ease; }
 .part::after {
   content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 0;
   background: var(--accent); transition: width 0.2s ease;
@@ -865,6 +1091,60 @@ a.pub-title:hover { color: #000; }
   .parts-label { margin-bottom: 0.15rem; }
 }
 #vision, #areas { scroll-margin-top: 6rem; }
+#area-01, #area-02, #area-03, #area-04 { scroll-margin-top: 5rem; }
+/* Deep-linked team members (e.g. /team#jonathan-zheng) land below the sticky header. */
+.team-card[id], .roster--lead > li[id] { scroll-margin-top: 6rem; }
+
+/* Jump cards for the four research areas — one accent-numbered box each,
+   scrolling to its theme. Mirrors the .theme numbering language above. */
+.area-cards {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: clamp(0.75rem, 1.5vw, 1.1rem);
+  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+.area-card {
+  display: grid; grid-template-columns: auto 1fr; align-items: center;
+  gap: 0.5rem 0.85rem;
+  padding: clamp(1rem, 2vw, 1.35rem);
+  border: 1px solid var(--border); background: var(--bg);
+  color: var(--text); transition: border-color 0.2s ease, background 0.2s ease;
+}
+.area-card-num {
+  font-size: 1.5rem; font-weight: 300; line-height: 1;
+  color: var(--accent-strong); -webkit-text-fill-color: var(--accent-strong);
+}
+.area-card-title {
+  font-family: var(--head); font-weight: 700; font-size: 0.95rem;
+  line-height: 1.35;
+}
+.area-card:hover { border-color: var(--accent); background: var(--bg-alt); }
+/* On the off-white stage, hovering an inactive tab brightens it toward the white
+   of the active/panel state as an affordance. */
+.js-tabs .area-card:not(.is-active):hover { background: var(--bg); }
+/* Tab state (added by research-tabs.js once it enhances the tablist). The active
+   tab shares the panel's tint and loses its bottom edge so it merges into the
+   filled box below — reading as one tab-folder. An accent bar sits along its top.
+   Cursor is a pointer since these act as buttons. */
+/* Inactive tabs sit a step deeper than the off-white stage so they clearly read
+   as tabs (not blend into the background); the active tab is white to match the
+   panel card it connects into. */
+.js-tabs .area-cards[role="tablist"] .area-card:not(.is-active) {
+  background: #ececea; border-color: var(--border-strong);
+}
+.area-cards[role="tablist"] .area-card { cursor: pointer; position: relative; }
+.area-card.is-active {
+  background: var(--bg);
+  border-color: var(--border);
+  border-top: 3px solid var(--accent-strong);
+  border-bottom: 0; /* the tab merges into the card — no line just under it */
+  border-radius: 8px 8px 0 0;
+  /* sit above the card and overlap its top border by 1px so only the segment
+     directly under this tab is hidden; the rest of the card's top edge stays. */
+  position: relative; z-index: 1;
+  margin-bottom: -1px; padding-bottom: calc(clamp(1rem, 2vw, 1.35rem) + 1px);
+}
+.area-card.is-active .area-card-num { color: var(--text); -webkit-text-fill-color: var(--text); }
+.area-card:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 2px; }
 
 /* ---------- Research themes ---------- */
 /* Each theme is a single prose column with the figure floated to one side, so
@@ -978,6 +1258,20 @@ a.pub-title:hover { color: #000; }
 .theme > .wrap {
   border-top: 1.5px solid var(--text);
   padding-top: clamp(2.75rem, 5vw, 4rem);
+}
+
+/* Tab-folder look: once JS enhances the tabs, the active panel becomes a white
+   contained card that the active tab connects into — reading as one clickable
+   unit. The tab zone sits on an off-white "stage" (full-bleed --bg-alt across
+   the lead + panel sections) so the white card and active tab stand out and the
+   figures inside sit on clean white. The dark divider rule is dropped. */
+.js-tabs .section--lead,
+.js-tabs .section.theme { background: var(--bg-alt); }
+.js-tabs .section.theme { padding-top: 0; padding-bottom: clamp(2.5rem, 5vw, 3.75rem); }
+.js-tabs .theme > .wrap {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 0 0 8px 8px;
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.75rem, 3.5vw, 2.75rem);
 }
 
 /* Body copy sitting directly in a .wrap (outside <main>) */
@@ -1333,6 +1627,10 @@ a.pub-title:hover { color: #000; }
    Signet on the dark footer band, where its native white box reads cleanly. */
 .footer-inner .tu-logo { height: 2.4rem; width: auto; display: block; }
 .footer-brand { display: inline-flex; align-items: center; gap: 0.7rem; }
+/* TU Wien / institute links in the footer credit — inherit the muted footer
+   colour, underline on hover, brighten to white. */
+.footer-brand a { color: inherit; text-decoration: none; }
+.footer-brand a:hover { color: #fff; text-decoration: none; }
 
 /* Footer GitHub link + inline mark */
 .footer-inner .footer-end { display: inline-flex; align-items: center; gap: 1.25rem; }
@@ -1352,7 +1650,7 @@ a.pub-title:hover { color: #000; }
 .opensource { background: var(--bg-alt); border-top: 1px solid var(--border); }
 .opensource-inner {
   max-width: 60rem;
-  padding-top: clamp(2.5rem, 5vw, 3.75rem); padding-bottom: clamp(2.5rem, 5vw, 3.75rem);
+  padding-top: clamp(2rem, 4vw, 3rem); padding-bottom: clamp(2rem, 4vw, 3rem);
 }
 .opensource h2 { font-size: clamp(1.9rem, 4vw, 2.9rem); margin: 0.25rem 0 0; }
 .opensource p { color: var(--muted); margin: 1rem 0 0; max-width: 62ch; }

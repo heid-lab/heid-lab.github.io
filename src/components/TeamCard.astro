@@ -1,6 +1,6 @@
 ---
 import type { Member } from '../data/team';
-import { initials } from '../data/team';
+import { initials, slug } from '../data/team';
 
 interface Props {
   member: Member;
@@ -13,7 +13,7 @@ const avatarClass = ['team-card-avatar', member.avatar && `team-card-avatar--${m
   .join(' ');
 const hasLinks = member.links && (member.links.github || member.links.linkedin || member.links.scholar);
 ---
-<li class:list={['team-card', { 'team-card--colbreak': member.colbreak }]}>
+<li id={slug(member.name)} class:list={['team-card', { 'team-card--colbreak': member.colbreak }]}>
   <div class="team-card-head">
     <div class={avatarClass}>
       {member.photo ? (

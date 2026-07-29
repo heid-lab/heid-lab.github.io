@@ -74,40 +74,42 @@ const hero = `${base}/imgs/HEID Esther_043_Ulrich Zinell crop2.jpg`;
   <!-- Funding / grants band -->
   <section class="band">
     <div class="wrap">
-      <p class="eyebrow">Grants</p>
+      <p class="eyebrow">Projects</p>
       <h2>Funded by the ERC and FWF</h2>
-      <p>
-        Our work is supported by multiple grants including a highly competitive ERC Starting Grant
-        and an FWF START Prize, supporting the group's long-term research on machine learning
-        for chemical reactions.
-      </p>
+      <div class="funding-intro">
+        <div class="funding-intro-text">
+          <p>
+            Our work is supported by multiple grants including a highly competitive ERC Starting Grant
+            and an FWF START Prize, supporting the group's long-term research on machine learning
+            for chemical reactions as part of the <strong>DeepRxn</strong> project.
+          </p>
+        </div>
+        <span class="funding-badge funding-badge--deeprxn">
+          <img src={`${base}/imgs/grants/deeprxn-logo.png`} alt="DeepRxn — deep learning for chemical reactions" />
+        </span>
+      </div>
 
       <div class="grant-cards">
         <article class="grant-card">
           <span class="funding-badge funding-badge--erc">
             <img src={`${base}/imgs/grants/erc-eu-logo.png`} alt="Funded by the European Union — European Research Council" />
           </span>
-          <p class="grant-meta">European Research Council · 2024</p>
+          <p class="grant-meta">European Research Council · 2024 · €1.5M</p>
           <h3>ERC Starting Grant</h3>
-          <p>
-            “Deep learning of chemical reactions” — generative and predictive
-            deep-learning models across gas-phase, organocatalytic, and
-            biocatalytic systems.
-          </p>
-          <a class="link-arrow" href={`${base}/grants-erc`}>About this grant <span class="arrow">→</span></a>
+          <div class="grant-links">
+            <a class="link-arrow" href={`${base}/grants-erc`}>Explore the research <span class="arrow">→</span></a>
+            <a class="link-arrow link-arrow--secondary" href="https://cordis.europa.eu/project/id/101162908/en" target="_blank" rel="noopener">Project description <span class="arrow">→</span></a>
+          </div>
         </article>
         <article class="grant-card">
           <span class="funding-badge">
             <img src={`${base}/imgs/grants/fwf-logo.png`} alt="Austrian Science Fund (FWF)" />
           </span>
-          <p class="grant-meta">Austrian Science Fund (FWF) · 2024</p>
+          <p class="grant-meta">Austrian Science Fund (FWF) · 2024 · €200K</p>
           <h3>FWF START Prize</h3>
-          <p>
-            The FWF's most highly endowed award for early-career researchers,
-            supporting the group's long-term work on machine learning for
-            sustainable chemistry.
-          </p>
-          <a class="link-arrow" href={`${base}/grants-fwf`}>About this grant <span class="arrow">→</span></a>
+          <div class="grant-links">
+            <a class="link-arrow" href="https://www.fwf.ac.at/en/research-radar/10.55776/STA192" target="_blank" rel="noopener">Project description <span class="arrow">→</span></a>
+          </div>
         </article>
       </div>
     </div>
