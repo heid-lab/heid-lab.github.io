@@ -2,7 +2,7 @@
 
 The website for the Heid Lab at TU Wien (Faculty of Technical Chemistry, Institute of Materials Chemistry).
 
-<!-- Live at **https://heid-lab.github.io/website/**. -->
+<!-- Live at **https://heid-lab.github.io/**. -->
 
 
 ## Tech stack
@@ -29,7 +29,7 @@ The website for the Heid Lab at TU Wien (Faculty of Technical Chemistry, Institu
 Clone the repo:
 
 ```bash
-git clone git@github.com:heid-lab/website.git
+git clone git@github.com:heid-lab/heid-lab.github.io.git
 ```
 
 Go into the folder and run:
@@ -42,8 +42,7 @@ npm install
 npm run dev
 ```
 
-Open **http://localhost:4321/website/** in your browser. The URL must include
-**`/website`** — `localhost:4321` on its own will 404.
+Open **http://localhost:4321/** in your browser.
 
 Leave `npm run dev` running while you edit. When you save a file, the browser
 reloads on its own. Press **Ctrl-C** to stop it.
@@ -173,7 +172,7 @@ the newest three; the News page shows all.
 1. Put the image files in `public/imgs/news/`.
 2. Reference them from a news item's `images` array in
    `public/js/news-data.js`, using the path **`imgs/news/your-file.jpg`**
-   (root-relative — the site adds the `/website` prefix for you).
+   (root-relative).
 
 The **"Life in the lab"** gallery on the News page fills itself: it collects
 every image from every news item (plus the group photo). Add photos to news
@@ -193,6 +192,5 @@ and publishes it to GitHub Pages. No manual step — just commit and push.
 One-time setup in the GitHub repo (only if Pages isn't already configured):
 **Settings → Pages → Build and deployment → Source → "GitHub Actions"**.
 
-> **Note on the base path.** The site lives under the `/website/` sub-path, so
-> `astro.config.mjs` sets `base: '/website'`. If the site ever moves to its own
-> domain, change that to `base: '/'`.
+> **Note on the base path.** The repo is `heid-lab.github.io`, so Pages serves
+> the site at the domain root and `astro.config.mjs` sets `base: '/'`.
