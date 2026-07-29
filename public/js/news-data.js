@@ -15,6 +15,10 @@
 
    !! Items below contain [bracketed] placeholders where details were
       missing. Search for "[" to find them all.
+
+   Image src values are written relative to the site root ("imgs/..."); the
+   renderers prefix them with the deploy base path at render time, so they
+   resolve correctly no matter which page shows them.
    ============================================================ */
 
 window.NEWS = [

@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Layout title="Heid Lab — Contact" active="contact" scripts={["header.js"]}>
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Where to find us</p>
+        <h1>Interested in joining?</h1>
+        <p>
+          We are always glad to hear from people with a background in chemistry,
+          computer science, or anything in between — whether you are looking for a
+          PhD or postdoc position, a thesis project, or a collaboration. Tell us
+          what you would like to work on.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="mailto:esther.heid@tuwien.ac.at">Email Esther <span class="arrow">→</span></a>
+        </div>
+        <p class="contact-note">
+          Esther Heid handles prospective students, collaborations, and everything
+          else. See her <a href={`${base}/pi`}>full profile</a>.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-block">
+          <h3>Address</h3>
+          <p class="big">
+            Heid Lab · TU Wien<br />
+            Institute of Materials Chemistry<br />
+            Getreidemarkt 9, Building BF<br />
+            1060 Vienna, Austria
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Map in its own off-white band so it doesn't stack black-on-black with
+       the footer, and reads as a distinct block from the contact details. -->
+  <section class="section section--alt">
+    <div class="wrap">
+      <div class="map">
+        <iframe
+          title="Map showing Getreidemarkt 9, 1060 Vienna"
+          src="https://www.google.com/maps?q=Getreidemarkt%209%2C%201060%20Wien%2C%20Austria&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+      <p class="map-note">
+        <a class="link-arrow" href="https://www.google.com/maps/search/?api=1&query=Getreidemarkt+9%2C+1060+Wien%2C+Austria">Open in Google Maps <span class="arrow">→</span></a>
+      </p>
+    </div>
+  </section>
+</Layout>

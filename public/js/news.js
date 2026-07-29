@@ -4,6 +4,15 @@
   var mounts = document.querySelectorAll('[data-news]');
   if (!mounts.length) return;
 
+  // Prefix a root-relative asset path ("imgs/...") with the deploy base path
+  // (e.g. "/website") so images resolve on every page regardless of its depth.
+  function asset(src) {
+    if (/^(?:[a-z]+:)?\/\//i.test(src) || src.charAt(0) === '/') return src;
+    var base = (window.BASE_URL || '/').replace(/\/$/, '');
+    return base + '/' + src;
+  }
+  window.NEWS_ASSET = asset;
+
   var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -47,7 +56,7 @@
 
     function render() {
       var pic = set[at];
-      imgEl.src = pic.src;
+      imgEl.src = asset(pic.src);
       imgEl.alt = pic.alt || '';
       capEl.textContent = set.length > 1
         ? capTitle + ' · ' + (at + 1) + ' / ' + set.length
@@ -169,7 +178,7 @@
           });
 
           var img = document.createElement('img');
-          img.src = pic.src;
+          img.src = asset(pic.src);
           img.alt = pic.alt || '';
           img.loading = 'lazy';
 

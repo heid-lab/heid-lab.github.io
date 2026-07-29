@@ -1,0 +1,43 @@
+---
+// The shared page skeleton: <head>, header, footer, and the global stylesheet.
+// Every page wraps its content in this, so the boilerplate that used to be
+// duplicated across 11 HTML files now lives here once.
+//
+// Props:
+//   title   -> <title> text
+//   active  -> nav key to highlight (see Header.astro)
+//   noJs    -> set <html class="no-js"> (team page progressive enhancement)
+//   scripts -> filenames from public/js to load at the end of <body>
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/style.css';
+
+interface Props {
+  title: string;
+  active?: string;
+  noJs?: boolean;
+  scripts?: string[];
+}
+const { title, active, noJs = false, scripts = [] } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<!DOCTYPE html>
+<html lang="en" class={noJs ? 'no-js' : undefined}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <!-- Expose the deploy base path so the vanilla scripts in public/js can
+         resolve root-relative asset paths ("imgs/...") correctly. -->
+    <script is:inline define:vars={{ base }}>
+      window.BASE_URL = base || '/';
+    </script>
+  </head>
+  <body>
+    <slot name="pre-header" />
+    <Header active={active} />
+    <slot />
+    <Footer />
+    {scripts.map((s) => <script is:inline src={`${base}/js/${s}`}></script>)}
+  </body>
+</html>

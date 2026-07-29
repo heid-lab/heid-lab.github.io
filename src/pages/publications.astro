@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { publications } from '../data/publications';
+---
+<Layout title="Heid Lab — Publications" active="publications" scripts={["header.js"]}>
+  <main>
+    <h1>Publications</h1>
+    <p>A complete list of work from the lab.</p>
+
+    {publications.map((group) => (
+      <>
+        <h2>{group.year}</h2>
+        <ul class="clean pubs">
+          {group.items.map((pub) => (
+            <li class="pub">
+              <span class="pub-meta">
+                {pub.preprint && <button class="pub-tag">Preprint</button>}
+                {pub.meta}
+              </span>
+              {pub.titleHtml
+                ? <a class="pub-title" href={pub.href} set:html={pub.titleHtml} />
+                : <a class="pub-title" href={pub.href}>{pub.title}</a>}
+              <span class="authors" set:html={pub.authors} />
+            </li>
+          ))}
+        </ul>
+      </>
+    ))}
+  </main>
+</Layout>

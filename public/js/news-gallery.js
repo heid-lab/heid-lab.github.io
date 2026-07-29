@@ -9,6 +9,10 @@
   var mount = document.querySelector('[data-news-gallery]');
   if (!mount) return;
 
+  // Reuse the base-path prefixer from news.js; fall back to identity so the
+  // gallery still works if loaded standalone.
+  var asset = window.NEWS_ASSET || function (s) { return s; };
+
   function sortKey(iso) { return iso.length === 7 ? iso + '-00' : iso; }
 
   // Always lead with the group photo, then every news image, newest first.
@@ -49,7 +53,7 @@
     });
 
     var img = document.createElement('img');
-    img.src = pic.src;
+    img.src = asset(pic.src);
     img.alt = pic.alt;
     img.loading = 'lazy';
     img.draggable = false;

@@ -1,33 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Heid Lab — Welcome</title>
-  <link rel="stylesheet" href="style.css?v=77" />
-</head>
-<body>
-  <header class="site-header">
-    <div class="nav-wrap">
-      <a class="brand" href="index.html">Heid <span>Lab</span></a>
-      <nav class="main-nav">
-        <a href="index.html" class="active">Home</a>
-        <a href="team.html">About us</a>
-        <a href="news.html">News</a>
-        <a href="research.html">Research</a>
-        <a href="publications.html">Publications</a>
-        <a href="teaching.html">Teaching</a>
-        <a href="contact.html" class="nav-cta">Contact</a>
-      </nav>
-    </div>
-  </header>
-
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const hero = `${base}/imgs/HEID Esther_043_Ulrich Zinell crop2.jpg`;
+---
+<Layout
+  title="Heid Lab — Welcome"
+  active="home"
+  scripts={["slideshow.js", "news-data.js", "news.js", "header.js"]}
+>
   <!-- Full-bleed cover hero -->
   <section class="hero-cover">
     <div class="hero-media">
-      <img class="hero-edge hero-edge--l" src="imgs/HEID Esther_043_Ulrich Zinell crop2.jpg" alt="" aria-hidden="true" />
-      <img class="hero-bg" src="imgs/HEID Esther_043_Ulrich Zinell crop2.jpg" alt="Esther Heid at TU Wien" />
-      <img class="hero-edge hero-edge--r" src="imgs/HEID Esther_043_Ulrich Zinell crop2.jpg" alt="" aria-hidden="true" />
+      <img class="hero-edge hero-edge--l" src={hero} alt="" aria-hidden="true" />
+      <img class="hero-bg" src={hero} alt="Esther Heid at TU Wien" />
+      <img class="hero-edge hero-edge--r" src={hero} alt="" aria-hidden="true" />
     </div>
     <p class="hero-credit">Photo: © Ulrich Zinell</p>
     <div class="hero-content">
@@ -37,8 +23,8 @@
         Bridging AI and mechanistic chemistry to enable high-throughput screening of chemical reactions.
       </p>
       <div class="btn-row">
-        <a class="btn btn-primary" href="research.html">View research <span class="arrow">→</span></a>
-        <a class="btn btn-outline" href="team.html" style="color:#fff;">Meet the team <span class="arrow">→</span></a>
+        <a class="btn btn-primary" href={`${base}/research`}>View research <span class="arrow">→</span></a>
+        <a class="btn btn-outline" href={`${base}/team`} style="color:#fff;">Meet the team <span class="arrow">→</span></a>
       </div>
     </div>
   </section>
@@ -49,12 +35,12 @@
       <div class="split-media">
         <div class="slideshow" aria-label="Photos of the Heid Lab group" aria-roledescription="carousel">
           <div class="slideshow-track">
-            <img class="is-active" src="imgs/group/web/sel-5.jpg" alt="The Heid Lab group" />
-            <img src="imgs/group/web/sel-1.jpg" alt="" />
-            <img src="imgs/group/web/sel-2.jpg" alt="" />
-            <img src="imgs/group/web/sel-3.jpg" alt="" />
-            <img src="imgs/group/web/sel-4.jpg" alt="" />
-            <img src="imgs/group/web/sel-6.jpg" alt="" />
+            <img class="is-active" src={`${base}/imgs/group/web/sel-5.jpg`} alt="The Heid Lab group" />
+            <img src={`${base}/imgs/group/web/sel-1.jpg`} alt="" />
+            <img src={`${base}/imgs/group/web/sel-2.jpg`} alt="" />
+            <img src={`${base}/imgs/group/web/sel-3.jpg`} alt="" />
+            <img src={`${base}/imgs/group/web/sel-4.jpg`} alt="" />
+            <img src={`${base}/imgs/group/web/sel-6.jpg`} alt="" />
           </div>
           <button class="slideshow-arrow slideshow-arrow--prev" type="button" aria-label="Previous photo">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 L7 12 L15 20" /></svg>
@@ -80,7 +66,7 @@
           and ML-accelerated automated reaction pathway search across gas-phase, organocatalytic,
           and biocatalytic reactions.
         </p>
-        <a class="link-arrow" href="research.html">Explore our work <span class="arrow">→</span></a>
+        <a class="link-arrow" href={`${base}/research`}>Explore our work <span class="arrow">→</span></a>
       </div>
     </div>
   </section>
@@ -99,7 +85,7 @@
       <div class="grant-cards">
         <article class="grant-card">
           <span class="funding-badge funding-badge--erc">
-            <img src="imgs/grants/erc-eu-logo.png" alt="Funded by the European Union — European Research Council" />
+            <img src={`${base}/imgs/grants/erc-eu-logo.png`} alt="Funded by the European Union — European Research Council" />
           </span>
           <p class="grant-meta">European Research Council · 2024</p>
           <h3>ERC Starting Grant</h3>
@@ -108,11 +94,11 @@
             deep-learning models across gas-phase, organocatalytic, and
             biocatalytic systems.
           </p>
-          <a class="link-arrow" href="grants-erc.html">About this grant <span class="arrow">→</span></a>
+          <a class="link-arrow" href={`${base}/grants-erc`}>About this grant <span class="arrow">→</span></a>
         </article>
         <article class="grant-card">
           <span class="funding-badge">
-            <img src="imgs/grants/fwf-logo.png" alt="Austrian Science Fund (FWF)" />
+            <img src={`${base}/imgs/grants/fwf-logo.png`} alt="Austrian Science Fund (FWF)" />
           </span>
           <p class="grant-meta">Austrian Science Fund (FWF) · 2024</p>
           <h3>FWF START Prize</h3>
@@ -121,13 +107,13 @@
             supporting the group's long-term work on machine learning for
             sustainable chemistry.
           </p>
-          <a class="link-arrow" href="grants-fwf.html">About this grant <span class="arrow">→</span></a>
+          <a class="link-arrow" href={`${base}/grants-fwf`}>About this grant <span class="arrow">→</span></a>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- News timeline — items live in news-data.js -->
+  <!-- News timeline — items live in public/js/news-data.js -->
   <section class="section">
     <div class="wrap">
       <div class="section-head">
@@ -136,7 +122,7 @@
       </div>
       <div data-news data-news-limit="3"></div>
       <div class="btn-row">
-        <a class="link-arrow" href="news.html">All news <span class="arrow">→</span></a>
+        <a class="link-arrow" href={`${base}/news`}>All news <span class="arrow">→</span></a>
       </div>
     </div>
   </section>
@@ -170,7 +156,7 @@
         </article>
       </div>
       <div class="btn-row">
-        <a class="link-arrow" href="publications.html">All publications <span class="arrow">→</span></a>
+        <a class="link-arrow" href={`${base}/publications`}>All publications <span class="arrow">→</span></a>
       </div>
     </div>
   </section>
@@ -187,31 +173,7 @@
           from you.
         </p>
       </div>
-      <a class="btn btn-primary" href="contact.html">Get in touch <span class="arrow">→</span></a>
+      <a class="btn btn-primary" href={`${base}/contact`}>Get in touch <span class="arrow">→</span></a>
     </div>
   </section>
-
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <!-- TU LOGO — footer -->
-      <span class="footer-brand">
-        <img class="tu-logo" src="imgs/TU-signet/TU_Signet_RGB.svg" alt="TU Wien" />
-        Heid Lab · TU Wien · Institute of Materials Chemistry
-      </span>
-      <span class="footer-end">
-        <a class="footer-github" href="https://github.com/heid-lab" target="_blank" rel="noopener" aria-label="Heid Lab on GitHub">
-          <svg class="gh-icon" viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-          GitHub
-        </a>
-        <span>© 2026 Heid Lab · All rights reserved</span>
-      </span>
-    </div>
-  </footer>
-
-  <script src="slideshow.js?v=2"></script>
-
-  <script src="news-data.js?v=4"></script>
-  <script src="news.js?v=3"></script>
-  <script src="header.js?v=1"></script>
-</body>
-</html>
+</Layout>
