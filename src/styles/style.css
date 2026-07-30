@@ -522,10 +522,25 @@ main :is(p, li) a:hover { color: #000; }
   background: var(--dr-crimson); color: #fff;
   font-family: var(--head); font-weight: 700; font-size: 0.9rem;
 }
+/* Round headshot. The wrapper does the clipping so the zoom modifiers below
+   can scale the image without spilling outside the circle. Focal points mirror
+   .team-card-avatar--* and come from the same `avatar` field in team.ts. */
 .grant-person-photo {
   flex: 0 0 auto; width: 2.6rem; height: 2.6rem; border-radius: 50%;
-  object-fit: cover; background: var(--bg-alt);
+  overflow: hidden; background: var(--bg-alt);
 }
+.grant-person-photo img {
+  display: block; width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 25%;
+}
+.grant-person-photo--top  img { object-position: 50% 6%; }
+.grant-person-photo--high img { object-position: 50% 15%; }
+.grant-person-photo--low  img { object-position: 50% 32%; }
+.grant-person-photo--zoom    img { transform: scale(1.25); transform-origin: 50% 35%; }
+.grant-person-photo--zoom-sm img { transform: scale(1.15); transform-origin: 50% 30%; }
+/* Wide-shot portraits where the head is high AND small: the circle crops the
+   corners the team page's square keeps, so pull the face in as well as up. */
+.grant-person-photo--zoom-top img { object-position: 50% 8%; transform: scale(1.3); transform-origin: 50% 12%; }
 .grant-people li:nth-child(3n+2) .grant-person-initials { background: var(--dr-purple); }
 .grant-people li:nth-child(3n) .grant-person-initials { background: var(--dr-orange); }
 .grant-person-text { min-width: 0; }

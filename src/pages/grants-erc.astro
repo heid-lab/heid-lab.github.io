@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { initials, slug } from '../data/team';
+import { avatarCrop, initials, slug } from '../data/team';
 import { pubsByFunding } from '../data/publications';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -62,6 +62,21 @@ const people = [
   { name: 'Jasper De Landsheere', note: 'PhD · reaction property prediction', href: `${base}/team#${slug('Jasper De Landsheere')}`, photo: 'jasper-de-landsheere.jpg' },
   { name: 'Leon Ganser', note: 'PhD · asymmetric organocatalysis', href: `${base}/team#${slug('Leon Ganser')}` },
 ];
+
+// Crop overrides for this page's small round frames. The team page's crops
+// (team.ts) are tuned for a large square; a circle also cuts the corners, so a
+// couple of photos need a tighter focal point here. Name -> class suffix.
+const cropOverrides: Record<string, string> = {
+  'Esther Heid': 'high',      // not in `members`; face sits high in the portrait
+  'Jasper De Landsheere': 'zoom-top', // wide shot: head high and small
+};
+
+// Class list for a headshot circle, adding the person's per-photo crop tweak
+// so faces stay centred in the circle.
+const photoClass = (name: string) => {
+  const crop = cropOverrides[name] ?? avatarCrop(name);
+  return ['grant-person-photo', crop && `grant-person-photo--${crop}`].filter(Boolean).join(' ');
+};
 
 // Former contributors to the project.
 const pastPeople = [
@@ -164,7 +179,9 @@ const pastPeople = [
       {people.map((p) => (
         <li>
           {p.photo
-            ? <img class="grant-person-photo" src={`${base}/imgs/team_members/${p.photo}`} alt={p.name} loading="lazy" />
+            ? <span class={photoClass(p.name)}>
+                <img src={`${base}/imgs/team_members/${p.photo}`} alt={p.name} loading="lazy" />
+              </span>
             : <span class="grant-person-initials">{initials(p.name)}</span>}
           <span class="grant-person-text">
             <strong><a href={p.href}>{p.name}</a></strong>
@@ -178,7 +195,9 @@ const pastPeople = [
       {pastPeople.map((p) => (
         <li>
           {p.photo
-            ? <img class="grant-person-photo" src={`${base}/imgs/team_members/${p.photo}`} alt={p.name} loading="lazy" />
+            ? <span class={photoClass(p.name)}>
+                <img src={`${base}/imgs/team_members/${p.photo}`} alt={p.name} loading="lazy" />
+              </span>
             : <span class="grant-person-initials">{initials(p.name)}</span>}
           <span class="grant-person-text">
             <strong><a href={p.href}>{p.name}</a></strong>
@@ -207,10 +226,10 @@ const pastPeople = [
 
     <h2>Acknowledgment</h2>
     <p class="grant-ack">
-      Funded by the European Union (ERC, DeepRxn, 101162908). Views and opinions expressed are
-      however those of the author(s) only and do not necessarily reflect those of the European
-      Union or the European Research Council. Neither the European Union nor the granting
-      authority can be held responsible for them.
+      Funded by the European Union (ERC-2024-STG, Project 101162908—DeepRxn). Views and
+      opinions expressed are however those of the author(s) only and do not necessarily reflect
+      those of the European Union or the European Research Council. Neither the European Union
+      nor the granting authority can be held responsible for them.
     </p>
   </main>
 </Layout>

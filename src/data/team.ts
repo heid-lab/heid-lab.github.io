@@ -253,6 +253,13 @@ export function slug(name: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
+// The crop tweak a person's photo needs, looked up by name. Other pages that
+// show the same headshots (e.g. the grant pages) reuse this so a crop fixed on
+// the team page is fixed everywhere. Returns undefined for the default crop.
+export function avatarCrop(name: string): Member['avatar'] {
+  return members.find((m) => m.name === name)?.avatar;
+}
+
 // Compute initials from a name for the photo fallback (e.g. "Leon Ganser" → "LG").
 export function initials(name: string): string {
   return name
