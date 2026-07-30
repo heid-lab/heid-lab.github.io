@@ -35,10 +35,13 @@ git clone git@github.com:heid-lab/heid-lab.github.io.git
 Go into the folder and run:
 
 ```bash
-# 1. Install dependencies (first time only)
+# 1. Go into cloned folder
+cd heid-lab.github.io.git
+
+# 2. Install dependencies (first time only)
 npm install
 
-# 2. Start the dev server
+# 3. Start the dev server
 npm run dev
 ```
 
