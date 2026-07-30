@@ -230,6 +230,27 @@ a:hover { color: #000; }
 .section-head h2 { font-size: clamp(1.9rem, 4vw, 3rem); }
 .section-head p { color: var(--muted); margin: 1rem 0 0; }
 
+/* Back link on sub-pages (e.g. the PI full profile). Absolutely positioned so it
+   takes up no space in the flow: it floats in the section's existing top padding
+   and the content below keeps exactly the position it had without the link.
+   Needs a positioned ancestor — see .wrap--anchor on the PI page. */
+.back-link {
+  /* left/right inset by the wrap's own horizontal padding so the link's text
+     starts on the same line as the content below it, not the wrap's edge. */
+  position: absolute; bottom: 100%; left: var(--pad-x);
+  margin-bottom: clamp(0.9rem, 2vw, 1.5rem);
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--head); font-size: 0.86rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+.back-link .arrow { transition: transform 0.2s ease; }
+.back-link:hover { color: var(--text); }
+.back-link:hover .arrow { transform: translateX(-3px); }
+/* Anchor for .back-link — position only, no box-model change. */
+.wrap--anchor { position: relative; }
+
 /* Split image + text */
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
 .split-media img { display: block; width: 100%; height: 100%; max-height: 35rem; object-fit: cover; border-radius: 3px; }

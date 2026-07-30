@@ -10,7 +10,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
        Built on the roster-lead layout (as on the About Us page) so the photo
        stretches to match the bio height rather than leaving a gap beneath it. -->
   <section class="section section--alt">
-    <div class="wrap">
+    <div class="wrap wrap--anchor">
+      <a class="back-link" href={`${base}/team#esther-heid`}>
+        <span class="arrow">←</span> Go back
+      </a>
       <ul class="roster roster--lead">
         <li>
           <div class="person-photo">
