@@ -98,17 +98,21 @@ yet.
 
 ```ts
 {
-  meta: 'Digital Discovery 4, 3208 · 2025',   // journal / venue line
+  meta: 'Digital Discovery 1, 234 · 2026',
   title: 'Paper title goes here',
-  href: 'https://doi.org/10.1039/D5DD00240K', // link to the paper / DOI
-  authors: 'J. Karwounopoulos, <strong>E. Heid</strong>, …', // wrap group names in <strong>
+  href: 'https://doi.org/1.234/ABC', 
+  authors: 'J. Doe, …', 
   preprint: true,                             // optional: shows the "Preprint" tag
+  funding: ['erc'],                           // optional: grant(s) the paper acknowledges
   // titleHtml: 'Ti-rich SrTiO<sub>3</sub>(110) …',  // use INSTEAD of `title` if it needs markup
 }
 ```
 
 - Use `titleHtml` **instead of** `title` only when the title needs markup like a
   subscript (`<sub>`).
+- Add `funding: ['erc']` if the paper acknowledges the ERC grant. It is **not**
+  shown on the Publications page — it only decides whether the paper appears in
+  the "related publications" list on the ERC grant page. Leave it out otherwise.
 
 ### Adding a team member
 
