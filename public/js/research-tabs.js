@@ -30,6 +30,14 @@
     tab.addEventListener('click', function (e) {
       e.preventDefault();
       select(i);
+      // Record the tab in the URL so leaving the page and coming back (or
+      // sharing the link) restores this tab instead of falling back to 01.
+      var id = tab.getAttribute('aria-controls');
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', '#' + id);
+      } else {
+        window.location.hash = id;
+      }
     });
     tab.addEventListener('keydown', function (e) {
       var next;
@@ -44,10 +52,19 @@
   });
 
   // If the page was opened with a #area-0x hash, honour it; otherwise show 01.
-  var start = 0;
-  var hash = window.location.hash.replace('#', '');
-  tabs.forEach(function (tab, i) {
-    if (tab.getAttribute('aria-controls') === hash) start = i;
+  function indexForHash() {
+    var hash = window.location.hash.replace('#', '');
+    var found = 0;
+    tabs.forEach(function (tab, i) {
+      if (tab.getAttribute('aria-controls') === hash) found = i;
+    });
+    return found;
+  }
+
+  select(indexForHash());
+
+  // Back/forward navigation only changes the hash — resync the visible panel.
+  window.addEventListener('hashchange', function () {
+    select(indexForHash());
   });
-  select(start);
 })();
