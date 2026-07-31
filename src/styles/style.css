@@ -1387,7 +1387,6 @@ a.pub-title:hover { color: #000; }
 }
 .timeline-toggle:hover { color: #000; }
 .timeline-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.timeline-toggle .count { color: var(--faint); }
 .timeline-toggle .chev { font-size: 0.85em; transition: transform 0.2s ease; }
 .timeline-toggle[aria-expanded="true"] .chev { transform: rotate(180deg); }
 .timeline-top { background: none; border: 0; padding: 0; cursor: pointer; }
