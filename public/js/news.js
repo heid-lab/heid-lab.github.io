@@ -221,25 +221,30 @@
 
     if (!(collapseAfter > 0) || shown.length <= collapseAfter) return;
 
-    var hiddenCount = shown.length - collapseAfter;
-    var expanded = false;
+    // Reveal earlier news a page at a time rather than all at once, so the
+    // button stays a short step instead of dumping the whole archive.
+    var PAGE = collapseAfter;
+    var visible = collapseAfter;
 
     function apply() {
       var i = 0;
       groups.forEach(function (g) {
         var anyVisible = false;
         g.items.forEach(function (li) {
-          var hide = !expanded && i >= collapseAfter;
+          var hide = i >= visible;
           li.hidden = hide;
           if (!hide) anyVisible = true;
           i++;
         });
         if (g.marker) g.marker.hidden = !anyVisible;
       });
-      toggle.setAttribute('aria-expanded', String(expanded));
-      label.textContent = expanded ? 'Show less' : 'Show earlier news';
-      count.textContent = expanded ? '' : ' (' + hiddenCount + ')';
-      top.hidden = !expanded;
+
+      var all = visible >= shown.length;
+      toggle.setAttribute('aria-expanded', String(visible > collapseAfter));
+      label.textContent = all ? 'Show less' : 'Show more';
+      chev.textContent = all ? '▴' : '▾';
+      // Only offer "back to top" once the list has actually grown.
+      top.hidden = visible <= collapseAfter;
     }
 
     var more = document.createElement('div');
@@ -249,14 +254,11 @@
     toggle.type = 'button';
     toggle.className = 'timeline-toggle';
     var label = document.createElement('span');
-    var count = document.createElement('span');
-    count.className = 'count';
     var chev = document.createElement('span');
     chev.className = 'chev';
     chev.setAttribute('aria-hidden', 'true');
     chev.textContent = '▾';
     toggle.appendChild(label);
-    toggle.appendChild(count);
     toggle.appendChild(chev);
 
     var top = document.createElement('button');
@@ -265,10 +267,20 @@
     top.innerHTML = 'Back to top <span class="arrow" aria-hidden="true">↑</span>';
 
     toggle.addEventListener('click', function () {
-      expanded = !expanded;
+      if (visible >= shown.length) {
+        // Everything is out — this press collapses back to the first page.
+        visible = collapseAfter;
+        apply();
+        // Collapsing from far down the list would leave the viewport stranded.
+        more.scrollIntoView({ block: 'center' });
+        return;
+      }
+      var flat = groups.reduce(function (acc, g) { return acc.concat(g.items); }, []);
+      var firstNew = flat[visible] || null;
+      visible = Math.min(visible + PAGE, shown.length);
       apply();
-      // Collapsing from far down the list would leave the viewport stranded.
-      if (!expanded) more.scrollIntoView({ block: 'center' });
+      // Keep the newly revealed items in view; the button moves down the page.
+      if (firstNew) firstNew.scrollIntoView({ block: 'nearest' });
     });
     top.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
