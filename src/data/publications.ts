@@ -39,6 +39,13 @@ export const publications: PublicationYear[] = [
       {
         preprint: true,
         meta: 'ChemRxiv · 2026',
+        title: 'An Atomistic Workflow for Determining Acid-Base Prototropic Tautomer Microstate Populations',
+        href: 'https://chemrxiv.org/doi/abs/10.26434/chemrxiv.15006747',
+        authors: 'J. W. Zheng, E. Heid',
+      }, 
+      {
+        preprint: true,
+        meta: 'ChemRxiv · 2026',
         title: 'Prediction of triplet geometries across chemical space with flow-matching based machine learning',
         href: 'https://chemrxiv.org/doi/full/10.26434/chemrxiv.15003682',
         authors: 'G. Giugliano, L. Galustian, M. Calvaresi, F. Zerbetto, E. Heid',
