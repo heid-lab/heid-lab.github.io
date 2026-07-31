@@ -108,7 +108,7 @@ yet.
   preprint: true,                             // optional: shows the "Preprint" tag
   funding: ['erc'],                           // optional: grant(s) the paper acknowledges
   // titleHtml: 'Ti-rich SrTiO<sub>3</sub>(110) …',  // use INSTEAD of `title` if it needs markup
-}
+},
 ```
 
 - Use `titleHtml` **instead of** `title` only when the title needs markup like a
@@ -138,7 +138,7 @@ field decides which section (and filter tab) they appear under.
     scholar: 'https://scholar.google.com/citations?user=…',
   },
   // avatar: 'high',                    // optional photo-crop nudge: 'high' | 'low' | 'top' | 'zoom' | 'zoom-sm'
-}
+},
 ```
 
 **Their photo:** put the file in `public/imgs/team_members/` and set `photo` to
@@ -171,7 +171,7 @@ the newest three; the News page shows all.
   images: [             // optional, 1–3 photos (see below)
     { src: "imgs/news/2026-08-example.jpg", alt: "Short description" }
   ]
-}
+},
 ```
 
 ### Adding photos (news items & "Life in the lab" gallery)
