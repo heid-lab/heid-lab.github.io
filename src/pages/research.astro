@@ -128,7 +128,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           A particular focus of our work lies in the <a href="https://doi.org/10.1039/D5DD00240K" target="_blank" rel="noopener noreferrer" class="paper-link" data-paper="barriers">prediction of reaction
           barrier heights</a>, which govern reaction rates and selectivity and
           are notoriously expensive to obtain via traditional QM
-          methods. We have shown that graph neural networks operating on CGRs
+          methods. We have shown that graph neural networks operating on the condensed graph of reaction (CGR)
           provide high predictive accuracy, and that further incorporating
           transition state geometries significantly improves
           barrier height predictions over purely connectivity-based approaches.
@@ -185,9 +185,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         </p>
         <p>
           Beyond chemical reactions, the GoFlow framework generalizes to other
-          excited-state geometry prediction tasks. <a href="https://chemrxiv.org/doi/full/10.26434/chemrxiv.15003682/v1" target="_blank" rel="noopener noreferrer" class="paper-link" data-paper="goflow-t1">GoFlow-T1</a>
-          adapts the same backbone for direct prediction of minimum-energy triplet
-          excited-state geometries across chemically diverse organic molecules,
+          geometry prediction tasks, such as minimum-energy triplet geometries. <a href="https://chemrxiv.org/doi/full/10.26434/chemrxiv.15003682/v1" target="_blank" rel="noopener noreferrer" class="paper-link" data-paper="goflow-t1">GoFlow-T1</a>
+          adapts the same backbone to predict these excited-state geometries
+          directly across chemically diverse organic molecules,
           enabling rapid computation of triplet energies and singlet-triplet gaps
           at near-quantum-mechanical accuracy.
         </p>
@@ -215,7 +215,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         <p class="eyebrow"><span class="theme-num">03</span> Automated workflows</p>
         <h2>ML-accelerated automated transition state search</h2>
         <p>
-        Generating accurate TS geometries is only one part of the challenge,
+        Generating accurate TS geometries is only one part of the challenge;
         integrating them into robust, scalable workflows for reaction mechanism
         exploration is another. Standalone deep learning predictors lack
         robustness under distribution shift, while heuristic-based automation
