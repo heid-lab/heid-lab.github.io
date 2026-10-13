@@ -206,9 +206,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <!-- 03 · Automated workflows -->
   <section class="section theme" id="area-03" role="tabpanel" aria-labelledby="tab-03">
     <div class="wrap theme-cols theme-cols--media-right">
-      <aside class="theme-aside">
+      <aside class="theme-aside theme-aside--wide">
         <figure class="theme-media">
-          <img src={`${base}/imgs/research/03-pes.png`} alt="Potential energy surface showing reactant and product macrostates, conformer minima, an intermediate, and elementary-step pathways." loading="lazy" />
+          <img src={`${base}/imgs/research/03-motsart.png`} alt="moTSart: an automated transition state search pipeline that goes from a SMILES input through a reactant complex finder, a reaction path guesser, and a validator to TS conformers, with GoFlow delta learning improving the TS guesses." loading="lazy" />
         </figure>
       </aside>
       <div class="theme-text">
@@ -245,15 +245,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <!-- 04 · Data creation & analysis -->
   <section class="section theme" id="area-04" role="tabpanel" aria-labelledby="tab-04">
-    <div class="wrap theme-cols theme-cols--media-left">
-      <aside class="theme-aside">
-        <figure class="theme-media">
-          <img src={`${base}/imgs/research/04-data.png`} alt="Enantioselective reaction: two prochiral faces highlighted, transforming to a stereodefined product." loading="lazy" />
-        </figure>
-      </aside>
+    <div class="wrap theme-cols">
       <div class="theme-text">
         <p class="eyebrow"><span class="theme-num">04</span> Data</p>
-        <h2>Reaction data: curation, generation, and experiment</h2>
+        <h2>Curating and generating reaction data</h2>
         <p>
           While ML models and representations for chemical reactions have matured
           rapidly, data is a real bottleneck. Existing datasets tend to be small,
@@ -262,18 +257,26 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           mechanistically diverse, internally consistent, and grounded in chemically
           meaningful elementary steps.
         </p>
-        <p>
-          On the computational side, we develop principled strategies for data
-          curation and generation — prioritizing chemical diversity, consistent
-          levels of theory, and validated transition states over sheer dataset size.
-        </p>
-        <p class="theme-close">
-          On the experimental side, we work in the wet lab to generate reaction
-          data ourselves. A current focus is asymmetric organocatalysis, where
-          enantioselectivity serves as a direct and measurable experimental
-          observable, and reaction spaces grow combinatorially, making
-          data-driven, intelligent sampling of the reaction space essential.
-        </p>
+        <div class="theme-split">
+          <div>
+            <span class="label">Computational</span>
+            <p>
+              We develop principled strategies for data curation and generation —
+              prioritizing chemical diversity, consistent levels of theory, and
+              validated transition states over sheer dataset size.
+            </p>
+          </div>
+          <div>
+            <span class="label">Experimental</span>
+            <p>
+              We work in the wet lab to generate reaction data ourselves. A current
+              focus is asymmetric organocatalysis, where enantioselectivity serves
+              as a direct and measurable experimental observable, and reaction
+              spaces grow combinatorially, making data-driven, intelligent sampling
+              of the reaction space essential.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
