@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { funding } from '../data/funding';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
-<Layout title="Heid Lab — Research" active="research" scripts={["header.js", "research-tabs.js"]}>
+<Layout title="Heid Lab — Research" active="research" scripts={["header.js", "research-tabs.js", "funding-tiles.js"]}>
   <!-- Intro -->
   <section class="section section--intro">
     <div class="wrap">
@@ -23,6 +24,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <nav class="parts" aria-label="On this page">
         <a class="part" href="#vision"><span class="part-arrow" aria-hidden="true">→</span>Our vision</a>
         <a class="part" href="#areas"><span class="part-arrow" aria-hidden="true">→</span>Areas of research</a>
+        <a class="part" href="#funding"><span class="part-arrow" aria-hidden="true">→</span>Funding</a>
       </nav>
     </div>
   </section>
@@ -281,26 +283,55 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     </div>
   </section>
 
-  <!-- ERC funding callout — the flagship grant behind much of this work, grouped
-       with the open-source CTA as the page's closing "about the lab" blocks.
-       ERC-focused (not framed as the whole DeepRxn project, which the FWF grant
-       also supports). -->
-  <section class="section section--erc">
+  <!-- Funding — grouped with the open-source CTA as the page's closing "about
+       the lab" blocks. The ERC grant leads, as it funds much of this work; the
+       other funders follow beneath it, listed from src/data/funding.ts. -->
+  <section class="section section--funding" id="funding">
     <div class="wrap">
       <div class="erc-callout">
         <div class="erc-callout-text">
-          <p class="eyebrow">Funded by the ERC</p>
-          <h2>Backed by a European Research Council Starting Grant</h2>
+          <p class="eyebrow">Funding</p>
+          <h2>Made possible by competitive research funding</h2>
           <p>
-            Much of this research is supported by an ERC Starting Grant, awarded to
-            Esther Heid in 2024 to develop data-driven deep-learning frameworks for
-            organic and enzymatic reactions.
+            A big part of our research is supported by a €1.5M ERC Starting Grant,
+            awarded to Esther Heid in 2024 to develop data-driven deep-learning
+            frameworks for organic and enzymatic reactions.
           </p>
           <a class="link-arrow" href={`${base}/grants-erc`}>Explore the ERC project <span class="arrow">→</span></a>
         </div>
         <span class="erc-callout-logo">
           <img src={`${base}/imgs/grants/erc-eu-logo.png`} alt="Funded by the European Union — European Research Council" />
         </span>
+      </div>
+      <div class="funding-more">
+        <p class="funding-more-intro">We are further supported by the following grants and programs:</p>
+        <ul class="funding-tiles">
+          {funding.map((f, i) => {
+            const external = f.href?.startsWith('http');
+            return (
+              <li class="funding-tile">
+                <button class="funding-tile-face" type="button" aria-expanded="false" aria-controls={`funding-details-${i}`}>
+                  <span class="funding-mark">
+                    {f.logo
+                      ? [f.logo].flat().map((logo, j) => <img class:list={['funding-logo', { 'funding-logo--wordmark': f.wordmark }]} src={`${base}/imgs/${logo}`} alt={j === 0 ? (f.logoAlt ?? f.funder) : ''} />)
+                      : <span class="funding-mark-text">{f.short ?? f.funder}</span>}
+                  </span>
+                  <span class="funding-name">{f.name}</span>
+                  <span class="funding-tile-plus" aria-hidden="true"></span>
+                </button>
+                <div class="funding-tile-details" id={`funding-details-${i}`}>
+                  {f.amount && <span class="funding-amount">{f.amount}</span>}
+                  {f.period && <span class="funding-period">{f.period}</span>}
+                  {f.href && (
+                    <a class="link-arrow funding-link" href={f.href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
+                      Learn more <span class="arrow">→</span>
+                    </a>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   </section>
