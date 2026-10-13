@@ -663,8 +663,8 @@ a.pub-title:hover { color: #000; }
   padding: clamp(1.5rem, 3vw, 2.25rem);
 }
 .current-courses-head { margin-bottom: 1.5rem; }
-.current-courses-head .eyebrow { margin-bottom: 0.7rem; }
 .current-courses-head h2 { margin: 0; font-size: clamp(1.5rem, 2.6vw, 1.95rem); }
+.current-courses-head p { margin: 0.6rem 0 0; color: var(--muted); }
 .course-cards {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
   gap: 1.15rem;
@@ -720,11 +720,43 @@ a.pub-title:hover { color: #000; }
   text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted);
   border-bottom: 1px solid var(--border-strong);
 }
-.course-table tbody td { color: var(--text); }
-.course-table tbody td:first-child {
-  font-family: var(--head); font-weight: 700; color: var(--muted);
-}
+.course-table tbody td { color: var(--text); white-space: normal; }
 .course-table tbody tr:hover td { background: var(--bg-alt); }
+/* One row group per semester: the semester label sits once in a header cell
+   spanning its courses, and a stronger rule closes each semester. */
+.course-table .course-sem {
+  font-family: var(--head); font-weight: 700; color: var(--text);
+  padding-right: 2rem;
+}
+.course-table .course-sem-code {
+  display: block; margin-top: 0.1rem;
+  font-weight: 400; font-size: 0.82rem; color: var(--faint);
+}
+.course-table tbody .course-sem { border-bottom-color: var(--border-strong); }
+/* Rows within a semester sit close together without their own rules; only the
+   group's first and last rows keep the full padding, so semesters stay apart. */
+.course-table tbody td { padding-top: 0.35rem; padding-bottom: 0.35rem; border-bottom: 0; }
+.course-table tbody tr:first-child td { padding-top: 0.85rem; }
+.course-table tbody tr:last-child td {
+  padding-bottom: 0.85rem; border-bottom: 1px solid var(--border-strong);
+}
+.course-table .course-nr {
+  white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--muted);
+}
+/* Course type (VU, SE, …) leads the name, in a fixed width so names line up. */
+.course-table .course-type { display: inline-block; min-width: 2.4rem; color: var(--muted); }
+/* Names link to TISS: plain at rest so the table stays calm; on hover the name
+   takes the site's yellow underline and a small arrow shows. */
+.course-table .course-name:hover {
+  text-decoration: underline; text-underline-offset: 3px;
+  text-decoration-color: var(--accent); text-decoration-thickness: 2px;
+}
+.course-table .course-go {
+  display: inline-block; margin-left: 0.4rem; color: var(--muted);
+  opacity: 0; transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.course-table tr:hover .course-go { opacity: 1; }
+.course-table .course-name:hover .course-go { transform: translateX(3px); }
 
 /* ---------- Inner-page hero ---------- */
 /* Same language as the landing hero, shorter, and without the mirrored-edge

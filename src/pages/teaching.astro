@@ -1,6 +1,56 @@
 ---
 import Layout from '../layouts/Layout.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Courses taught this semester, each drawn as a card linking to TISS.
+const semester = '2026W';
+const currentCourses = [
+  { nr: '165.169', type: 'SE', ects: '3.0', title: 'Interdisciplinary Foundations of Deep Learning in Chemistry' },
+  { nr: '165.144', type: 'VU', ects: '3.0', title: 'Simulation of condensed matter' },
+  { nr: '164.385', type: 'VU', ects: '4.0', title: 'Programming for Chemistry and PE' },
+  { nr: '165.164', type: 'PR', ects: '3.0', title: 'Selected Topics in Theoretical Chemistry' },
+  { nr: '360.239', type: 'VO', ects: '2.0', title: 'Introduction to Computational Science and Engineering' },
+  { nr: '193.026', type: 'VU', ects: '6.0', title: 'Methods for Data Generation and Analytics in Medicine and Life Sciences' },
+];
+const tissUrl = (nr: string, sem = semester) =>
+  `https://www.tiss.tuwien.ac.at/course/courseDetails.xhtml?semester=${sem}&locale=en&courseNr=${nr.replace('.', '')}`;
+
+// Past courses, newest semester first. Semester codes follow TISS: 2026S is
+// summer 2026, 2025W is winter 2025/26. `nr` and `type` (VU, VO, SE, PR, UE,
+// LU, …) are the TISS course number and type, checked against the TISS course
+// API for that semester. Each name links to its TISS page for that semester.
+// The table groups rows by semester.
+const pastCourses = [
+  { sem: '2026S', nr: '165.171', type: 'VU', title: 'AI in Chemistry' },
+  { sem: '2026S', nr: '165.169', type: 'SE', title: 'Interdisciplinary Foundations of Deep Learning in Chemistry' },
+  { sem: '2026S', nr: '194.147', type: 'PR', title: 'Interdisciplinary Project in Data Science' },
+  { sem: '2026S', nr: '360.243', type: 'VU', title: 'Numerical Simulation and Scientific Computing II' },
+  { sem: '2026S', nr: '165.164', type: 'PR', title: 'Selected Topics in Theoretical Chemistry' },
+  { sem: '2025W', nr: '165.169', type: 'SE', title: 'Interdisciplinary Foundations of Deep Learning in Chemistry' },
+  { sem: '2025W', nr: '360.239', type: 'VO', title: 'Introduction to Computational Science and Engineering' },
+  { sem: '2025W', nr: '193.026', type: 'VU', title: 'Methods for Data Generation and Analytics in Medicine and Life Sciences' },
+  { sem: '2025W', nr: '164.385', type: 'VU', title: 'Programming for Chemistry and PE' },
+  { sem: '2025W', nr: '165.164', type: 'PR', title: 'Selected Topics in Theoretical Chemistry' },
+  { sem: '2025W', nr: '165.144', type: 'VU', title: 'Simulation of condensed matter' },
+  { sem: '2025S', nr: '360.243', type: 'VU', title: 'Numerical Simulation and Scientific Computing II' },
+  { sem: '2025S', nr: '164.373', type: 'VU', title: 'Programming for Chemists' },
+  { sem: '2024W', nr: '360.239', type: 'VO', title: 'Introduction to Computational Science and Engineering' },
+  { sem: '2024W', nr: '165.166', type: 'VU', title: 'Introduction to Theoretical Chemistry' },
+  { sem: '2024W', nr: '165.144', type: 'VU', title: 'Simulation of condensed matter' },
+  { sem: '2024S', nr: '360.243', type: 'VU', title: 'Numerical Simulation and Scientific Computing II' },
+  { sem: '2024S', nr: '164.373', type: 'VU', title: 'Programming for Chemists' },
+  { sem: '2023W', nr: '360.239', type: 'VO', title: 'Introduction to Computational Science and Engineering' },
+  { sem: '2023W', nr: '165.166', type: 'VU', title: 'Introduction to Theoretical Chemistry' },
+  { sem: '2023W', nr: '165.144', type: 'VU', title: 'Simulation of condensed matter' },
+];
+const pastSemesters = [...new Set(pastCourses.map((c) => c.sem))].map((sem) => ({
+  sem,
+  courses: pastCourses.filter((c) => c.sem === sem),
+}));
+const semesterLabel = (sem: string) => {
+  const year = Number(sem.slice(0, 4));
+  return sem.endsWith('W') ? `Winter ${year}/${String(year + 1).slice(2)}` : `Summer ${year}`;
+};
 ---
 <Layout title="Heid Lab — Teaching" active="teaching" scripts={["header.js"]}>
   <main>
@@ -10,22 +60,17 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     <section class="current-courses">
       <div class="current-courses-head">
-        <p class="eyebrow">Now teaching</p>
-        <h2>Current courses — summer semester 2026</h2>
+        <h2>Current courses {semester}</h2>
+        <p>During the winter semester we teach the following courses:</p>
       </div>
       <div class="course-cards">
-        <a class="course-card" href="https://www.tiss.tuwien.ac.at/course/courseDetails.xhtml?semester=2026S&locale=en&courseNr=165169" target="_blank" rel="noopener">
-          <span class="course-meta">165.169 · SE · 3.0 ECTS</span>
-          <h3>Interdisciplinary Foundations of Deep Learning in Chemistry</h3>
-          <p>Seminar on the foundations of deep learning in chemistry from a chemical, mathematical, and computer-science perspective, with student presentations and reading assignments.</p>
-          <span class="course-link">View on TISS <span aria-hidden="true">→</span></span>
-        </a>
-        <a class="course-card" href="https://www.tiss.tuwien.ac.at/course/courseDetails.xhtml?semester=2026S&locale=en&courseNr=165171" target="_blank" rel="noopener">
-          <span class="course-meta">165.171 · VU · 3.0 ECTS</span>
-          <h3>AI in Chemistry</h3>
-          <p>Lecture and exercise introducing modern AI methods for chemical systems: chemical representations, neural networks on fingerprints, graph and sequence models, machine-learned interatomic potentials, and generative models.</p>
-          <span class="course-link">View on TISS <span aria-hidden="true">→</span></span>
-        </a>
+        {currentCourses.map((c) => (
+          <a class="course-card" href={tissUrl(c.nr)} target="_blank" rel="noopener">
+            <span class="course-meta">{c.nr} · {c.type} · {c.ects} ECTS</span>
+            <h3>{c.title}</h3>
+            <span class="course-link">View on TISS <span aria-hidden="true">→</span></span>
+          </a>
+        ))}
       </div>
     </section>
 
@@ -36,23 +81,28 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         <thead>
           <tr>
             <th scope="col">Semester</th>
-            <th scope="col">Curriculum</th>
-            <th scope="col">ECTS</th>
+            <th scope="col" class="course-nr">Course no.</th>
             <th scope="col">Course name</th>
           </tr>
         </thead>
-        <tbody>
-          <tr><td>2025S</td><td>M.Sc. CSE</td><td>6</td><td>Numerical Simulation and Scientific Computing II</td></tr>
-          <tr><td>2025S</td><td>M.Sc. TC</td><td>3</td><td>Programming for Chemists</td></tr>
-          <tr><td>2024W</td><td>M.Sc. CSE/TC/MS</td><td>3</td><td>Simulation of condensed matter</td></tr>
-          <tr><td>2024W</td><td>M.Sc. CSE</td><td>4.5</td><td>Introduction to Theoretical Chemistry</td></tr>
-          <tr><td>2024W</td><td>M.Sc. CSE</td><td>4.5</td><td>Introduction to Computational Science and Engineering</td></tr>
-          <tr><td>2024S</td><td>M.Sc. CSE</td><td>6</td><td>Numerical Simulation and Scientific Computing II</td></tr>
-          <tr><td>2024S</td><td>M.Sc. TC</td><td>3</td><td>Programming for Chemists</td></tr>
-          <tr><td>2023W</td><td>M.Sc. CSE/TC/MS</td><td>3</td><td>Simulation of condensed matter</td></tr>
-          <tr><td>2023W</td><td>M.Sc. CSE</td><td>4.5</td><td>Introduction to Theoretical Chemistry</td></tr>
-          <tr><td>2023W</td><td>M.Sc. CSE</td><td>4.5</td><td>Introduction to Computational Science and Engineering</td></tr>
-        </tbody>
+        {pastSemesters.map((s) => (
+          <tbody>
+            {s.courses.map((c, i) => (
+              <tr>
+                {i === 0 && (
+                  <th scope="rowgroup" rowspan={s.courses.length} class="course-sem">
+                    {semesterLabel(s.sem)}
+                    <span class="course-sem-code">{s.sem}</span>
+                  </th>
+                )}
+                <td class="course-nr">{c.nr}</td>
+                <td>
+                  <span class="course-type">{c.type}</span><a class="course-name" href={tissUrl(c.nr, c.sem)} target="_blank" rel="noopener">{c.title}<span class="course-go" aria-hidden="true">→</span></a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        ))}
       </table>
     </div>
 
