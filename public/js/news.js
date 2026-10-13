@@ -13,6 +13,13 @@
   }
   window.NEWS_ASSET = asset;
 
+  // Titles may contain inline HTML (e.g. <em>); labels and captions need the
+  // plain text.
+  function plain(html) {
+    return new DOMParser().parseFromString(html, 'text/html').body.textContent;
+  }
+  window.NEWS_PLAIN = plain;
+
   var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -153,7 +160,7 @@
       if (chip) head.appendChild(chip);
 
       var title = document.createElement('h3');
-      title.textContent = item.title;
+      title.innerHTML = item.title;
       head.appendChild(title);
       li.appendChild(head);
 
@@ -172,9 +179,9 @@
           btn.type = 'button';
           btn.className = 'timeline-thumb';
           btn.setAttribute('aria-label',
-            'Open photo ' + (i + 1) + ' of ' + item.images.length + ' — ' + item.title);
+            'Open photo ' + (i + 1) + ' of ' + item.images.length + ' — ' + plain(item.title));
           btn.addEventListener('click', function () {
-            lightbox.open(item.images, i, item.title);
+            lightbox.open(item.images, i, plain(item.title));
           });
 
           var img = document.createElement('img');

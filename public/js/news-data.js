@@ -5,7 +5,7 @@
    date   Full ISO date ("2026-07-08") or month only ("2026-07").
           Month-only items show just the month in the date chip.
           Order does not matter — items are sorted automatically.
-   title  Plain text.
+   title  Plain text; inline HTML such as <em> for italics is allowed.
    body   May contain HTML, so links work as usual.
    images Optional, 1–3 entries: { src, alt }. They render as a small
           row under the item; one photo fills the width, two or three
@@ -22,6 +22,19 @@
    ============================================================ */
 
 window.NEWS = [
+  {
+    date: "2026-09",
+    title: "Guest article by Esther on AI in chemistry in <em>Der Standard</em>",
+    body: 'Esther wrote a guest article for the Young Academy blog in <em>Der Standard</em> on how specialized AI models, beyond general-purpose chatbots like ChatGPT, could make chemical research faster, more efficient, and more innovative. For our German-speaking readers, the full article is available <a href="https://www.derstandard.at/story/3000000338392/mehr-als-chatgpt-wie-kuenstliche-intelligenz-die-chemie-veraendert">here</a>.'
+  },
+  {
+    date: "2026-09",
+    title: "Group excursion to the Zotter chocolate factory",
+    body: 'We swapped the lab for the Styrian countryside and headed to the Zotter chocolate factory in Riegersburg for the day. Instead of chemical reactions, we analysed chocolate, and are happy to report overwhelmingly positive results, with only a few outliers reporting a chocolate hangover. We\'d recommend giving it a try and reproducing the results yourself.',
+    images: [
+      { src: "imgs/news/2026-09-zotter.jpg", alt: "The Heid Lab group at the Zotter chocolate factory" }
+    ]
+  },
   {
     date: "2026-07",
     title: "Max awarded a DOC Fellowship",

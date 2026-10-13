@@ -2,7 +2,7 @@
    element. It gathers every image across window.NEWS so the gallery grows
    automatically as news items are added — nothing to maintain here.
 
-   One photo is in focus (large, centered, bright); its neighbours fan out
+   One photo is in focus (large, centered, bright); its neighbors fan out
    behind it, smaller and dimmed. Arrows / drag / arrow-keys move the focus,
    and clicking the focused photo opens the shared lightbox. */
 (function () {
@@ -12,6 +12,7 @@
   // Reuse the base-path prefixer from news.js; fall back to identity so the
   // gallery still works if loaded standalone.
   var asset = window.NEWS_ASSET || function (s) { return s; };
+  var plain = window.NEWS_PLAIN || function (s) { return s; };
 
   function sortKey(iso) { return iso.length === 7 ? iso + '-00' : iso; }
 
@@ -24,7 +25,7 @@
     .sort(function (a, b) { return sortKey(b.date).localeCompare(sortKey(a.date)); })
     .forEach(function (item) {
       (item.images || []).forEach(function (pic) {
-        pics.push({ src: pic.src, alt: pic.alt || item.title, title: item.title });
+        pics.push({ src: pic.src, alt: pic.alt || plain(item.title), title: plain(item.title) });
       });
     });
 
