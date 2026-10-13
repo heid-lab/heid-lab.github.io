@@ -715,6 +715,11 @@ a.pub-title:hover { color: #000; }
                           fill the leftover sides automatically. */
   --hero-y: 60px;      /* moves the visible window UP — higher value = more
                           headroom above the heads (crops more off the bottom) */
+  --hero-keep: 0.34;   /* the most of the photo's height that may ever be
+                          cropped off the top (≈ just above the tallest head).
+                          On very wide screens the photo gets so tall that
+                          bottom-anchoring would cut into the heads; past this
+                          point it pins here and crops the feet instead. */
   position: relative; min-height: var(--hero-h);
   display: flex; align-items: flex-end; overflow: hidden;
   background: var(--ink);
@@ -722,9 +727,12 @@ a.pub-title:hover { color: #000; }
 /* The photo is sized --hero-zoom wide at its true aspect (never distorted or
    side-cropped) and anchored to the bottom so the group stays in frame; the
    band clips the top. Mirrored copies sit flush at its left/right edges and
-   only appear once it's narrower than the window. aspect-ratio = image size. */
+   only appear once it's narrower than the window. aspect-ratio = image size.
+   The second min() term caps the top crop at --hero-keep (photo height =
+   --hero-zoom × 1577/2400); whichever pushes the photo lower wins. */
 .page-hero .hero-media {
-  position: absolute; left: 50%; bottom: calc(-1 * var(--hero-y));
+  position: absolute; left: 50%;
+  bottom: min(-1 * var(--hero-y), 100% - (1 - var(--hero-keep)) * var(--hero-zoom) * 1577 / 2400);
   transform: translateX(-50%);
   width: var(--hero-zoom); aspect-ratio: 2400 / 1577;
 }

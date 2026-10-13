@@ -45,7 +45,7 @@ export const members: Member[] = [
     photo: 'johannes-karwounopoulos.jpg',
     avatar: 'high',
     bio: [
-      'Johannes studied chemistry at the University of Stuttgart in Germany. After an internship in France and a master’s thesis in bioinformatics, he moved to Vienna to pursue a Ph.D. at the University of Vienna under the supervision of Prof. Stefan Boresch. His doctoral research combined classical force fields with machine-learning potentials to study the binding affinities of protein–ligand complexes. Following his Ph.D., Johannes joined the British biotech company Exscientia, now part of Recursion, where he worked in the Drug Discovery team developing novel methods for calculating binding free energies. He later returned to academia as a postdoctoral researcher in Esther’s group, focusing on graph neural networks. Recently, Johannes was awarded an ESPRIT fellowship, which will allow him to pursue his own research on how machine-learned potentials can improve free-energy predictions.',
+      "Johannes Karwounopoulos studied chemistry at the University of Stuttgart in Germany. After an internship in France and a master's thesis in bioinformatics, he moved to Vienna to pursue a Ph.D. at the University of Vienna under the supervision of Prof. Stefan Boresch. His doctoral research combined classical force fields with machine learning potentials to study the binding affinities of protein–ligand complexes. Following his Ph.D., Johannes joined the British biotech company Exscientia, now part of Recursion, where he worked in the Drug Discovery team developing novel methods for calculating binding free energies. He later returned to academia as a postdoctoral researcher in the Heid Lab, focusing on graph neural networks. He now holds an FWF ESPRIT fellowship, through which he pursues his own research on how machine-learned potentials can improve free-energy predictions.",
     ],
     links: {
       github: 'https://github.com/JohannesKarwou',
@@ -55,12 +55,12 @@ export const members: Member[] = [
   },
   {
     name: 'Jonathan Zheng',
-    role: 'Postdoc · ERC Project',
+    role: 'Postdoc · ERC project',
     group: 'postdoc',
     photo: 'jonathan-zheng.jpg',
     avatar: 'low',
     bio: [
-      "Jonathan is a postdoctoral researcher in Prof. Heid's research group. He graduated with a B.Sc. from the University of Virginia in 2020 and a Ph.D. from the Massachusetts Institute of Technology in 2026. During his Ph.D., Jonathan studied acid-base and ionization phenomena, focusing at the intersection of computational chemistry, cheminformatics, and data science. Currently, Jonathan is working on the ERC Project for modeling enzymatic reactions. He is also continuing to study solvation effects for ionizable compounds. Outside of research, Jonathan enjoys developing video games, reading science fiction and fantasy books, listening to and making music, and eating tasty food from around the world.",
+      "Jonathan Zheng is a postdoctoral researcher in the Heid Lab. He graduated with a B.S. from the University of Virginia in 2020 and a Ph.D. from the Massachusetts Institute of Technology in 2026. During his Ph.D., Jonathan studied acid–base and ionization phenomena, focusing on the intersection of computational chemistry, cheminformatics, and data science. Currently, Jonathan is working on the ERC project for modeling enzymatic reactions. He is also continuing to study solvation effects for ionizable compounds. Outside of research, Jonathan enjoys developing video games, reading science fiction and fantasy books, listening to and making music, and eating tasty food from around the world.",
     ],
     links: {
       github: 'https://github.com/jonwzheng',
@@ -72,12 +72,12 @@ export const members: Member[] = [
   // ── Ph.D. students ──────────────────────────────────────────────────────────
   {
     name: 'Jasper De Landsheere',
-    role: 'Ph.D. Student · ERC Project',
+    role: 'Ph.D. Student · ERC project',
     group: 'phd',
     photo: 'jasper-de-landsheere.jpg',
     avatar: 'top',
     bio: [
-      'Jasper De Landsheere is a Ph.D. student working on the ERC-funded project "Deep Learning for Chemical Reactions". He received his Master\'s degree in Data Science from the Technical University of Vienna in 2025. He also holds a Master\'s and Bachelor\'s degree in Bioscience Engineering Technology from Ghent University. His research focuses on developing new deep learning architectures for learning over chemical reactions.',
+      'Jasper De Landsheere is a Ph.D. student working on the ERC-funded project "Deep learning of chemical reactions". He received his master\'s degree in Data Science from TU Wien in 2025. He also holds a bachelor\'s and a master\'s degree in Bioscience Engineering Technology from Ghent University. His research focuses on developing new deep learning architectures for learning over chemical reactions.',
     ],
     links: {
       github: 'https://github.com/JasperDeLandsheere',
@@ -91,7 +91,7 @@ export const members: Member[] = [
     group: 'phd',
     photo: 'leonard-galustian.jpg',
     bio: [
-      'Leonard studied computer engineering and data science at TU Wien. His research interests lie at the intersection of computational chemistry and machine learning. Before joining the Heid Lab as a Ph.D. student, he worked on interdisciplinary projects as a machine learning scientist, most recently in the Department of Geosciences and the Machine Learning Research Unit at TU Wien, as well as in Neuroimaging Labs at the Medical University of Vienna.',
+      'Leonard Galustian studied computer engineering and data science at TU Wien. His research interests lie at the intersection of computational chemistry and machine learning. Before joining the Heid Lab as a Ph.D. student, he worked on interdisciplinary projects as a machine learning scientist, most recently in the Department of Geosciences and the Machine Learning Research Unit at TU Wien, as well as in Neuroimaging Labs at the Medical University of Vienna.',
     ],
     links: {
       github: 'https://github.com/galustian',
@@ -106,7 +106,7 @@ export const members: Member[] = [
     photo: 'charlotte-gerhaher.jpg',
     avatar: 'zoom-sm',
     bio: [
-      'Charlotte joined the lab in May 2025 as part of the Doctoral College on Computational Sustainability. She got a B.Sc. in Bioinformatics from TU Munich and an M.Sc. in Computer Science from the University of Oxford, where she worked on generative modeling for brain data synthesis. Before joining the lab, she also gained research experience in proteomics at the Max Planck Institute of Biochemistry. Outside of the lab, she enjoys knitting and (wine) hiking.',
+      'Charlotte Gerhaher joined the lab in May 2025 as part of the Doctoral College on Computational Sustainability. She got a B.Sc. in Bioinformatics from TU Munich and an M.Sc. in Computer Science from the University of Oxford, where she worked on generative modeling for brain data synthesis. Before joining the lab, she also gained research experience in proteomics at the Max Planck Institute of Biochemistry. Outside of the lab, she enjoys knitting and (wine) hiking.',
     ],
     links: {
       github: 'https://github.com/anna-charlotte',
@@ -122,7 +122,7 @@ export const members: Member[] = [
     avatar: 'zoom',
     bio: [
       'Synnöve Lemke is a shared doctoral researcher working at the interface of analytical chemistry and machine learning. Her research focuses on breathomics for the early detection of lung cancer, combining comprehensive two-dimensional gas chromatography–mass spectrometry (GC×GC–MS) with advanced pattern recognition methods, including convolutional neural networks (CNNs). Through her work, she aims to advance non-invasive diagnostic approaches and contribute to interdisciplinary, data-driven solutions in healthcare.',
-      "Synnöve holds a B.Sc. in Biochemistry from the University of Greifswald and an M.Sc. in Chemical Biology from Friedrich-Schiller-University Jena. During her master's studies, she completed a one-year Erasmus research internship at the University of Vienna.",
+      "Synnöve holds a B.Sc. in Biochemistry from the University of Greifswald and an M.Sc. in Chemical Biology from Friedrich Schiller University Jena. During her master's studies, she completed a one-year Erasmus research internship at the University of Vienna.",
     ],
     links: {
       linkedin: 'https://www.linkedin.com/in/synnoeve-lemke/',
@@ -151,7 +151,7 @@ export const members: Member[] = [
     group: 'phd',
     photoTodo: 'add imgs/team_members/leon-ganser.jpg',
     bio: [
-      'Leon is a Ph.D. candidate from Germany working under the shared supervision of Katharina Schröder and Esther Heid. He obtained his M.Sc. in Chemistry from the University of Regensburg, where his research focused on photocatalytic transformations. His current doctoral research lies at the interface of asymmetric organocatalysis, high-throughput experimentation, and data-driven reaction development. In particular, he works on the rational design of experimental datasets for asymmetric organocatalytic reactions, with the aim of generating high-quality, machine-learning-ready data for reaction prediction, optimization, and mechanistic insight. His research combines synthetic organic chemistry with automated experimentation and computational approaches to better understand and navigate complex reaction spaces.',
+      'Leon Ganser is a Ph.D. candidate from Germany working under the shared supervision of Katharina Schröder and Esther Heid. He obtained his M.Sc. in Chemistry from the University of Regensburg, where his research focused on photocatalytic transformations. His current doctoral research lies at the interface of asymmetric organocatalysis, high-throughput experimentation, and data-driven reaction development. In particular, he works on the rational design of experimental datasets for asymmetric organocatalytic reactions, with the aim of generating high-quality, machine-learning-ready data for reaction prediction, optimization, and mechanistic insight. His research combines synthetic organic chemistry with automated experimentation and computational approaches to better understand and navigate complex reaction spaces.',
     ],
     links: {
       linkedin: 'https://www.linkedin.com/in/leon-ganser-420154313',
@@ -182,7 +182,7 @@ export const members: Member[] = [
     group: 'project',
     photo: 'anton-zamyatin.jpg',
     bio: [
-      "Anton is a research student working on machine learning for computational chemistry. He holds a bachelor's degree in Computer Science from TU Wien and is currently pursuing a master's degree in Computational Science and Engineering, focusing on mathematics and theoretical/computational chemistry.",
+      "Anton Zamyatin is a research student working on machine learning for computational chemistry. He holds a bachelor's degree in Computer Science from TU Wien and is currently pursuing a master's degree in Computational Science and Engineering, focusing on mathematics and theoretical/computational chemistry.",
       'In the group, he co-developed ChemTorch, a framework for developing and evaluating machine learning models for chemical reactions. He has also worked on transition-state search workflows and stereochemistry-aware graph representations for transition-state generation.',
       'His research interests include representation learning and generative modeling for molecular systems, with a particular interest in developing mathematically grounded machine learning methodology.',
     ],
@@ -199,7 +199,7 @@ export const members: Member[] = [
     photo: 'sebastian-pinter.jpg',
     avatar: 'high',
     bio: [
-      "Sebastian is a master's student doing his master's thesis on generative modeling for enzyme engineering together with Prof. Heid. He received his B.Sc. in Computer Science from the Technical University of Graz before moving to Vienna to study Data Science. His interest in computational chemistry and biology sparked while doing small projects such as modeling gene-disease interactions and comparative analysis of mitochondrial genomes of fungi during his studies. While he is not working on his master's thesis, he enjoys playing the classical guitar, developing video games and doing martial arts.",
+      "Sebastian Pinter is a master's student doing his master's thesis on generative modeling for enzyme engineering as part of the Heid Lab. He received his B.Sc. in Computer Science from TU Graz before moving to Vienna to study Data Science. His interest in computational chemistry and biology sparked while doing small projects such as modeling gene-disease interactions and comparative analysis of mitochondrial genomes of fungi during his studies. While he is not working on his master's thesis, he enjoys playing the classical guitar, developing video games and doing martial arts.",
     ],
   },
   {
@@ -237,6 +237,7 @@ export const alumni: { year: string; people: { name: string; note: string }[] }[
     people: [
       { name: 'Hannah Teis', note: 'B.Sc. thesis, TU Wien' },
       { name: 'Benjamin Zeller', note: 'B.Sc. thesis, TU Wien' },
+      { name: 'Marion Sappl', note: 'Visiting Ph.D. researcher from University of Vienna' },
     ],
   },
 ];
