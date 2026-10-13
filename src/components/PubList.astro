@@ -1,0 +1,22 @@
+---
+import type { Publication } from '../data/publications';
+
+interface Props {
+  items: Publication[];
+}
+const { items } = Astro.props;
+---
+<ul class="clean pubs">
+  {items.map((pub) => (
+    <li class="pub">
+      <span class="pub-meta">
+        {pub.preprint && <button class="pub-tag">Preprint</button>}
+        {pub.meta}
+      </span>
+      {pub.titleHtml
+        ? <a class="pub-title" href={pub.href} set:html={pub.titleHtml} />
+        : <a class="pub-title" href={pub.href}>{pub.title}</a>}
+      <span class="authors" set:html={pub.authors} />
+    </li>
+  ))}
+</ul>

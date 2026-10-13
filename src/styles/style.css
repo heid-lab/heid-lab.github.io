@@ -607,7 +607,8 @@ ul.clean li strong { font-family: var(--head); font-weight: 700; }
    room on the right. Each entry is a grid: a fixed meta rail on the left
    (journal · volume · year, plus any tag) and the title + authors on the
    right. Rows are kept tight. */
-main > ul.clean.pubs { max-width: var(--max); }
+main > ul.clean.pubs,
+.pubs-fold > ul.clean.pubs { max-width: var(--max); }
 .pubs .pub {
   display: grid;
   grid-template-columns: 1fr;
@@ -625,6 +626,27 @@ main > ul.clean.pubs { max-width: var(--max); }
 a.pub-title { color: var(--text); }
 a.pub-title:hover { color: #000; }
 .pub .authors { display: block; color: var(--muted); margin: 0.3rem 0 0; font-size: 0.9rem; line-height: 1.5; }
+/* Publication years: each one a native <details>, no JS (recent years start
+   open, older ones closed). Closed, they stack as a list of year rows
+   (year · chevron), each ruled below. Open, a year drops its rule
+   and gets section spacing: 3.5rem above the heading, 2rem from heading to
+   list. The 2.4rem margins + 1.1rem summary padding = 3.5rem. */
+.pubs-folds { margin-top: 2.4rem; }
+.pubs-fold[open] { margin: 2.4rem 0; }
+.pubs-fold > summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: baseline; gap: 0.9rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.pubs-fold[open] > summary { border-bottom: 0; }
+.pubs-fold > summary::-webkit-details-marker { display: none; }
+.pubs-fold > summary h2 { margin: 0; }
+.pubs-fold .chev { margin-left: auto; color: var(--muted); transition: transform 0.2s ease; }
+.pubs-fold[open] .chev { transform: rotate(180deg); }
+.pubs-fold > summary:hover :is(h2, .chev) { color: #000; }
+.pubs-fold > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.pubs-fold > ul.clean.pubs { margin-top: 0.9rem; } /* + 1.1rem padding = the 2rem under an open h2 (its margin collapses into the list's) */
 .tags { margin: 0 0 0.9rem; }
 .tag { display: inline-block; font-family: var(--head); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); background: var(--bg-alt); border: 1px solid var(--border); padding: 0.25rem 0.75rem; margin: 0 0.4rem 0.4rem 0; }
 
