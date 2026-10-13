@@ -119,13 +119,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           reaction properties, without the cost of exhaustive quantum mechanical
           calculations. As a foundation for community-driven method development
           and reproducible benchmarking, we developed
-          <a href="https://pubs.acs.org/jcisd8/article/66/5/2434/5080373/ChemTorch-A-Deep-Learning-Framework-for" target="_blank" rel="noopener noreferrer" class="paper-link" data-paper="chemtorch">ChemTorch</a>,
+          <a href="https://doi.org/10.1021/acs.jcim.5c02645" target="_blank" rel="noopener noreferrer" class="paper-link" data-paper="chemtorch">ChemTorch</a>,
           an open-source deep learning framework that
           streamlines model development and benchmarking across different
           modalities for chemical reaction property prediction.
         </p>
         <p>
-          A particular focus of our work lies in the <a href="https://pubs.rsc.org/en/content/articlehtml/2025/dd/d5dd00240k" target="_blank" rel="noopener noreferrer" class="paper-link" data-paper="barriers">prediction of reaction
+          A particular focus of our work lies in the <a href="https://doi.org/10.1039/D5DD00240K" target="_blank" rel="noopener noreferrer" class="paper-link" data-paper="barriers">prediction of reaction
           barrier heights</a>, which govern reaction rates and selectivity and
           are notoriously expensive to obtain via traditional QM
           methods. We have shown that graph neural networks operating on CGRs
@@ -136,7 +136,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
         <p>
           Beyond graph-based methods, we also investigate language model approaches
-          for reaction property prediction. We introduced <a href="https://chemrxiv.org/doi/full/10.26434/chemrxiv.15000926/v1" target="_blank" rel="noopener noreferrer" class="paper-link" data-paper="sr-smiles">sr-SMILES</a>, a compact
+          for reaction property prediction. We introduced <a href="https://doi.org/10.1039/D6DD00120C" target="_blank" rel="noopener noreferrer" class="paper-link" data-paper="sr-smiles">sr-SMILES</a>, a compact
           sequence-based representation derived from the CGR that encodes explicit
           mechanistic and stereochemical information in a textual format amenable to
           transformer models.
@@ -144,9 +144,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         <div class="theme-papers">
           <span class="label">Related work</span>
           <ul>
-            <li data-paper="chemtorch"><a href="https://pubs.acs.org/doi/full/10.1021/acs.jcim.5c02645">ChemTorch: A Deep Learning Framework for Benchmarking and Developing Chemical Reaction Property Prediction Models</a> · J. Chem. Inf. Model. 2026</li>
-            <li data-paper="barriers"><a href="https://pubs.rsc.org/en/content/articlehtml/2025/dd/d5dd00240k">Graph-based prediction of reaction barrier heights with on-the-fly prediction of transition states</a> · Digital Discovery 2025</li>
-            <li data-paper="sr-smiles"><a href="https://chemrxiv.org/doi/full/10.26434/chemrxiv.15000926/v1">Bridging CGR Representations and Language Models for Reaction Property Prediction</a> · ChemRxiv 2025 (Preprint)</li>
+            <li data-paper="chemtorch"><a href="https://doi.org/10.1021/acs.jcim.5c02645">ChemTorch: A Deep Learning Framework for Benchmarking and Developing Chemical Reaction Property Prediction Models</a> · J. Chem. Inf. Model. 2026</li>
+            <li data-paper="barriers"><a href="https://doi.org/10.1039/D5DD00240K">Graph-based prediction of reaction barrier heights with on-the-fly prediction of transition states</a> · Digital Discovery 2025</li>
+            <li data-paper="sr-smiles"><a href="https://doi.org/10.1039/D6DD00120C">Bridging CGR representations and language models for reaction property prediction</a> · Digital Discovery 2026</li>
           </ul>
         </div>
       </div>
@@ -167,7 +167,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         <p>
           Generative models have emerged as a promising approach for transition state
           (TS) geometry generation. Our method
-          <a href="https://pubs.rsc.org/dd/article/4/12/3492/889134/GoFlow-efficient-transition-state-geometry" target="_blank" rel="noopener noreferrer" class="paper-link" data-paper="goflow">GoFlow</a>
+          <a href="https://doi.org/10.1039/D5DD00283D" target="_blank" rel="noopener noreferrer" class="paper-link" data-paper="goflow">GoFlow</a>
           frames TS generation as an optimal transport flow problem, solved via
           E(3)-equivariant flow matching with geometric tensor networks. Compared
           to prior diffusion-based approaches, GoFlow achieves a significant
@@ -194,7 +194,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         <div class="theme-papers">
           <span class="label">Related work</span>
           <ul>
-            <li data-paper="goflow"><a href="https://pubs.rsc.org/en/content/articlehtml/2025/dd/d5dd00283d">GoFlow: efficient transition state geometry prediction with flow matching and E(3)-equivariant neural networks</a> · Digital Discovery 2025</li>
+            <li data-paper="goflow"><a href="https://doi.org/10.1039/D5DD00283D">GoFlow: efficient transition state geometry prediction with flow matching and E(3)-equivariant neural networks</a> · Digital Discovery 2025</li>
             <li data-paper="fkflow"><a href="https://arxiv.org/abs/2509.01543">Feynman-Kac-Flow: Inference Steering of Conditional Flow Matching to an Energy-Tilted Posterior</a> · arXiv 2025 (Preprint)</li>
             <li data-paper="goflow-t1"><a href="https://chemrxiv.org/doi/full/10.26434/chemrxiv.15003682/v1">Prediction of triplet geometries across chemical space with flow-matching based machine learning</a> · ChemRxiv 2026 (Preprint)</li>
           </ul>
@@ -222,7 +222,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         struggles to scale, limiting their utility for high-throughput discovery.
       </p>
       <p>
-        With <a href="https://chemrxiv.org/doi/full/10.26434/chemrxiv.15002135/v1" target="_blank" rel="noopener noreferrer" class="paper-link" data-paper="motsart">moTSart</a>
+        With <a href="https://doi.org/10.1039/D6DD00259E" target="_blank" rel="noopener noreferrer" class="paper-link" data-paper="motsart">moTSart</a>
         we address this by embedding a generative model directly within a
         fully automated TS search pipeline, coupled with physics-based
         validation. Rather than replacing quantum mechanics, the model
@@ -236,7 +236,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         <div class="theme-papers">
           <span class="label">Related work</span>
           <ul>
-            <li data-paper="motsart"><a href="https://chemrxiv.org/doi/full/10.26434/chemrxiv.15002135/v1">moTSart: Accelerating Automated Transition State Search with Generative Models in a Low-Data Regime</a> · ChemRxiv 2026 (Preprint)</li>
+            <li data-paper="motsart"><a href="https://doi.org/10.1039/D6DD00259E">moTSart: accelerating automated transition state search with generative models in a low-data regime</a> · Digital Discovery 2026</li>
           </ul>
         </div>
       </div>
