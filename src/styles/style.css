@@ -218,7 +218,7 @@ a:hover { color: #000; }
 /* Photographer credit pinned to the hero corner, above the dark overlay. */
 .hero-cover .hero-credit {
   position: absolute; z-index: 3; right: 0.9rem; bottom: 0.6rem;
-  margin: 0; font-family: var(--head); font-size: 0.66rem; font-weight: 400;
+  margin: 0; font-family: var(--head); font-size: 0.80rem; font-weight: 400;
   letter-spacing: 0.04em; color: rgba(255, 255, 255, 0.62);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
 }
@@ -864,7 +864,7 @@ a.pub-title:hover { color: #000; }
 /* Photographer credit under a portrait. */
 .photo-credit {
   margin: 0.4rem 0 0; font-family: var(--head);
-  font-size: 0.66rem; font-weight: 400; letter-spacing: 0.04em;
+  font-size: 0.80rem; font-weight: 400; letter-spacing: 0.04em;
   color: var(--faint);
 }
 .person-photo .initials {

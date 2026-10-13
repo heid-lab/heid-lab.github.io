@@ -30,14 +30,14 @@ window.NEWS = [
   {
     date: "2026-09",
     title: "Group excursion to the Zotter chocolate factory",
-    body: 'We swapped the lab for the Styrian countryside and headed to the Zotter chocolate factory in Riegersburg for the day. Instead of chemical reactions, we analysed chocolate, and are happy to report overwhelmingly positive results, with only a few outliers reporting a chocolate hangover. We\'d recommend giving it a try and reproducing the results yourself.',
+    body: 'We swapped the lab for the Styrian countryside and headed to the Zotter chocolate factory in Riegersburg for the day. Instead of chemical reactions, we analyzed chocolate, and are happy to report overwhelmingly positive results, with only a few outliers reporting a chocolate hangover. We\'d recommend giving it a try and reproducing the results yourself.',
     images: [
       { src: "imgs/news/2026-09-zotter.jpg", alt: "The Heid Lab group at the Zotter chocolate factory" }
     ]
   },
   {
     date: "2026-07",
-    title: "Max awarded a DOC Fellowship",
+    title: "Max awarded a DOC fellowship",
     body: 'Max has been awarded the competitive DOC Fellowship of the Austrian Academy of Sciences. His project focuses on curating high-quality chemical reaction datasets that meaningfully cover reaction space to train more reliable AI models for synthetic chemistry. Congratulations, Max! \
     Read the full press release <a href="https://stipendien.oeaw.ac.at/en/stipendien/doc/doc-gefoerderte-personen">here</a>.',
     images: [
@@ -73,7 +73,7 @@ window.NEWS = [
   {
     date: "2026-06",
     title: "Johannes returns on an ESPRIT fellowship",
-    body: 'We are super excited to welcome back Johannes Karwounopoulos, who rejoins the group with his own <a href="https://www.fwf.ac.at/en/research-radar/10.55776/ESP1292125">FWF ESPRIT fellowship</a> for this project titled "Towards Accurate Binding Free Energies using Machine-Learned Potentials". For this he will explore how machine-learned potentials can improve free-energy predictions. Welcome back!'
+    body: 'We are super excited to welcome back Johannes Karwounopoulos, who rejoins the group with his own <a href="https://www.fwf.ac.at/en/research-radar/10.55776/ESP1292125">FWF ESPRIT fellowship</a> for this project titled “Towards Accurate Binding Free Energies using Machine-Learned Potentials”. For this he will explore how machine-learned potentials can improve free-energy predictions. Welcome back!'
   },
   {
     date: "2026-05",
@@ -102,17 +102,17 @@ window.NEWS = [
   {
     date: "2026-03-01",
     title: "Max returns to the group as a Ph.D. student",
-    body: 'We are happy to welcome back Max, who previously did his master\'s thesis with us in the summer of 2025 on <a href="https://repositum.tuwien.at/bitstream/20.500.12708/218844/1/Kovar%20Maximilian%20-%202025%20-%20On%20the%20influence%20of%20dataset%20quality%20on%20chemical...pdf">"On the Influence of Dataset Quality on Chemical Reaction Machine Learning"</a>. After his research visit to Spain, he is now back with us for his Ph.D., where he will continue his work on curating meaningful datasets to enable future AI assistants to learn chemistry.'
+    body: 'We are happy to welcome back Max, who previously did his master\'s thesis with us in the summer of 2025 on <a href="https://repositum.tuwien.at/bitstream/20.500.12708/218844/1/Kovar%20Maximilian%20-%202025%20-%20On%20the%20influence%20of%20dataset%20quality%20on%20chemical...pdf">“On the Influence of Dataset Quality on Chemical Reaction Machine Learning”</a>. After his research visit to Spain, he is now back with us for his Ph.D., where he will continue his work on curating meaningful datasets to enable future AI assistants to learn chemistry.'
   },
   {
     date: "2026-03-27",
     title: "Max successfully defends his second master's thesis",
-    body: 'Congratulations to Max, who successfully defended his second master\'s thesis, carried out with a research group in Spain, on "Simulation of Proton Transfer Reactions in Ionic Liquids confined in Metal-Organic Frameworks: Methylimidazolium Acetate &amp; Triflate in NU-1000 using Machine-Learned Interatomic Potentials"!'
+    body: 'Congratulations to Max, who successfully defended his second master\'s thesis, carried out with a research group in Spain, on “Simulation of Proton Transfer Reactions in Ionic Liquids confined in Metal-Organic Frameworks: Methylimidazolium Acetate &amp; Triflate in NU-1000 using Machine-Learned Interatomic Potentials”!'
   },
   {
     date: "2026-03-18",
     title: "Stephie successfully defends her master's thesis",
-    body: 'Congratulations to Stephie, who successfully defended her master\'s thesis on "Integrating nudged elastic band with flow matching for enhanced transition state prediction"!',
+    body: 'Congratulations to Stephie, who successfully defended her master\'s thesis on “Integrating nudged elastic band with flow matching for enhanced transition state prediction”!',
     images: [
       { src: "imgs/news/2026-03-stephi-1.jpeg", alt: "Stephie's master's thesis defense" },
       { src: "imgs/news/2026-03-stephi-2.jpeg", alt: "Stephie's master's thesis defense" },

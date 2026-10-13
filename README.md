@@ -36,7 +36,7 @@ Go into the folder and run:
 
 ```bash
 # 1. Go into cloned folder
-cd heid-lab.github.io.git
+cd heid-lab.github.io
 
 # 2. Install dependencies (first time only)
 npm install
@@ -125,7 +125,7 @@ field decides which section (and filter tab) they appear under.
 ```ts
 {
   name: 'Jane Doe',
-  role: 'PhD Student · ERC Project',   // the line under the name
+  role: 'PhD Student · ERC project',   // the line under the name
   group: 'phd',                        // 'postdoc' | 'phd' | 'project'
   photo: 'jane-doe.jpg',               // file in public/imgs/team_members/ (see below)
   bio: [

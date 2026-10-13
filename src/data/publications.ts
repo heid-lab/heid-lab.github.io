@@ -71,7 +71,7 @@ export const publications: PublicationYear[] = [
         funding: ['erc'],
       },
       {
-        meta: 'Chemical Physics Reviews · 7, 021310 · 2026',
+        meta: 'Chemical Physics Reviews 7, 021310 · 2026',
         title: 'Toward On-the-Fly Prediction of Reaction Energetics for High-Throughput Screening',
         href: 'https://doi.org/10.1063/5.0321836',
         authors: 'J. De Landsheere, M. P.-P. Kovar, K. Mark, L. Ganser, L. Galustian, J. Karwounopoulos, C. Gerhaher, E. Heid',
@@ -214,7 +214,7 @@ export const publications: PublicationYear[] = [
         meta: 'Chemical Science 13, 6039 · 2022',
         title: 'Similarity based enzymatic retrosynthesis',
         href: 'https://doi.org/10.1039/D2SC01588A',
-        authors: 'K. Sankaranarayanan, E. Heid, C. W. Coley, D. Verma, W. H. Green, K. J. Jensen',
+        authors: 'K. Sankaranarayanan, E. Heid, C. W. Coley, D. Verma, W. H. Green, K. F. Jensen',
       },
       {
         meta: 'Journal of Chemical Information and Modeling 62, 16 · 2022',
@@ -307,11 +307,11 @@ export const publications: PublicationYear[] = [
         meta: 'Physical Chemistry Chemical Physics 21, 17703 · 2019',
         title: 'Solvation dynamics: Improved reproduction of the time-dependent Stokes shift with polarizable empirical force field chromophore models',
         href: 'https://doi.org/10.1039/C9CP03000J',
-        authors: 'E. Heid, S. Schmode, P. Chatterjee, A. D. MacKerell Jr, C. Schröder',
+        authors: 'E. Heid, S. Schmode, P. Chatterjee, A. D. MacKerell, Jr., C. Schröder',
       },
       {
         meta: 'Physical Chemistry Chemical Physics 21, 4435 · 2019',
-        title: 'Fundamental limitations of the time-dependent stokes shift for investigating protein hydration dynamics',
+        title: 'Fundamental limitations of the time-dependent Stokes shift for investigating protein hydration dynamics',
         href: 'https://doi.org/10.1039/c8cp07623e',
         authors: 'E. Heid, D. Braun',
       },

@@ -77,7 +77,7 @@ export const members: Member[] = [
     photo: 'jasper-de-landsheere.jpg',
     avatar: 'top',
     bio: [
-      'Jasper De Landsheere is a Ph.D. student working on the ERC-funded project "Deep learning of chemical reactions". He received his master\'s degree in Data Science from TU Wien in 2025. He also holds a bachelor\'s and a master\'s degree in Bioscience Engineering Technology from Ghent University. His research focuses on developing new deep learning architectures for learning over chemical reactions.',
+      'Jasper De Landsheere is a Ph.D. student working on the ERC-funded project “Deep learning of chemical reactions”. He received his master\'s degree in Data Science from TU Wien in 2025. He also holds a bachelor\'s and a master\'s degree in Bioscience Engineering Technology from Ghent University. His research focuses on developing new deep learning architectures for learning over chemical reactions.',
     ],
     links: {
       github: 'https://github.com/JasperDeLandsheere',
@@ -136,7 +136,7 @@ export const members: Member[] = [
     avatar: 'high',
     colbreak: true,
     bio: [
-      "Konstantin Alexander Mark is a doctoral researcher working on the mathematical and methodological foundations of generative machine learning for chemical reactions. His research focuses on probabilistic models that generate molecular geometries and reactive structures, particularly flow-matching and related stochastic approaches. He investigates how these models can be made more efficient, controllable, and consistent with physical and chemical constraints. He is especially interested in transition-state generation, guided sampling, Schrödinger bridges, and the mathematical principles underlying generative processes. In this role, he helps connect the group's chemical applications to developments in generative modeling, probability theory, and scientific machine learning. In the group, he brings a strongly mathematics-driven perspective to projects at the interface of machine learning, reaction modeling, and computational chemistry.",
+      "Konstantin Alexander Mark is a doctoral researcher working on the mathematical and methodological foundations of generative machine learning for chemical reactions. His research focuses on probabilistic models that generate molecular geometries and reactive structures, particularly flow matching and related stochastic approaches. He investigates how these models can be made more efficient, controllable, and consistent with physical and chemical constraints. He is especially interested in transition-state generation, guided sampling, Schrödinger bridges, and the mathematical principles underlying generative processes. In this role, he helps connect the group's chemical applications to developments in generative modeling, probability theory, and scientific machine learning. In the group, he brings a strongly mathematics-driven perspective to projects at the interface of machine learning, reaction modeling, and computational chemistry.",
       'Before starting his doctoral research, he studied Technical Mathematics at TU Wien, specializing in functional analysis, numerics, and optimization.',
     ],
     links: {
@@ -165,7 +165,7 @@ export const members: Member[] = [
     photo: 'maximilian-kovar.jpg',
     avatar: 'high',
     bio: [
-      "Maximilian P.-P. Kovar started with his diploma thesis in 2025 and has been a doctoral researcher since 2026. Within his DOC Fellowship of the Austrian Academy of Sciences, he investigates the predictability of chemical reactions using carefully selected representative reactions computed with robust high-throughput quantum-chemical workflows. His work focuses on how chemical reactions can be described reliably, calculated systematically, and represented in a way that is useful for machine learning. He is especially interested in dataset impact, chemical plausibility, reaction energetics, and the reliable prediction of reactive processes. In this role, he helps connect the group's methodological and machine-learning efforts to the underlying chemistry. In the group, he brings a strongly chemistry-driven perspective to projects at the interface of quantum chemistry, reaction modeling, and molecular simulations.",
+      "Maximilian P.-P. Kovar started with his master's thesis in 2025 and has been a doctoral researcher since 2026. Within his DOC fellowship of the Austrian Academy of Sciences, he investigates the predictability of chemical reactions using carefully selected representative reactions computed with robust high-throughput quantum-chemical workflows. His work focuses on how chemical reactions can be described reliably, calculated systematically, and represented in a way that is useful for machine learning. He is especially interested in dataset impact, chemical plausibility, reaction energetics, and the reliable prediction of reactive processes. In this role, he helps connect the group's methodological and machine-learning efforts to the underlying chemistry. In the group, he brings a strongly chemistry-driven perspective to projects at the interface of quantum chemistry, reaction modeling, and molecular simulations.",
       'Before starting his Ph.D., he studied Chemistry at the University of Vienna and Chemistry and Technology of Materials at TU Wien.',
     ],
     links: {
@@ -183,7 +183,7 @@ export const members: Member[] = [
     photo: 'anton-zamyatin.jpg',
     bio: [
       "Anton Zamyatin is a research student working on machine learning for computational chemistry. He holds a bachelor's degree in Computer Science from TU Wien and is currently pursuing a master's degree in Computational Science and Engineering, focusing on mathematics and theoretical/computational chemistry.",
-      'In the group, he co-developed ChemTorch, a framework for developing and evaluating machine learning models for chemical reactions. He has also worked on transition-state search workflows and stereochemistry-aware graph representations for transition-state generation.',
+      'In the group, he co-developed ChemTorch, a framework for developing and evaluating machine learning models for chemical reactions. He has also worked on transition state search workflows and stereochemistry-aware graph representations for transition-state generation.',
       'His research interests include representation learning and generative modeling for molecular systems, with a particular interest in developing mathematically grounded machine learning methodology.',
     ],
     links: {
@@ -199,7 +199,7 @@ export const members: Member[] = [
     photo: 'sebastian-pinter.jpg',
     avatar: 'high',
     bio: [
-      "Sebastian Pinter is a master's student doing his master's thesis on generative modeling for enzyme engineering as part of the Heid Lab. He received his B.Sc. in Computer Science from TU Graz before moving to Vienna to study Data Science. His interest in computational chemistry and biology sparked while doing small projects such as modeling gene-disease interactions and comparative analysis of mitochondrial genomes of fungi during his studies. While he is not working on his master's thesis, he enjoys playing the classical guitar, developing video games and doing martial arts.",
+      "Sebastian Pinter is a master's student doing his master's thesis on generative modeling for enzyme engineering as part of the Heid Lab. He received his B.Sc. in Computer Science from TU Graz before moving to Vienna to study Data Science. His interest in computational chemistry and biology was sparked doing small projects such as modeling gene–disease interactions and comparative analysis of mitochondrial genomes of fungi during his studies. While he is not working on his master's thesis, he enjoys playing the classical guitar, developing video games, and doing martial arts.",
     ],
   },
   {
@@ -229,7 +229,7 @@ export const alumni: { year: string; people: { name: string; note: string }[] }[
     year: '2026',
     people: [
       { name: 'Stephanie Gstoettenmayr', note: 'M.Sc. thesis, TU Wien' },
-      { name: 'Giulia Giugliano', note: 'Visiting Ph.D. student from University of Bologna' },
+      { name: 'Giulia Giugliano', note: 'Visiting Ph.D. student from the University of Bologna' },
     ],
   },
   {
@@ -237,7 +237,7 @@ export const alumni: { year: string; people: { name: string; note: string }[] }[
     people: [
       { name: 'Hannah Teis', note: 'B.Sc. thesis, TU Wien' },
       { name: 'Benjamin Zeller', note: 'B.Sc. thesis, TU Wien' },
-      { name: 'Marion Sappl', note: 'Visiting Ph.D. student from University of Vienna' },
+      { name: 'Marion Sappl', note: 'Visiting Ph.D. student from the University of Vienna' },
     ],
   },
 ];
