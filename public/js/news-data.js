@@ -42,15 +42,15 @@ window.NEWS = [
     title: "Three new students joining the group",
     body: 'We\'re excited to welcome three new students to the lab this summer:' +
       '<ul>' +
-      '<li><strong>Christoph Kloesch</strong> (Uni Wien) — joining for his MSc thesis</li>' +
-      '<li><strong>Philip Kamper</strong> (TU Wien) — for his BSc thesis</li>' +
+      '<li><strong>Christoph Kloesch</strong> (Uni Wien) — joining for his M.Sc. thesis</li>' +
+      '<li><strong>Philip Kamper</strong> (TU Wien) — for his B.Sc. thesis</li>' +
       '<li><strong>Johann Wu</strong> — for a summer internship over his high-school summer break</li>' +
       '</ul>'
   },
   {
     date: "2026-06",
     title: "Highlights from the Science Days 2026",
-    body: 'The <a href="https://www.tuwien.at/tch/yia/science-days/">Science Days</a> 2026 were a full success with a wide range of contributions from the group, including a talk by Esther, moderation by Max, posters and pitches by Leon and Synnöve, and to top it all off, Leon taking home the first poster prize. Congratulations all round!',
+    body: 'The <a href="https://www.tuwien.at/tch/yia/science-days/">Science Days</a> 2026 were a full success with a wide range of contributions from the group, including a talk by Esther, moderation by Max, posters and pitches by Leon and Synnöve, and to top it all off, Leon taking home the first poster prize. Congrats to all!',
     images: [
       { src: "imgs/news/2026-06-science-days-1.jpg", alt: "Science Days 2026" },
       { src: "imgs/news/2026-06-science-days-2.jpg", alt: "Science Days 2026" },
@@ -84,26 +84,26 @@ window.NEWS = [
   {
     date: "2026-03-01",
     title: "Jonathan joins the group as a postdoc",
-    body: 'We are thrilled to welcome Jonathan Zheng, who joins the group as a postdoctoral researcher after successfully defending his PhD at MIT and moving across the Atlantic to Vienna. As part of the ERC project, he will be working on modeling enzymatic reactions. Welcome, Jonathan!'
+    body: 'We are thrilled to welcome Jonathan Zheng, who joins the group as a postdoctoral researcher after successfully defending his Ph.D. at MIT and moving across the Atlantic to Vienna. As part of the ERC project, he will be working on modeling enzymatic reactions. Welcome, Jonathan!'
   },
   {
     date: "2026-03-01",
-    title: "Max returns to the group as a PhD student",
-    body: 'We are happy to welcome back Max, who previously did his master thesis with us in the summer of 2025 on <a href="https://repositum.tuwien.at/bitstream/20.500.12708/218844/1/Kovar%20Maximilian%20-%202025%20-%20On%20the%20influence%20of%20dataset%20quality%20on%20chemical...pdf">"On the Influence of Dataset Quality on Chemical Reaction Machine Learning"</a>. After his research visit to Spain, he is now back with us for his PhD, where he will continue his work on curating meaningful datasets to enable future AI assistants to learn chemistry.'
+    title: "Max returns to the group as a Ph.D. student",
+    body: 'We are happy to welcome back Max, who previously did his master\'s thesis with us in the summer of 2025 on <a href="https://repositum.tuwien.at/bitstream/20.500.12708/218844/1/Kovar%20Maximilian%20-%202025%20-%20On%20the%20influence%20of%20dataset%20quality%20on%20chemical...pdf">"On the Influence of Dataset Quality on Chemical Reaction Machine Learning"</a>. After his research visit to Spain, he is now back with us for his Ph.D., where he will continue his work on curating meaningful datasets to enable future AI assistants to learn chemistry.'
   },
   {
     date: "2026-03-27",
-    title: "Max successfully defends his second master thesis",
-    body: 'Congratulations to Max, who successfully defended his second master thesis, carried out with a research group in Spain, on "Simulation of Proton Transfer Reactions in Ionic Liquids confined in Metal-Organic Frameworks: Methylimidazolium Acetate &amp; Triflate in NU-1000 using Machine-Learned Interatomic Potentials"!'
+    title: "Max successfully defends his second master's thesis",
+    body: 'Congratulations to Max, who successfully defended his second master\'s thesis, carried out with a research group in Spain, on "Simulation of Proton Transfer Reactions in Ionic Liquids confined in Metal-Organic Frameworks: Methylimidazolium Acetate &amp; Triflate in NU-1000 using Machine-Learned Interatomic Potentials"!'
   },
   {
     date: "2026-03-18",
-    title: "Stephie successfully defends her master thesis",
-    body: 'Congratulations to Stephie, who successfully defended her master thesis on "Integrating nudged elastic band with flow matching for enhanced transition state prediction"!',
+    title: "Stephie successfully defends her master's thesis",
+    body: 'Congratulations to Stephie, who successfully defended her master\'s thesis on "Integrating nudged elastic band with flow matching for enhanced transition state prediction"!',
     images: [
-      { src: "imgs/news/2026-03-stephi-1.jpeg", alt: "Stephie's master thesis defense" },
-      { src: "imgs/news/2026-03-stephi-2.jpeg", alt: "Stephie's master thesis defense" },
-      { src: "imgs/news/2026-03-stephi-3.jpeg", alt: "Stephie's master thesis defense" }
+      { src: "imgs/news/2026-03-stephi-1.jpeg", alt: "Stephie's master's thesis defense" },
+      { src: "imgs/news/2026-03-stephi-2.jpeg", alt: "Stephie's master's thesis defense" },
+      { src: "imgs/news/2026-03-stephi-3.jpeg", alt: "Stephie's master's thesis defense" }
     ]
   },
   {

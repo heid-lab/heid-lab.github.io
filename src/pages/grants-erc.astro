@@ -59,8 +59,8 @@ const facts = [
 const people = [
   { name: 'Esther Heid', note: 'Principal investigator', href: `${base}/pi`, photo: 'esther-heid-portrait.jpg' },
   { name: 'Jonathan Zheng', note: 'Postdoc · enzymatic reactions', href: `${base}/team#${slug('Jonathan Zheng')}`, photo: 'jonathan-zheng.jpg' },
-  { name: 'Jasper De Landsheere', note: 'PhD · reaction property prediction', href: `${base}/team#${slug('Jasper De Landsheere')}`, photo: 'jasper-de-landsheere.jpg' },
-  { name: 'Leon Ganser', note: 'PhD · asymmetric organocatalysis', href: `${base}/team#${slug('Leon Ganser')}` },
+  { name: 'Jasper De Landsheere', note: 'Ph.D. · reaction property prediction', href: `${base}/team#${slug('Jasper De Landsheere')}`, photo: 'jasper-de-landsheere.jpg' },
+  { name: 'Leon Ganser', note: 'Ph.D. · asymmetric organocatalysis', href: `${base}/team#${slug('Leon Ganser')}` },
 ];
 
 // Crop overrides for this page's small round frames. The team page's crops
@@ -72,7 +72,7 @@ const cropOverrides: Record<string, string> = {
 };
 
 // Class list for a headshot circle, adding the person's per-photo crop tweak
-// so faces stay centred in the circle.
+// so faces stay centered in the circle.
 const photoClass = (name: string) => {
   const crop = cropOverrides[name] ?? avatarCrop(name);
   return ['grant-person-photo', crop && `grant-person-photo--${crop}`].filter(Boolean).join(' ');
@@ -81,8 +81,8 @@ const photoClass = (name: string) => {
 // Former contributors to the project.
 const pastPeople = [
   { name: 'Johannes Karwounopoulos', note: 'Postdoc · 2025–2026', href: `${base}/team#${slug('Johannes Karwounopoulos')}`, photo: 'johannes-karwounopoulos.jpg' },
-  { name: 'Charlotte Gerhaher', note: 'PhD · 2025–2026', href: `${base}/team#${slug('Charlotte Gerhaher')}`, photo: 'charlotte-gerhaher.jpg' },
-  { name: 'Konstantin Mark', note: 'PhD · 2025–2026', href: `${base}/team#${slug('Konstantin Mark')}`, photo: 'konstantin-mark.jpg' },
+  { name: 'Charlotte Gerhaher', note: 'Ph.D. · 2025–2026', href: `${base}/team#${slug('Charlotte Gerhaher')}`, photo: 'charlotte-gerhaher.jpg' },
+  { name: 'Konstantin Mark', note: 'Ph.D. · 2025–2026', href: `${base}/team#${slug('Konstantin Mark')}`, photo: 'konstantin-mark.jpg' },
 ];
 ---
 <Layout title="Heid Lab — ERC Starting Grant (DeepRxn)" scripts={["header.js"]}>
