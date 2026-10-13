@@ -1685,16 +1685,26 @@ a.pub-title:hover { color: #000; }
 .btn .gh-icon { margin-right: 0.15rem; vertical-align: -0.2em; }
 
 /* ---------- Open-source closing CTA ----------
-   A light section (on --bg-alt) between the last research theme and the dark
-   footer, with the "Open source" eyebrow + heading + a GitHub button. The top
-   border separates it from the theme above; the light→dark break to the footer
-   stays clean. Padding is kept moderate so it closes the page without the tall
-   full-section feel. */
-.opensource { background: var(--bg-alt); border-top: 1px solid var(--border); }
-.opensource-inner {
-  max-width: 60rem;
-  padding-top: clamp(2rem, 4vw, 3rem); padding-bottom: clamp(2rem, 4vw, 3rem);
+   A light section (on --bg-alt) between the ERC callout and the dark footer.
+   The content sits in a white card spanning the full .wrap width (so its edges
+   line up with the sections above), with a yellow left rule instead of the
+   eyebrow underline, text on the left and the GitHub button on the right —
+   boxed so it reads as a CTA rather than another eyebrow + heading section. */
+.opensource {
+  background: var(--bg-alt); border-top: 1px solid var(--border);
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
 }
-.opensource h2 { font-size: clamp(1.9rem, 4vw, 2.9rem); margin: 0.25rem 0 0; }
-.opensource p { color: var(--muted); margin: 1rem 0 0; max-width: 62ch; }
-.opensource .btn { margin-top: 1.75rem; }
+.opensource-card {
+  display: grid; grid-template-columns: 1fr auto; align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  background: var(--bg); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+  padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1.5rem, 4vw, 3rem);
+}
+.opensource-text .eyebrow { margin: 0 0 0.7rem; }
+.opensource-text .eyebrow::after { display: none; }
+.opensource-text h2 { font-size: clamp(1.5rem, 2.8vw, 2.1rem); margin: 0; }
+.opensource-text > p { color: var(--muted); margin: 0.8rem 0 0; max-width: 62ch; }
+@media (max-width: 760px) {
+  .opensource-card { grid-template-columns: 1fr; }
+  .opensource-card .btn { justify-self: start; }
+}
