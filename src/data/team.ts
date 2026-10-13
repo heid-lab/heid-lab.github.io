@@ -237,7 +237,7 @@ export const alumni: { year: string; people: { name: string; note: string }[] }[
     people: [
       { name: 'Hannah Teis', note: 'B.Sc. thesis, TU Wien' },
       { name: 'Benjamin Zeller', note: 'B.Sc. thesis, TU Wien' },
-      { name: 'Marion Sappl', note: 'Visiting Ph.D. researcher from University of Vienna' },
+      { name: 'Marion Sappl', note: 'Visiting Ph.D. student from University of Vienna' },
     ],
   },
 ];

@@ -83,6 +83,7 @@ const pastPeople = [
   { name: 'Johannes Karwounopoulos', note: 'Postdoc · 2025–2026', href: `${base}/team#${slug('Johannes Karwounopoulos')}`, photo: 'johannes-karwounopoulos.jpg' },
   { name: 'Charlotte Gerhaher', note: 'Ph.D. · 2025–2026', href: `${base}/team#${slug('Charlotte Gerhaher')}`, photo: 'charlotte-gerhaher.jpg' },
   { name: 'Konstantin Mark', note: 'Ph.D. · 2025–2026', href: `${base}/team#${slug('Konstantin Mark')}`, photo: 'konstantin-mark.jpg' },
+  { name: 'Maximilian P.-P. Kovar', note: 'Ph.D. · 2026', href: `${base}/team#${slug('Maximilian P.-P. Kovar')}`, photo: 'maximilian-kovar.jpg' },
 ];
 ---
 <Layout title="Heid Lab — ERC Starting Grant (DeepRxn)" scripts={["header.js"]}>
@@ -101,7 +102,7 @@ const pastPeople = [
         </div>
         <div class="grant-hero-logos">
           <span class="grant-hero-logo">
-            <img src={`${base}/imgs/grants/deeprxn-logo.png`} alt="DeepRxn — deep learning for chemical reactions" />
+            <img src={`${base}/imgs/grants/deeprxn-logo.png`} alt="DeepRxn — Deep learning of chemical reactions" />
           </span>
           <span class="grant-hero-logo grant-hero-logo--erc">
             <img src={`${base}/imgs/grants/erc-eu-logo.png`} alt="Funded by the European Union — European Research Council" />
@@ -207,8 +208,8 @@ const pastPeople = [
       ))}
     </ul>
 
-    <h2>Related publications</h2>
-    <p>Publications acknowledging this grant. See the full list on the <a href={`${base}/publications`}>Publications</a> page.</p>
+    <h2>Work supported by the ERC</h2>
+    <p>Publications funded by this grant. Our full list is on the <a href={`${base}/publications`}>Publications</a> page.</p>
     <ul class="clean pubs grant-pubs">
       {relatedPubs.map((pub) => (
         <li class="pub">
