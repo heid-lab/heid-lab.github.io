@@ -165,7 +165,7 @@ export const members: Member[] = [
     photo: 'maximilian-kovar.jpg',
     avatar: 'high',
     bio: [
-      "Maximilian P.-P. Kovar started with his master's thesis in 2025 and has been a doctoral researcher since 2026. Within his DOC fellowship of the Austrian Academy of Sciences, he investigates the predictability of chemical reactions using carefully selected representative reactions computed with robust high-throughput quantum-chemical workflows. His work focuses on how chemical reactions can be described reliably, calculated systematically, and represented in a way that is useful for machine learning. He is especially interested in dataset impact, chemical plausibility, reaction energetics, and the reliable prediction of reactive processes. In this role, he helps connect the group's methodological and machine-learning efforts to the underlying chemistry. In the group, he brings a strongly chemistry-driven perspective to projects at the interface of quantum chemistry, reaction modeling, and molecular simulations.",
+      "Maximilian P.-P. Kovar completed his master's thesis in 2025 as part of the lab and returned as a doctoral researcher in 2026. Within his DOC fellowship of the Austrian Academy of Sciences, he investigates the predictability of chemical reactions using carefully selected representative reactions computed with robust high-throughput quantum-chemical workflows. His work focuses on how chemical reactions can be described reliably, calculated systematically, and represented in a way that is useful for machine learning. He is especially interested in dataset impact, chemical plausibility, reaction energetics, and the reliable prediction of reactive processes. He helps connect the group's methodological and machine-learning efforts to the underlying chemistry. He brings a chemistry-driven perspective to projects at the interface of quantum chemistry, reaction modeling, and molecular simulations.",
       'Before starting his Ph.D., he studied Chemistry at the University of Vienna and Chemistry and Technology of Materials at TU Wien.',
     ],
     links: {
@@ -208,7 +208,7 @@ export const members: Member[] = [
     group: 'project',
     photoTodo: 'add imgs/team_members/albert-lehninger.jpg',
     bio: [
-      'Albert studies computer science at TU Wien and joined the Heid Lab for his bachelor\'s thesis as part of the AI-NOSE project.',
+      'Albert studies Computer Science at TU Wien and joined the Heid Lab for his bachelor\'s thesis as part of the AI-NOSE project.',
     ],
     links: {
       linkedin: 'https://www.linkedin.com/in/albert-lehninger-b142952a0/',
