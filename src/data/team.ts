@@ -207,7 +207,9 @@ export const members: Member[] = [
     role: 'B.Sc. thesis',
     group: 'project',
     photoTodo: 'add imgs/team_members/albert-lehninger.jpg',
-    bio: [],
+    bio: [
+      'Albert studies computer science at TU Wien and joined the Heid Lab for his bachelor\'s thesis as part of the AI-NOSE project.',
+    ],
     links: {
       linkedin: 'https://www.linkedin.com/in/albert-lehninger-b142952a0/',
     },
@@ -228,6 +230,8 @@ export const alumni: { year: string; people: { name: string; note: string }[] }[
   {
     year: '2026',
     people: [
+      { name: 'Christoph Kloesch', note: 'Internship, University of Vienna' },
+      { name: 'Philip Kamper', note: 'B.Sc. thesis, TU Wien' },
       { name: 'Stephanie Gstoettenmayr', note: 'M.Sc. thesis, TU Wien' },
       { name: 'Giulia Giugliano', note: 'Visiting Ph.D. student from the University of Bologna' },
     ],
