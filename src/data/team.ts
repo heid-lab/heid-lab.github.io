@@ -45,7 +45,7 @@ export const members: Member[] = [
     photo: 'johannes-karwounopoulos.jpg',
     avatar: 'high',
     bio: [
-      "Johannes Karwounopoulos studied chemistry at the University of Stuttgart in Germany. After an internship in France and a master's thesis in bioinformatics, he moved to Vienna to pursue a Ph.D. at the University of Vienna under the supervision of Prof. Stefan Boresch. His doctoral research combined classical force fields with machine learning potentials to study the binding affinities of protein–ligand complexes. Following his Ph.D., Johannes joined the British biotech company Exscientia, now part of Recursion, where he worked in the Drug Discovery team developing novel methods for calculating binding free energies. He later returned to academia as a postdoctoral researcher in the Heid Lab, focusing on graph neural networks. He now holds an FWF ESPRIT fellowship, through which he pursues his own research on how machine-learned potentials can improve free-energy predictions.",
+      "Johannes Karwounopoulos studied Chemistry at the University of Stuttgart in Germany. After an internship in France and a master's thesis in bioinformatics, he moved to Vienna to pursue a Ph.D. at the University of Vienna under the supervision of Prof. Stefan Boresch. His doctoral research combined classical force fields with machine learning potentials to study the binding affinities of protein–ligand complexes. Following his Ph.D., Johannes joined the British biotech company Exscientia, now part of Recursion, where he worked in the Drug Discovery team developing novel methods for calculating binding free energies. He later returned to academia as a postdoctoral researcher in the Heid Lab, focusing on graph neural networks. He now holds an FWF ESPRIT fellowship, through which he pursues his own research on how machine-learned potentials can improve free-energy predictions.",
     ],
     links: {
       github: 'https://github.com/JohannesKarwou',
@@ -91,7 +91,7 @@ export const members: Member[] = [
     group: 'phd',
     photo: 'leonard-galustian.jpg',
     bio: [
-      'Leonard Galustian studied computer engineering and data science at TU Wien. His research interests lie at the intersection of computational chemistry and machine learning. Before joining the Heid Lab as a Ph.D. student, he worked on interdisciplinary projects as a machine learning scientist, most recently in the Department of Geosciences and the Machine Learning Research Unit at TU Wien, as well as in Neuroimaging Labs at the Medical University of Vienna.',
+      'Leonard Galustian studied Computer Engineering and Data Science at TU Wien. His research interests lie at the intersection of computational chemistry and machine learning. Before joining the Heid Lab as a Ph.D. student, he worked on interdisciplinary projects as a machine learning scientist, most recently in the Department of Geosciences and the Machine Learning Research Unit at TU Wien, as well as in Neuroimaging Labs at the Medical University of Vienna.',
     ],
     links: {
       github: 'https://github.com/galustian',
