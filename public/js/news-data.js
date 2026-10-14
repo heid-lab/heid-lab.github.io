@@ -55,7 +55,7 @@ window.NEWS = [
     title: "Three new students joining the group",
     body: 'We\'re excited to welcome three new students to the lab this summer:' +
       '<ul>' +
-      '<li><strong>Christoph Kloesch</strong> (Uni Wien) — joining for his M.Sc. thesis</li>' +
+      '<li><strong>Christoph Klösch</strong> (Uni Wien) — joining for his M.Sc. thesis</li>' +
       '<li><strong>Philip Kamper</strong> (TU Wien) — for his B.Sc. thesis</li>' +
       '<li><strong>Johann Wu</strong> — for a summer internship over his high-school summer break</li>' +
       '</ul>'
