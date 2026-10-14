@@ -2,17 +2,14 @@ name: Deploy to GitHub Pages
 
 # Build the Astro site and publish it to GitHub Pages.
 #
-# NOT YET LIVE. Deployment is planned for the future, so auto-deploy on push is
-# disabled — the workflow only runs when triggered manually from the Actions tab.
-#
-# To go live later:
-#   1. Uncomment the `push:` block below (re-enables deploy on every push to main).
-#   2. In repo settings: Pages → "Build and deployment" → Source → "GitHub Actions".
+# Runs on every push to main, and can also be triggered manually from the
+# Actions tab. Requires repo settings: Pages → "Build and deployment" →
+# Source → "GitHub Actions".
 
 on:
-  # push:
-  #   branches: [main]
-  # Run manually from the Actions tab.
+  push:
+    branches: [main]
+  # Also allow manual runs from the Actions tab.
   workflow_dispatch:
 
 # Permissions the deploy job needs to publish to Pages.
@@ -31,9 +28,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 20
           cache: npm
@@ -42,7 +39,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./dist
 
@@ -55,4 +52,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
