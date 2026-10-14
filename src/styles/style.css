@@ -1173,7 +1173,8 @@ a.pub-title:hover { color: #000; }
    a click or tap (.is-open, set by funding-tiles.js), or when keyboard focus
    moves into its details — :focus-visible, so a link left focused by a mouse
    click doesn't hold the card open after the visitor comes back from that link.
-   Items come from src/data/funding.ts. */
+   Once open, a card with a link is clickable anywhere (see .funding-link
+   below). Items come from src/data/funding.ts. */
 .funding-more { margin-top: clamp(1.5rem, 3vw, 2rem); }
 .funding-more-intro { color: var(--muted); margin: 0 0 1.25rem; }
 .funding-tiles {
@@ -1213,18 +1214,19 @@ a.pub-title:hover { color: #000; }
 }
 /* A small "+" in the corner hints that the card opens; it turns to "×" when pinned. */
 .funding-tile-plus {
-  position: absolute; top: 0.85rem; right: 0.85rem; width: 0.7rem; height: 0.7rem;
+  position: absolute; top: 0.85rem; right: 0.85rem; z-index: 1; width: 0.7rem; height: 0.7rem;
   color: var(--faint); transition: transform 0.2s ease, color 0.2s ease;
   background:
     linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat,
     linear-gradient(currentColor, currentColor) center / 1.5px 100% no-repeat;
 }
 /* Details sit where the name is, bottom-aligned; the card's min-height keeps
-   room for them below the logo row. */
+   room for them below the logo row. The box spans the whole card so the
+   link's hit area below can cover it. */
 .funding-tile-details {
-  position: absolute; left: 0; right: 0; bottom: 0;
+  position: absolute; inset: 0;
   padding: 0 1.15rem 1.1rem;
-  display: flex; flex-direction: column; align-items: flex-start;
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start;
   opacity: 0; transform: translateY(0.35rem); pointer-events: none;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
@@ -1234,6 +1236,12 @@ a.pub-title:hover { color: #000; }
 }
 .funding-period { font-size: 0.85rem; line-height: 1.4; color: var(--muted); font-variant-numeric: tabular-nums; }
 .funding-tile-details .funding-link { margin-top: 0.45rem; font-size: 0.72rem; }
+/* Stretch the link's hit area over the whole card. It only takes clicks while
+   the card is open (the details ignore the pointer until then), so hovering
+   and clicking anywhere follows the link, and on touch the first tap opens the
+   card and the second follows it. The corner "×" sits above it, so it still
+   closes a pinned card. */
+.funding-tile-details .funding-link::after { content: ''; position: absolute; inset: 0; }
 /* Open state — shared by hover, pin, and keyboard focus; mirrors .course-card:hover. */
 .funding-tile.is-open,
 .funding-tile:has(.funding-tile-details :focus-visible) {
