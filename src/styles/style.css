@@ -1611,7 +1611,8 @@ a.pub-title:hover { color: #000; }
 
 /* ---------- News photo gallery (coverflow below the timeline) ----------
    One photo in focus, its neighbors fanned out behind it, smaller and dimmed.
-   Arrows / drag move the focus; clicking the focused photo opens the lightbox. */
+   Arrows / drag / trackpad swipe / clicking a neighbor move the focus;
+   clicking the focused photo opens the lightbox. */
 .gallery {
   margin-top: clamp(3.5rem, 8vw, 5.5rem);
   /* Full-bleed off-white band: break out of <main>'s padding to the viewport
@@ -1627,8 +1628,10 @@ a.pub-title:hover { color: #000; }
 .gallery-heading { margin-top: 0; text-align: center; }
 .gallery-viewport {
   position: relative; margin-top: 1.25rem;
+  /* Wider than the text column, so the fan has room on large screens. */
+  max-width: 96rem;
   /* Just enough for the focused photo (scaled 1.04) plus its drop shadow. */
-  height: clamp(12rem, 26vw, 18.5rem);
+  height: clamp(13rem, 30.5vw, 27.75rem);
   overflow: hidden;
   perspective: 1600px;   /* Gives the rotateY on neighbors real depth. */
 }
@@ -1647,15 +1650,15 @@ a.pub-title:hover { color: #000; }
   --shift: clamp(-2, var(--i), 2);
   transform:
     translate(-50%, -50%)
-    translateX(calc(var(--i) * clamp(6.5rem, 15vw, 11rem)))
+    translateX(calc(var(--i) * clamp(6.5rem, 12.4vw, 13rem)))
     scale(calc(1 - min(0.16 * (var(--i) * var(--i)), 0.42)))
     rotateY(calc(var(--shift) * -18deg));
   transform-origin: center;
   transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.4s ease, opacity 0.4s ease;
 }
 .gallery-slide img {
-  display: block; width: clamp(15rem, 34vw, 24rem);
-  height: clamp(11rem, 24vw, 17rem);
+  display: block; width: clamp(17rem, 40vw, 36rem);
+  height: clamp(12rem, 28vw, 25.5rem);
   object-fit: cover; background: var(--bg-alt);
   /* Portrait shots get cropped top & bottom; bias the crop upward so faces
      stay in frame instead of being sliced through the middle. */
@@ -1663,16 +1666,24 @@ a.pub-title:hover { color: #000; }
   border-radius: 0; user-select: none;
   border: 1px solid #fff;
   box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.5);
-  transition: filter 0.4s ease;
+  transition: filter 0.4s ease, box-shadow 0.4s ease;
 }
 /* Neighbors sit back: darker the further they are from focus. */
 .gallery-slide:not(.is-active) img { filter: brightness(0.5); }
+/* Brighten a neighbor on hover to hint that clicking brings it to focus. */
+@media (hover: hover) {
+  .gallery-slide:not(.is-active):hover img { filter: brightness(0.75); }
+}
 .gallery-slide.is-active {
   z-index: 10;
   /* Focused photo lifts slightly toward the viewer. */
   transform: translate(-50%, -50%) scale(1.04);
 }
 .gallery-slide.is-active img { box-shadow: 0 26px 55px -20px rgba(0, 0, 0, 0.6); }
+/* Beyond the fan: piled underneath the outermost photo, so not clickable.
+   No shadow, or the pile's stacked shadows would darken the edge. */
+.gallery-slide.is-off { pointer-events: none; }
+.gallery-slide.is-off img { box-shadow: none; }
 .gallery-slide:focus-visible { outline: none; }
 .gallery-slide:focus-visible img { outline: 3px solid var(--accent); outline-offset: 3px; }
 
@@ -1691,6 +1702,17 @@ a.pub-title:hover { color: #000; }
 .gallery-prev { left: clamp(0.25rem, 2vw, 1.5rem); }
 .gallery-next { right: clamp(0.25rem, 2vw, 1.5rem); }
 .gallery-nav.is-disabled { opacity: 0; pointer-events: none; }
+.gallery-caption {
+  margin-top: 0.6rem; max-width: 36rem; padding: 0 1rem;
+  text-align: center; color: var(--muted); line-height: 1.5;
+  text-wrap: balance;
+  min-height: 1.5em;
+}
+/* Narrow screens wrap longer titles: keep room for two lines so the page
+   doesn't jump as the caption changes. */
+@media (max-width: 40rem) {
+  .gallery-caption { min-height: 3em; }
+}
 
 /* Lightbox */
 .lightbox {

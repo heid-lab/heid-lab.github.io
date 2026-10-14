@@ -65,9 +65,12 @@
       var pic = set[at];
       imgEl.src = asset(pic.src);
       imgEl.alt = pic.alt || '';
+      // Gallery photos come from different news items, so each carries its
+      // own title; a news item's photos share the one passed to open().
+      var title = pic.title || capTitle;
       capEl.textContent = set.length > 1
-        ? capTitle + ' · ' + (at + 1) + ' / ' + set.length
-        : capTitle;
+        ? title + ' · ' + (at + 1) + ' / ' + set.length
+        : title;
       var many = set.length > 1;
       prevBtn.hidden = !many;
       nextBtn.hidden = !many;
