@@ -51,7 +51,7 @@
     });
   });
 
-  // If the page was opened with a #area-0x hash, honour it; otherwise show 01.
+  // If the page was opened with a #area-0x hash, honor it; otherwise show 01.
   function indexForHash() {
     var hash = window.location.hash.replace('#', '');
     var found = 0;

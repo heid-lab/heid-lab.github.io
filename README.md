@@ -125,7 +125,7 @@ field decides which section (and filter tab) they appear under.
 ```ts
 {
   name: 'Jane Doe',
-  role: 'PhD Student · ERC project',   // the line under the name
+  role: 'Ph.D. Student · ERC project',   // the line under the name
   group: 'phd',                        // 'postdoc' | 'phd' | 'project'
   photo: 'jane-doe.jpg',               // file in public/imgs/team_members/ (see below)
   bio: [
@@ -152,7 +152,7 @@ and add a line to the `alumni` array further down the same file:
 {
   year: '2026',
   people: [
-    { name: 'Jane Doe', note: 'PhD, now at …' },
+    { name: 'Jane Doe', note: 'Ph.D., now at …' },
   ],
 },
 ```
