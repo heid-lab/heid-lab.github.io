@@ -1169,8 +1169,9 @@ a.pub-title:hover { color: #000; }
    The cards borrow the teaching page's course cards: a hairline border, square
    corners, and on opening a lift onto white with a yellow border and shadow.
    The name fades out as the details (amount, period, link) fade in at the same
-   spot, while the logo stays put. A card opens on hover (on devices that can hover), when pinned by
-   a click or tap (.is-open, set by funding-tiles.js), or when keyboard focus
+   spot, while the logo slides up to make room for them. A card opens on hover
+   (on devices that can hover), when pinned by a click or tap (.is-open, set by
+   funding-tiles.js), or when keyboard focus
    moves into its details — :focus-visible, so a link left focused by a mouse
    click doesn't hold the card open after the visitor comes back from that link.
    Once open, a card with a link is clickable anywhere (see .funding-link
@@ -1194,7 +1195,12 @@ a.pub-title:hover { color: #000; }
   cursor: pointer;
 }
 .funding-tile-face:focus-visible { outline: 2px solid var(--text); outline-offset: -4px; }
-.funding-mark { display: flex; align-items: center; gap: 0.6rem; height: 2.4rem; max-width: 100%; }
+/* At rest the logo sits lower, nearer the name; it slides back up when the
+   card opens so the details have room below it. */
+.funding-mark {
+  display: flex; align-items: center; gap: 0.6rem; height: 2.4rem; max-width: 100%;
+  transform: translateY(1.25rem); transition: transform 0.2s ease;
+}
 /* Multiply drops white logo backgrounds (e.g. FFG) into the card fill. */
 .funding-logo {
   display: block; height: 100%; width: auto; max-width: 100%; object-fit: contain;
@@ -1252,6 +1258,8 @@ a.pub-title:hover { color: #000; }
 .funding-tile-details:has(:focus-visible) { opacity: 1; transform: none; pointer-events: auto; }
 .funding-tile.is-open .funding-name,
 .funding-tile:has(.funding-tile-details :focus-visible) .funding-name { opacity: 0; }
+.funding-tile.is-open .funding-mark,
+.funding-tile:has(.funding-tile-details :focus-visible) .funding-mark { transform: none; }
 .funding-tile.is-open .funding-tile-plus { transform: rotate(45deg); color: var(--muted); }
 @media (hover: hover) {
   .funding-tile:hover {
@@ -1260,6 +1268,7 @@ a.pub-title:hover { color: #000; }
   }
   .funding-tile:hover .funding-tile-details { opacity: 1; transform: none; pointer-events: auto; }
   .funding-tile:hover .funding-name { opacity: 0; }
+  .funding-tile:hover .funding-mark { transform: none; }
 }
 @media (max-width: 1000px) { .funding-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .funding-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

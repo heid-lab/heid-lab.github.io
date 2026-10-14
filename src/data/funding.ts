@@ -41,7 +41,7 @@ export const funding: Funding[] = [
     href: 'https://www.fwf.ac.at/en/research-radar/10.55776/STA192',
   },
   {
-    name: 'Computational Sustainability Doctoral College',
+    name: 'Comp. Sust. DC',
     funder: 'TU Wien & JKU Linz',
     period: '2026–2029',
     amount: '€213K',
@@ -50,7 +50,7 @@ export const funding: Funding[] = [
     href: 'https://computational-sustainability.at/',
   },
   {
-    name: 'Biosensors and Medical Devices Doctoral Program',
+    name: 'BioDevX',
     funder: 'TU Wien',
     period: '2026–2029',
     amount: '€213K',
@@ -67,11 +67,11 @@ export const funding: Funding[] = [
     href: 'https://www.ffg.at/programm/bridge',
   },
   {
-    // TODO: link if there is one.
     name: 'DARE project',
     funder: 'Vienna Science and Technology Fund (WWTF)',
     period: '2026–2028',
     amount: '€100K',
     logo: 'grants/wwtf-logo.png',
+    href: 'https://www.gmbh.wwtf.at/funding/programmes/ei/DARE25-041/',
   },
 ];
