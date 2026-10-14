@@ -58,13 +58,13 @@ export const funding: Funding[] = [
     href: 'https://www.tuwien.at/en/doc/biodevx-vorbereitung',
   },
   {
-    // TODO: project name and link.
+    // TODO: project name.
     name: 'BRIDGE project',
     funder: 'Austrian Research Promotion Agency (FFG)',
     period: '2025–2028',
     amount: '€100K',
     logo: 'grants/ffg-logo.png',
-    href: '#',
+    href: 'https://www.ffg.at/programm/bridge',
   },
   {
     // TODO: link if there is one.
