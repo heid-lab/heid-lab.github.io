@@ -230,8 +230,9 @@ export const alumni: { year: string; people: { name: string; note: string }[] }[
   {
     year: '2026',
     people: [
-      { name: 'Christoph Kloesch', note: 'Internship, University of Vienna' },
+      { name: 'Christoph Klösch', note: 'Internship, University of Vienna' },
       { name: 'Philip Kamper', note: 'B.Sc. thesis, TU Wien' },
+      { name: 'Marton Szamecz', note: 'Student assistant, TU Wien' },
       { name: 'Stephanie Gstoettenmayr', note: 'M.Sc. thesis, TU Wien' },
       { name: 'Giulia Giugliano', note: 'Visiting Ph.D. student from the University of Bologna' },
     ],
