@@ -149,7 +149,7 @@ export const members: Member[] = [
     name: 'Leon Ganser',
     role: 'Ph.D. Student · Shared with Katharina Schröder',
     group: 'phd',
-    photoTodo: 'add imgs/team_members/leon-ganser.jpg',
+    photo: 'leon-ganser.jpg',
     bio: [
       'Leon Ganser is a Ph.D. candidate from Germany working under the shared supervision of Katharina Schröder and Esther Heid. He obtained his M.Sc. in Chemistry from the University of Regensburg, where his research focused on photocatalytic transformations. His current doctoral research lies at the interface of asymmetric organocatalysis, high-throughput experimentation, and data-driven reaction development. In particular, he works on the rational design of experimental datasets for asymmetric organocatalytic reactions, with the aim of generating high-quality, machine-learning-ready data for reaction prediction, optimization, and mechanistic insight. His research combines synthetic organic chemistry with automated experimentation and computational approaches to better understand and navigate complex reaction spaces.',
     ],
