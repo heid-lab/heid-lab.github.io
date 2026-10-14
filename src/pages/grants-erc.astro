@@ -1,11 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PubList from '../components/PubList.astro';
 import { avatarCrop, initials, slug } from '../data/team';
 import { pubsByFunding } from '../data/publications';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-// Publications acknowledging the ERC grant — tagged funding: ['erc'] in
-// publications.ts, so this list stays in sync when papers are added there.
+// Publications acknowledging the ERC grant, grouped by year — tagged
+// funding: ['erc'] in publications.ts, so this list stays in sync when papers
+// are added there.
 const relatedPubs = pubsByFunding('erc');
 
 // CORDIS subject/keyword tags for the project (cordis.europa.eu/project/id/101162908).
@@ -80,10 +82,10 @@ const photoClass = (name: string) => {
 
 // Former contributors to the project.
 const pastPeople = [
-  { name: 'Johannes Karwounopoulos', note: 'Postdoc · 2025–2026', href: `${base}/team#${slug('Johannes Karwounopoulos')}`, photo: 'johannes-karwounopoulos.jpg' },
-  { name: 'Charlotte Gerhaher', note: 'Ph.D. · 2025–2026', href: `${base}/team#${slug('Charlotte Gerhaher')}`, photo: 'charlotte-gerhaher.jpg' },
-  { name: 'Konstantin Mark', note: 'Ph.D. · 2025–2026', href: `${base}/team#${slug('Konstantin Mark')}`, photo: 'konstantin-mark.jpg' },
-  { name: 'Maximilian P.-P. Kovar', note: 'Ph.D. · 2026', href: `${base}/team#${slug('Maximilian P.-P. Kovar')}`, photo: 'maximilian-kovar.jpg' },
+  { name: 'Johannes Karwounopoulos', note: 'Postdoc (2025–2026)', href: `${base}/team#${slug('Johannes Karwounopoulos')}`, photo: 'johannes-karwounopoulos.jpg' },
+  { name: 'Charlotte Gerhaher', note: 'Ph.D. (2025–2026)', href: `${base}/team#${slug('Charlotte Gerhaher')}`, photo: 'charlotte-gerhaher.jpg' },
+  { name: 'Konstantin Mark', note: 'Ph.D. (2025–2026)', href: `${base}/team#${slug('Konstantin Mark')}`, photo: 'konstantin-mark.jpg' },
+  { name: 'Maximilian P.-P. Kovar', note: 'Ph.D. (2026)', href: `${base}/team#${slug('Maximilian P.-P. Kovar')}`, photo: 'maximilian-kovar.jpg' },
 ];
 ---
 <Layout title="Heid Lab — ERC Starting Grant (DeepRxn)" scripts={["header.js"]}>
@@ -210,20 +212,12 @@ const pastPeople = [
 
     <h2>Work supported by the ERC</h2>
     <p>Publications funded by this grant. Our full list is on the <a href={`${base}/publications`}>Publications</a> page.</p>
-    <ul class="clean pubs grant-pubs">
-      {relatedPubs.map((pub) => (
-        <li class="pub">
-          <span class="pub-meta">
-            {pub.preprint && <button class="pub-tag">Preprint</button>}
-            {pub.meta}
-          </span>
-          {pub.titleHtml
-            ? <a class="pub-title" href={pub.href} set:html={pub.titleHtml} />
-            : <a class="pub-title" href={pub.href}>{pub.title}</a>}
-          <span class="authors" set:html={pub.authors} />
-        </li>
-      ))}
-    </ul>
+    {relatedPubs.map((group) => (
+      <Fragment>
+        <h3 class="grant-pubs-year">{group.year}</h3>
+        <PubList items={group.items} />
+      </Fragment>
+    ))}
 
     <h2>Acknowledgment</h2>
     <p class="grant-ack">

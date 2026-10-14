@@ -552,6 +552,11 @@ main :is(p, li) a:hover { color: #000; }
 .grant-people-past-head + .grant-people { margin-top: 0.85rem; }
 .grant-people--past .grant-person-initials { background: var(--faint); }
 
+/* Year labels splitting the grant's publication list into light sections —
+   small crimson numerals, each sitting just above that year's papers. */
+.grant-pubs-year { margin: 2.25rem 0 0; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.08em; color: var(--dr-crimson); }
+.grant-pubs-year + ul.clean.pubs { margin-top: 0.6rem; }
+
 .grant-ack { font-size: 0.9rem; color: var(--faint); border-top: 1px solid var(--border); padding-top: 1.4rem; }
 
 /* ---------- Cards / grids ---------- */

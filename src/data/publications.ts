@@ -406,19 +406,14 @@ export const publications: PublicationYear[] = [
   },
 ];
 
-// A publication paired with its display year — what pubsByFunding() returns so a
-// grant page can show the year alongside each paper.
-export interface DatedPublication extends Publication {
-  year: string;
-}
-
-// All publications acknowledging a given grant, flattened across years and kept
-// in the same newest-first order as the main list. Drives the per-grant
-// "related publications" sections (e.g. the ERC project page).
-export function pubsByFunding(tag: FundingTag): DatedPublication[] {
-  return publications.flatMap((group) =>
-    group.items
-      .filter((pub) => pub.funding?.includes(tag))
-      .map((pub) => ({ ...pub, year: group.year })),
-  );
+// All publications acknowledging a given grant, still grouped by year in the
+// same newest-first order as the main list (years without any are dropped).
+// Drives the per-grant "related publications" sections (e.g. the ERC project page).
+export function pubsByFunding(tag: FundingTag): PublicationYear[] {
+  return publications
+    .map((group) => ({
+      year: group.year,
+      items: group.items.filter((pub) => pub.funding?.includes(tag)),
+    }))
+    .filter((group) => group.items.length > 0);
 }
