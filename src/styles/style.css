@@ -702,31 +702,43 @@ a.pub-title:hover { color: #000; }
   text-transform: uppercase; letter-spacing: 0.08em; color: var(--text);
 }
 .course-card .course-link span { display: inline-block; transition: transform 0.2s ease; }
-.course-card:hover .course-link span { transform: translateX(4px); }
+a.course-card:hover .course-link span { transform: translateX(4px); }
+/* A course with its own page gets a plain card holding two links (to that page
+   and to TISS) rather than being one link; each link reacts on its own. */
+.course-card .course-links {
+  margin-top: auto; padding-top: 1.1rem;
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.6rem;
+}
+.course-card .course-links .course-link { margin-top: 0; padding-top: 0; }
+.course-card .course-links .course-link:hover {
+  text-decoration: underline; text-underline-offset: 3px;
+  text-decoration-color: var(--accent); text-decoration-thickness: 2px;
+}
+.course-card .course-links .course-link:hover span { transform: translateX(4px); }
 
-/* ---------- Data table (teaching: recurring courses) ---------- */
+/* ---------- Data tables (teaching: past courses, course sessions) ---------- */
 /* Wide content scrolls inside its own container so the page body never scrolls
    sideways on narrow screens. */
 .table-scroll { max-width: var(--measure); margin: 2rem 0 0; overflow-x: auto; }
-.course-table {
+:is(.course-table, .session-table) {
   width: 100%; border-collapse: collapse;
   font-size: 0.96rem; line-height: 1.5;
 }
-.course-table th, .course-table td {
+:is(.course-table, .session-table) :is(th, td) {
   text-align: left; padding: 0.85rem 1.25rem 0.85rem 0;
   border-bottom: 1px solid var(--border); vertical-align: top;
   white-space: nowrap;
 }
-.course-table td:last-child, .course-table th:last-child {
+:is(.course-table, .session-table) :is(td, th):last-child {
   padding-right: 0; white-space: normal;
 }
-.course-table thead th {
+:is(.course-table, .session-table) thead th {
   font-family: var(--head); font-size: 0.74rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted);
   border-bottom: 1px solid var(--border-strong);
 }
-.course-table tbody td { color: var(--text); white-space: normal; }
-.course-table tbody tr:hover td { background: var(--bg-alt); }
+:is(.course-table, .session-table) tbody td { color: var(--text); white-space: normal; }
+:is(.course-table, .session-table) tbody tr:hover td { background: var(--bg-alt); }
 /* One row group per semester: the semester label sits once in a header cell
    spanning its courses, and a stronger rule closes each semester. */
 .course-table .course-sem {
@@ -762,6 +774,15 @@ a.pub-title:hover { color: #000; }
 }
 .course-table tr:hover .course-go { opacity: 1; }
 .course-table .course-name:hover .course-go { transform: translateX(3px); }
+
+/* Course page: one row per session, each with its own rule. */
+.session-table .session-date {
+  white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--muted);
+}
+.session-table .session-area { color: var(--muted); }
+.session-table tbody tr:hover td.session-empty { background: none; }
+.session-table .session-empty { color: var(--muted); }
+main > p.session-back { margin-top: 2.5rem; }
 
 /* ---------- Inner-page hero ---------- */
 /* Same language as the landing hero, shorter, and without the mirrored-edge

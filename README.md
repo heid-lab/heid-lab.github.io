@@ -106,7 +106,7 @@ npm run preview
 
 ### 4. Make your changes
 
-Expand the change you want to make:
+Here are some examples of changes you may want to make:
 
 <details>
 <summary><b>Adding a publication</b></summary>
@@ -211,6 +211,34 @@ to news items and they show up there too. (The first photo is fixed and set in
 2. Reference them from a news item's `images` array in
    `public/js/news-data.js`, using the path **`imgs/news/your-file.jpg`**
    (root-relative).
+
+</details>
+
+<details>
+<summary><b>Adding a page for a current course</b></summary>
+
+A current course on the Teaching page can get its own page, with a table of
+its sessions. Its card then shows a **Course details** link next to
+**View on TISS**.
+
+1. Copy `src/pages/teaching/_course-template.astro` into the same folder under
+   a short name **without** the leading `_`, e.g.
+   `ml-for-chemistry.astro`. The name becomes the URL
+   (`/teaching/ml-for-chemistry`); files starting with `_` are
+   never built into pages.
+2. In the copy, fill in `course` (number, type, semester, title) and add the
+   sessions to `sessions`:
+
+   ```ts
+   { date: '2026-10-08', title: 'Session title', area: 'Chemistry' },
+   ```
+
+3. In `src/pages/teaching.astro`, add `page` to the course's entry in
+   `currentCourses`:
+
+   ```ts
+   { nr: '165.169', type: 'SE', ects: '3.0', title: '…', page: 'teaching/deep-learning-in-chemistry' },
+   ```
 
 </details>
 

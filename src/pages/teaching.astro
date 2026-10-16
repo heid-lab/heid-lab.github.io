@@ -2,9 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-// Courses taught this semester, each drawn as a card linking to TISS.
+// Courses taught this semester, each drawn as a card linking to TISS. A course
+// with its own page on this site sets `page` (its path under src/pages, e.g.
+// 'teaching/deep-learning-in-chemistry'), and its card links there as well.
+// New course pages start as a copy of src/pages/teaching/_course-template.astro.
 const semester = '2026W';
-const currentCourses = [
+const currentCourses: { nr: string; type: string; ects: string; title: string; page?: string }[] = [
   { nr: '165.169', type: 'SE', ects: '3.0', title: 'Interdisciplinary Foundations of Deep Learning in Chemistry' },
   { nr: '165.144', type: 'VU', ects: '3.0', title: 'Simulation of condensed matter' },
   { nr: '164.385', type: 'VU', ects: '4.0', title: 'Programming for Chemistry and PE' },
@@ -64,7 +67,16 @@ const semesterLabel = (sem: string) => {
         <p>During the winter semester we teach the following courses:</p>
       </div>
       <div class="course-cards">
-        {currentCourses.map((c) => (
+        {currentCourses.map((c) => c.page ? (
+          <div class="course-card">
+            <span class="course-meta">{c.nr} · {c.type} · {c.ects} ECTS</span>
+            <h3>{c.title}</h3>
+            <span class="course-links">
+              <a class="course-link" href={`${base}/${c.page}`}>Course details <span aria-hidden="true">→</span></a>
+              <a class="course-link" href={tissUrl(c.nr)} target="_blank" rel="noopener">View on TISS <span aria-hidden="true">→</span></a>
+            </span>
+          </div>
+        ) : (
           <a class="course-card" href={tissUrl(c.nr)} target="_blank" rel="noopener">
             <span class="course-meta">{c.nr} · {c.type} · {c.ects} ECTS</span>
             <h3>{c.title}</h3>

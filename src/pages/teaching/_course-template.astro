@@ -1,0 +1,57 @@
+---
+// Template for a course's own page. Files starting with _ are not built into
+// pages, so this one never appears on the site. To add a page for a course:
+//   1. Copy this file into this folder under a short name without the leading
+//      _, e.g. deep-learning-in-chemistry.astro (the name becomes the URL:
+//      /teaching/deep-learning-in-chemistry).
+//   2. Fill in `course` and `sessions` below.
+//   3. In src/pages/teaching.astro, add `page: 'teaching/<name>'` to the
+//      course's entry in `currentCourses`, e.g.
+//      page: 'teaching/deep-learning-in-chemistry'. Its card then links here.
+import Layout from '../../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const course = { nr: '000.000', type: 'SE', semester: '2026W', title: 'Course title' };
+const tissUrl = `https://www.tiss.tuwien.ac.at/course/courseDetails.xhtml?semester=${course.semester}&locale=en&courseNr=${course.nr.replace('.', '')}`;
+
+// The course's sessions, in the order they take place. Add one entry per
+// session, e.g.
+//   { date: '2026-10-08', title: 'Machine-readable molecules', area: 'Chemistry' },
+const sessions: { date: string; title: string; area: string }[] = [];
+---
+<Layout title={`Heid Lab — ${course.title}`} active="teaching" scripts={["header.js"]}>
+  <main>
+    <p class="eyebrow">{course.nr} · {course.type} · {course.semester}</p>
+    <h1>{course.title}</h1>
+    <p>
+      Sessions of the course this semester. Registration and the official course
+      details are on <a href={tissUrl} target="_blank" rel="noopener">TISS</a>.
+    </p>
+
+    <h2>Sessions</h2>
+    <div class="table-scroll">
+      <table class="session-table">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Title</th>
+            <th scope="col">Area</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sessions.length === 0 ? (
+            <tr><td colspan="3" class="session-empty">The schedule will be posted here.</td></tr>
+          ) : sessions.map((s) => (
+            <tr>
+              <td class="session-date">{s.date}</td>
+              <td>{s.title}</td>
+              <td class="session-area">{s.area}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="session-back"><a href={`${base}/teaching`}>← All courses</a></p>
+  </main>
+</Layout>
