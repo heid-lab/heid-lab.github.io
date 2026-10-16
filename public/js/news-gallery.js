@@ -26,7 +26,7 @@
     .sort(function (a, b) { return sortKey(b.date).localeCompare(sortKey(a.date)); })
     .forEach(function (item) {
       (item.images || []).forEach(function (pic) {
-        pics.push({ src: pic.src, alt: pic.alt || plain(item.title), title: plain(item.title) });
+        pics.push({ src: pic.src, alt: pic.alt || plain(item.title), title: plain(item.title), credit: pic.credit });
       });
     });
 
@@ -81,7 +81,8 @@
     });
     prev.classList.toggle('is-disabled', active === 0);
     next.classList.toggle('is-disabled', active === pics.length - 1);
-    caption.textContent = pics[active].title;
+    caption.textContent = pics[active].title +
+      (pics[active].credit ? ' · Photo: © ' + pics[active].credit : '');
   }
 
   function go(i) {

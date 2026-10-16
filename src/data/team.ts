@@ -116,7 +116,7 @@ export const members: Member[] = [
   },
   {
     name: 'Synnöve Lemke',
-    role: 'Ph.D. Student · Shared doctoral researcher',
+    role: 'Ph.D. Student · Shared with Erwin Rosenberg',
     group: 'phd',
     photo: 'synnoeve-lemke.jpeg',
     avatar: 'zoom',

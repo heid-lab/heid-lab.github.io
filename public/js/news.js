@@ -68,9 +68,9 @@
       // Gallery photos come from different news items, so each carries its
       // own title; a news item's photos share the one passed to open().
       var title = pic.title || capTitle;
-      capEl.textContent = set.length > 1
+      capEl.textContent = (set.length > 1
         ? title + ' · ' + (at + 1) + ' / ' + set.length
-        : title;
+        : title) + (pic.credit ? ' · Photo: © ' + pic.credit : '');
       var many = set.length > 1;
       prevBtn.hidden = !many;
       nextBtn.hidden = !many;
@@ -196,6 +196,17 @@
           media.appendChild(btn);
         });
         li.appendChild(media);
+
+        // Copyright line for photos we don't own, e.g. press portraits.
+        var credits = item.images
+          .map(function (pic) { return pic.credit; })
+          .filter(function (c, i, all) { return c && all.indexOf(c) === i; });
+        if (credits.length) {
+          var credit = document.createElement('p');
+          credit.className = 'photo-credit';
+          credit.textContent = 'Photo: © ' + credits.join(', ');
+          li.appendChild(credit);
+        }
       }
 
       return li;
