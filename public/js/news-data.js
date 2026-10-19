@@ -23,11 +23,21 @@
    ============================================================ */
 
 window.NEWS = [
-  /*{
+  {
     date: "2026-10-01",
     title: 'Our Seminar Series "Interdisciplinary Foundations of Deep Learning in Chemistry" opens its doors',
-    body: 'We are proud to announce that Esther and Max will host <a href="/teaching/interdisciplinary-foundations">Interdisciplinary Foundations of Deep Learning in Chemistry</a>, which is now also accessible to an interested audience as well as to motivated students in mathematics, data science, informatics, computer science, Computational Science and Engineering, physics, chemistry, and chemical engineering.'
-  },*/
+    body: 'We are proud to announce that Esther and Max will host the Seminar Series <a href="/teaching/interdisciplinary-foundations">Interdisciplinary Foundations of Deep Learning in Chemistry</a>, which is now also accessible to an interested audience as well as to motivated students in mathematics, data science, informatics, computer science, computational science and engineering, physics, chemistry, and chemical engineering.'
+  },
+  {
+    date: "2026-10",
+    title: "Florentin joins for his master's thesis",
+    body: 'We are happy to welcome Florentin again, who will write his master\'s thesis with Jasper.'
+  },
+  {
+    date: "2026-09-26",
+    title: "Max was interviewed by <em>Kurier</em> about his Ph.D. project",
+    body: 'In the Austrian daily <em>Kurier</em>, Max talks about his DOC-funded Ph.D. project. <em>"The goal is not to collect every recipe in the world, but to understand the principles behind them"<em>. Read the full article <a href="https://kurier.at/wissen/wien-wills-wissen/tu-wien-forschung-mathematische-sandwiches-ki-kochbuch/403193545">here</a> (in German).'
+  },
   {
     date: "2026-09-23",
     title: "Chemietage 2026 in Krems",
@@ -43,7 +53,7 @@ window.NEWS = [
   {
     date: "2026-09-16",
     title: "Guest article by Esther on AI in chemistry in <em>Der Standard</em>",
-    body: 'Esther wrote a guest article for the Young Academy blog in <em>Der Standard</em> on how specialized AI models, beyond general-purpose chatbots like ChatGPT, could make chemical research faster, more efficient, and more innovative. For our German-speaking readers, the full article is available <a href="https://www.derstandard.at/story/3000000338392/mehr-als-chatgpt-wie-kuenstliche-intelligenz-die-chemie-veraendert">here</a>.'
+    body: 'Esther wrote a guest article for the Young Academy blog in the Austrian daily <em>Der Standard</em> on how specialized AI models, beyond general-purpose chatbots like ChatGPT, could make chemical research faster, more efficient, and more innovative. For our German-speaking readers, the full article is available <a href="https://www.derstandard.at/story/3000000338392/mehr-als-chatgpt-wie-kuenstliche-intelligenz-die-chemie-veraendert">here</a>.'
   },
   {
     date: "2026-09-08",
@@ -51,6 +61,15 @@ window.NEWS = [
     body: 'We swapped the lab for the Styrian countryside and headed to the Zotter chocolate factory in Riegersburg for the day. Instead of chemical reactions, we analyzed chocolate, and are happy to report overwhelmingly positive results, with only a few outliers reporting a chocolate hangover. We\'d recommend giving it a try and reproducing the results yourself.',
     images: [
       { src: "imgs/news/2026-09-zotter.jpg", alt: "The Heid Lab group at the Zotter chocolate factory" }
+    ]
+  },
+  {
+    date: "2026-09-04",
+    title: "People's Poster Prize for Jonathan",
+    body: 'Congratulations to Jonathan, who won the People\'s Poster Prize at the <a href="https://www.rscbmcs.org/events/aichem9/">9th RSC AI in Chemistry Symposium</a> at Churchill College, Cambridge! His poster “Modeling Acid-Base Phenomena: Advances in Data, Simulations, Cheminformatics, and Deep Learning” won over the attendees, who voted it their favorite. Well deserved, Jonathan!',
+    images: [
+      { src: "imgs/news/2026-09-04-RSC_AI_Jonathan_Prize.png", alt: "Jonathan with the other prize winners on stage at the RSC AI in Chemistry Symposium in Cambridge" },
+      { src: "imgs/news/2026-09-04-RSC_AI_Jonathan_Poster.jpg", alt: "Jonathan with his certificate next to his poster on acid-base phenomena" }
     ]
   },
   {
@@ -115,6 +134,14 @@ window.NEWS = [
     ]
   },
   {
+    date: "2026-04",
+    title: "A new student joining the group",
+    body: 'We\'re excited to welcome a new student to the lab this spring:' +
+      '<ul>' +
+      '<li><strong>Marton</strong> — joining for a research internship with Jasper</li>' +
+      '</ul>'
+  },
+  {
     date: "2026-03-26",
     title: "Esther elected to the Austrian Academy of Sciences",
     body: 'We are delighted that Esther has been elected as a new member of the Young Academy (Junge Akademie) of the Austrian Academy of Sciences (ÖAW), in recognition of her outstanding research in bridging chemistry and AI. The ÖAW welcomed 46 newly elected members in March 2026, with women making up 63% of new members. Read the full press release <a href="https://www.oeaw.ac.at/news/neue-mitglieder-gewaehlt-46-spitzenforschende-verstaerken-die-oeaw">here</a>.'
@@ -133,12 +160,12 @@ window.NEWS = [
     body: 'A new course is born! On 9 March, Esther taught the very first unit of <a href="https://tiss.tuwien.ac.at/course/courseDetails.xhtml?semester=2026S&locale=en&courseNr=165171">AI in Chemistry</a> (165.171), where chemistry students learn about the exciting opportunities of neural networks, machine learning, and more.'
   },
   {
-    date: "2026-03-01",
+    date: "2026-03",
     title: "Jonathan joins the group as a postdoc",
     body: 'We are thrilled to welcome Jonathan, who joins the group as a postdoctoral researcher after successfully defending his Ph.D. at MIT and moving across the Atlantic to Vienna. As part of the ERC project, he will be working on modeling enzymatic reactions. Welcome, Jonathan!'
   },
   {
-    date: "2026-03-01",
+    date: "2026-03",
     title: "Max returns to the group as a Ph.D. student",
     body: 'We are happy to welcome back Max, who previously did his master\'s thesis with us in the summer of 2025 on <a href="https://repositum.tuwien.at/bitstream/20.500.12708/218844/1/Kovar%20Maximilian%20-%202025%20-%20On%20the%20influence%20of%20dataset%20quality%20on%20chemical...pdf">“On the Influence of Dataset Quality on Chemical Reaction Machine Learning”</a>. After his research visit to Spain, he is now back with us for his Ph.D., where he will continue his work on curating meaningful datasets to enable future AI assistants to learn chemistry. Welcome home, Max!'
   },
@@ -181,14 +208,22 @@ window.NEWS = [
     ]
   },
   {
-    date: "2025-12-01",
+    date: "2025-12",
     title: "Synnöve joins the group as a Ph.D. student",
     body: 'We are thrilled to welcome Synnöve, our first Ph.D. student shared with the group of Prof. Erwin Rosenberg (TU Wien). With years of expertise both in analytical and computational chemistry, she will focus on analyzing breath-based samples for future cancer diagnostics. Welcome, Synnöve!'
   },
   {
-    date: "2025-12-01",
+    date: "2025-12",
     title: "Sebastian joins the group",
     body: 'We are happy to welcome Sebastian, who joins us for his master\'s thesis on using machine learning to predict pH optima for mutated enzymes as part of the <a href="/grants-erc">ERC-funded project</a>. Welcome, Sebastian!'
+  },
+  {
+    date: "2025-10",
+    title: "A new student joining the group",
+    body: 'We\'re excited to welcome a new student to the lab this fall:' +
+      '<ul>' +
+      '<li><strong>Florentin</strong> — joining for a research internship with Jasper</li>' +
+      '</ul>'
   },
   {
     date: "2025-09",
@@ -223,14 +258,14 @@ window.NEWS = [
     body: 'We are happy to welcome Stephie back to the group, who starts her master\'s thesis on flow matching for nudged elastic band reaction path prediction. Welcome back, Stephie!'
   },
   {
-    date: "2025-07-01",
+    date: "2025-07",
     title: "Jasper continues as a Ph.D. student",
     body: 'We are glad to announce Jasper is staying with us as a Ph.D. student from now on. He will continue his exciting research on machine learning for chemical reactions.'
   },
   {
     date: "2025-06-18",
     title: "Highlights from the Science Days 2025",
-    body: 'Our first <a href="https://www.tuwien.at/tch/yia/science-days/">Science Days</a> as a group! Konsti presented posters on his flow matching models and even won his first poster prize with his beautiful piece. Max also received a prize in the Ph.D. and master\'s students\' flash talk competition. They enjoyed the rest of the day in the warm sun on our balcony. Well deserved!',
+    body: 'Our first <a href="https://www.tuwien.at/tch/yia/science-days/">Science Days</a> as a group! Konsti presented a poster on his flow matching models and even won his first poster prize with his beautiful piece. Max also received a prize in the Ph.D. and master\'s students\' flash talk competition. They enjoyed the rest of the day in the warm sun on our balcony. Well deserved!',
     images: [
       { src: "imgs/news/2025-06-18-ScienceDays_Posters.jpeg", alt: "Three group members in front of their posters at the Science Days 2025" },
       { src: "imgs/news/2025-06-18-ScienceDays_Prizes.jpeg", alt: "Two group members with their prize certificates at the Science Days 2025" }
@@ -255,9 +290,14 @@ window.NEWS = [
       '</ul>'
   },
   {
-    date: "2025-05-01",
+    date: "2025-05",
     title: "Charlotte joins the group as a Ph.D. student",
     body: 'We are happy to welcome Charlotte, who joins the group as a Ph.D. student. With roots in bioinformatics, she will focus on string-based representations and models for chemical reactions. Welcome, Charlotte!'
+  },
+  {
+    date: "2025-04",
+    title: "Anton joins the group",
+    body: 'We welcome Anton, who joins the group to support our team, while also pursuing his studies at TU Wien.'
   },
   {
     date: "2025-03-05",
@@ -265,7 +305,7 @@ window.NEWS = [
     body: 'With the Heid Lab growing rapidly with people from different fields, Jasper, Max, Leo, Leon, and Konsti want to dedicate two hours every week to teach the foundations of their respective fields to each other.'
   },
   {
-    date: "2025-03-01",
+    date: "2025-03",
     title: "Konsti joins the group as a Ph.D. student",
     body: 'We are thrilled to welcome Konsti, the group\'s first mathematician, who joins as a Ph.D. student. He will strengthen our team\'s abstract reasoning and problem-solving capabilities significantly while focusing on generative models together with Leo. Welcome, Konsti!'
   },
@@ -279,17 +319,17 @@ window.NEWS = [
       '</ul>'
   },
   {
-    date: "2025-02-17",
+    date: "2025-02",
     title: "Max starts his master's thesis",
     body: 'After his research internship in the group, Max continues with his master\'s thesis on filtering existing and curating new chemical reaction datasets for machine learning applications. Welcome back, Max!'
   },
   {
-    date: "2025-02-01",
+    date: "2025-02",
     title: "Leon joins the group as a Ph.D. student",
     body: 'We\'re excited to welcome Leon, our first shared Ph.D. student and wet-lab chemist. Together with the group of <a href="https://info.ias.tuwien.ac.at/schroederlab/">Prof. Katharina Schröder</a> (TU Wien), he will focus on reactions using organocatalysts as part of the <a href="/grants-erc">ERC project</a>. Welcome, Leon!'
   },
   {
-    date: "2024-12-16",
+    date: "2024-12",
     title: "Leo joins the group as a Ph.D. student",
     body: 'We welcome Leo, who joins the group as its first Ph.D. student. After his work at the Department of Geosciences (TU Wien) and the Neuroimaging Labs (MedUni Wien), he will start his work on transition state geometry generation. Welcome, Leo!'
   },
@@ -297,10 +337,6 @@ window.NEWS = [
     date: "2024-12",
     title: "Esther becomes Assistant Professor",
     body: 'Less than three years after returning from MIT, and fresh off an ERC Starting Grant and an FWF START Prize, Esther starts as Assistant Professor for Machine Learning for Sustainable Chemistry at TU Wien. The Heid Lab is officially born!'
-    // TODO: add photo, e.g.
-    // images: [
-    //   { src: "imgs/news/2024-12-esther-professor.jpg", alt: "" }
-    // ]
   },
   {
     date: "2024-12",
@@ -308,7 +344,7 @@ window.NEWS = [
     body: 'Our course “Programming for Chemists”, taught by Esther together with Georg Ramer, won TU Wien\'s <a href="https://www.tuwien.at/en/studies/teaching-at-tu-wien/best-teaching-awards/ceremonies-2017-2025/best-teaching-awards-2024">Best Lecture Award 2024</a>. Amazing!'
   },
   {
-    date: "2024-11-11",
+    date: "2024-11",
     title: "A new student joining the group",
     body: 'We\'re excited to welcome a new student to the lab this fall:' +
       '<ul>' +
@@ -322,6 +358,16 @@ window.NEWS = [
     images: [
       { src: "imgs/news/2024-09-erc-esther.jpg", alt: "Esther Heid", credit: "Ulrich Zinell" }
     ]
+  },
+  {
+    date: "2024-10",
+    title: "Johannes joins the group as a postdoc",
+    body: 'We are thrilled to welcome Johannes, who joins the group as the first postdoctoral researcher after successfully defending his Ph.D. at Universität Wien. Welcome, Johannes!'
+  },
+  {
+    date: "2024-08",
+    title: "Jasper joins as a master's student",
+    body: 'We are excited to welcome Jasper, who will be our first master\'s student. He will work on graph representations and neural network architectures for reaction barrier height prediction. Good luck, Jasper!'
   },
   {
     date: "2024-06-20",
@@ -350,28 +396,6 @@ window.NEWS = [
      TU Wien; co-supervisor and topic). Thesis defenses get photos;
      arrivals don't by default.
 
-  // ── Arrivals still waiting for text ─────────────────────────────────
-
-  {
-    date: "2025-04-01",
-    title: "Anton joins the group",                      // student assistant
-    body: 'TODO'
-  },
-  {
-    date: "????-??",
-    title: "Jasper joins the group",                     // master's thesis
-    body: 'TODO'
-  },
-  {
-    date: "????-??",                                      // ERC page says 2025
-    title: "Johannes joins the group as a postdoc",
-    body: 'TODO'
-  },
-  {
-    date: "????-??",                                      // on hold
-    title: "Marton",                                      // master's thesis
-    body: 'TODO'
-  },
   {
     date: "????-??",                                      // on hold
     title: "Giulia",                                      // visiting Ph.D. student, University of Bologna

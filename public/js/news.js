@@ -242,9 +242,7 @@
 
     if (!(collapseAfter > 0) || shown.length <= collapseAfter) return;
 
-    // Reveal earlier news a page at a time rather than all at once, so the
-    // button stays a short step instead of dumping the whole archive.
-    var PAGE = collapseAfter;
+    // The newest few show by default; one press reveals the whole archive.
     var visible = collapseAfter;
 
     function apply() {
@@ -262,7 +260,7 @@
 
       var all = visible >= shown.length;
       toggle.setAttribute('aria-expanded', String(visible > collapseAfter));
-      label.textContent = all ? 'Show less' : 'Show more';
+      label.textContent = all ? 'Show less' : 'Show all';
       chev.textContent = all ? '▴' : '▾';
       // Only offer "back to top" once the list has actually grown.
       top.hidden = visible <= collapseAfter;
@@ -298,7 +296,7 @@
       }
       var flat = groups.reduce(function (acc, g) { return acc.concat(g.items); }, []);
       var firstNew = flat[visible] || null;
-      visible = Math.min(visible + PAGE, shown.length);
+      visible = shown.length;
       apply();
       // Keep the newly revealed items in view; the button moves down the page.
       if (firstNew) firstNew.scrollIntoView({ block: 'nearest' });
