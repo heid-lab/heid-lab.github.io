@@ -1,23 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import NewsList from '../components/NewsList.astro';
+import NewsGallery from '../components/NewsGallery.astro';
 ---
 <Layout
   title="Heid Lab — News"
+  description="News from the Heid Lab at TU Wien: awards and prizes, new arrivals, thesis defenses, and other group milestones."
   active="news"
-  scripts={["news-data.js", "news.js", "news-gallery.js", "header.js"]}
 >
-  <main>
+  <div class="page">
     <p class="eyebrow">What's new</p>
     <h1>The latest from the lab</h1>
     <p>
       Awards & prizes, new arrivals, and group milestones.
     </p>
 
-    <div data-news data-news-months data-news-collapse="5"></div>
+    <NewsList months collapse={5} />
 
-    <section class="gallery">
-      <h2 class="gallery-heading">Life in the lab</h2>
-      <div class="gallery-viewport" data-news-gallery></div>
-    </section>
-  </main>
+    <NewsGallery />
+  </div>
 </Layout>

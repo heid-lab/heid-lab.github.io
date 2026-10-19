@@ -120,7 +120,7 @@ a:hover { color: #000; }
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
   transition: padding 0.25s ease;
 }
-/* Condensed state, toggled by header.js once the page is scrolled. */
+/* Condensed state, toggled by the script in Header.astro once the page is scrolled. */
 .site-header.is-scrolled { box-shadow: 0 6px 22px -16px rgba(0, 0, 0, 0.45); }
 .site-header.is-scrolled .nav-wrap { padding-top: 0.55rem; padding-bottom: 0.55rem; }
 .site-header.is-scrolled .main-nav a.nav-cta { padding-top: 0.45rem; padding-bottom: 0.45rem; }
@@ -368,16 +368,19 @@ a:hover { color: #000; }
 .grant-links { margin-top: auto; padding-top: 1.35rem; display: flex; flex-wrap: wrap; gap: 0.6rem 2.25rem; }
 @media (max-width: 700px) { .grant-cards { grid-template-columns: 1fr; } }
 
-/* ---------- Interior pages (plain <main>) ---------- */
-main { display: block; max-width: var(--max); margin: 0 auto; padding: clamp(3.5rem, 8vw, 5.5rem) var(--pad-x) clamp(4rem, 9vw, 6.5rem); }
-main > h1 { font-size: clamp(2.4rem, 5.5vw, 3.6rem); margin: 0 0 1.4rem; }
-main > h1 + p { font-size: 1.28rem; line-height: 1.7; color: var(--muted); max-width: var(--measure); margin: 0 0 1.4rem; }
-main > p, main > ul.clean { max-width: var(--measure); }
-main > p { color: var(--muted); margin: 0 0 1.2rem; }
-main h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin: 3.5rem 0 1rem; }
-main h3 { font-size: 1.2rem; font-family: var(--head); font-weight: 700; margin: 2rem 0 0.5rem; }
-main :is(p, li) a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
-main :is(p, li) a:hover { color: #000; }
+/* ---------- Interior pages (<div class="page">) ----------
+   :where() gives .page no weight, so these act as plain element defaults and
+   any class used inside a page (.eyebrow, .link-arrow, .gallery-heading, …)
+   still overrides them. */
+:where(.page) { max-width: var(--max); margin: 0 auto; padding: clamp(3.5rem, 8vw, 5.5rem) var(--pad-x) clamp(4rem, 9vw, 6.5rem); }
+:where(.page) > h1 { font-size: clamp(2.4rem, 5.5vw, 3.6rem); margin: 0 0 1.4rem; }
+:where(.page) > h1 + p { font-size: 1.28rem; line-height: 1.7; color: var(--muted); max-width: var(--measure); margin: 0 0 1.4rem; }
+:where(.page) > p, :where(.page) > ul.clean { max-width: var(--measure); }
+:where(.page) > p { color: var(--muted); margin: 0 0 1.2rem; }
+:where(.page) h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin: 3.5rem 0 1rem; }
+:where(.page) h3 { font-size: 1.2rem; font-family: var(--head); font-weight: 700; margin: 2rem 0 0.5rem; }
+:where(.page) :is(p, li) a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
+:where(.page) :is(p, li) a:hover { color: #000; }
 
 /* ---------- Grant / project page ---------- */
 /* DeepRxn brand accents sampled from the flask logo (crimson R + brackets,
@@ -612,7 +615,7 @@ ul.clean li strong { font-family: var(--head); font-weight: 700; }
    room on the right. Each entry is a grid: a fixed meta rail on the left
    (journal · volume · year, plus any tag) and the title + authors on the
    right. Rows are kept tight. */
-main > ul.clean.pubs,
+:where(.page) > ul.clean.pubs,
 .pubs-fold > ul.clean.pubs { max-width: var(--max); }
 .pubs .pub {
   display: grid;
@@ -782,7 +785,7 @@ a.course-card:hover .course-link span { transform: translateX(4px); }
 .session-table .session-area { color: var(--muted); }
 .session-table tbody tr:hover td.session-empty { background: none; }
 .session-table .session-empty { color: var(--muted); }
-main > p.session-back { margin-top: 2.5rem; }
+:where(.page) > p.session-back { margin-top: 2.5rem; }
 
 /* ---------- Inner-page hero ---------- */
 /* Same language as the landing hero, shorter, and without the mirrored-edge
@@ -901,8 +904,9 @@ main > p.session-back { margin-top: 2.5rem; }
   font-family: var(--head); font-weight: 300; font-size: 2.2rem;
   letter-spacing: 0.06em; color: var(--faint);
 }
-.person-body h3 { font-family: var(--head); font-size: 1.4rem; font-weight: 700; margin: 0 0 0.3rem; }
-.roster--lead .person-body h3 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 300; }
+/* The name: an h3 in lists, the page's h1 on the PI page — same look. */
+.person-body :is(h1, h3) { font-family: var(--head); font-size: 1.4rem; font-weight: 700; margin: 0 0 0.3rem; }
+.roster--lead .person-body :is(h1, h3) { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 300; }
 .person-role {
   font-family: var(--head); font-size: 0.72rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
@@ -1032,10 +1036,6 @@ main > p.session-back { margin-top: 2.5rem; }
 
 /* ---------- Contact ---------- */
 .section-head h1 { font-size: clamp(2.4rem, 5.5vw, 3.6rem); margin: 0 0 0.5rem; }
-.contact-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  gap: clamp(1.5rem, 3vw, 2.75rem); margin-top: 1rem;
-}
 .contact-block h3 {
   font-family: var(--head); font-size: 0.74rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
@@ -1049,12 +1049,6 @@ main > p.session-back { margin-top: 2.5rem; }
 }
 .contact-block a:hover { color: #000; }
 .contact-block .big { font-size: 1.05rem; color: var(--text); }
-.contact-note { color: var(--muted); margin: 1.4rem 0 0; max-width: var(--measure); }
-.contact-note a {
-  text-decoration: underline; text-underline-offset: 3px;
-  text-decoration-color: var(--accent); text-decoration-thickness: 2px;
-}
-.contact-note a:hover { color: #000; }
 
 /* The three ways to get involved — one line each, accent-marked. */
 .join-list {
@@ -1211,7 +1205,7 @@ main > p.session-back { margin-top: 2.5rem; }
    The name fades out as the details (amount, period, link) fade in at the same
    spot, while the logo slides up to make room for them. A card opens on hover
    (on devices that can hover), when pinned by a click or tap (.is-open, set by
-   funding-tiles.js), or when keyboard focus
+   the script in research.astro), or when keyboard focus
    moves into its details — :focus-visible, so a link left focused by a mouse
    click doesn't hold the card open after the visitor comes back from that link.
    Once open, a card with a link is clickable anywhere (see .funding-link
@@ -1314,21 +1308,16 @@ main > p.session-back { margin-top: 2.5rem; }
 @media (max-width: 560px) { .funding-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* Compact signpost at the top of the research page — in-page links that
-   scroll down to each part. A top hairline and an "On this page" label
-   anchor it to the intro copy so it reads as one deliberate element rather than
-   labels floating in the section's white space; a leading accent arrow on
-   each link marks them as jump-to targets. */
+   scroll down to each part. A top hairline anchors it to the intro copy so it
+   reads as one deliberate element rather than labels floating in the section's
+   white space; a leading accent arrow on each link marks them as jump-to
+   targets. */
 .parts {
   display: flex; flex-wrap: wrap; align-items: center;
   gap: clamp(0.85rem, 2.5vw, 1.5rem) clamp(1.5rem, 3.5vw, 2.75rem);
   margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
   padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
   border-top: 1px solid var(--border);
-}
-.parts-label {
-  font-family: var(--head); font-weight: 700; font-size: 0.72rem;
-  text-transform: uppercase; letter-spacing: 0.16em; color: var(--faint);
-  margin-right: 0.25rem;
 }
 .part {
   position: relative; display: inline-flex; align-items: baseline; gap: 0.5rem;
@@ -1346,7 +1335,6 @@ main > p.session-back { margin-top: 2.5rem; }
 .part:hover .part-arrow { transform: translateX(3px); }
 @media (max-width: 34rem) {
   .parts { flex-direction: column; align-items: flex-start; gap: 0.7rem; }
-  .parts-label { margin-bottom: 0.15rem; }
 }
 #vision, #areas, #funding { scroll-margin-top: 6rem; }
 #area-01, #area-02, #area-03, #area-04 { scroll-margin-top: 5rem; }
@@ -1380,7 +1368,7 @@ main > p.session-back { margin-top: 2.5rem; }
 /* On the off-white stage, hovering an inactive tab brightens it toward the white
    of the active/panel state as an affordance. */
 .js-tabs .area-card:not(.is-active):hover { background: var(--bg); }
-/* Tab state (added by research-tabs.js once it enhances the tablist). The active
+/* Tab state (added by the script in research.astro once it enhances the tablist). The active
    tab shares the panel's tint and loses its bottom edge so it merges into the
    filled box below — reading as one tab-folder. An accent bar sits along its top.
    Cursor is a pointer since these act as buttons. */
@@ -1539,7 +1527,7 @@ main > p.session-back { margin-top: 2.5rem; }
   padding: clamp(2rem, 4vw, 3rem) clamp(1.75rem, 3.5vw, 2.75rem);
 }
 
-/* Body copy sitting directly in a .wrap (outside <main>) */
+/* Body copy sitting directly in a .wrap (outside .page) */
 .prose { color: var(--muted); max-width: var(--measure); margin: 0; }
 .section--cta .btn-row { margin-top: 0; }
 
@@ -1585,12 +1573,12 @@ main > p.session-back { margin-top: 2.5rem; }
 .timeline-date span { background: var(--bg-alt); color: var(--text); padding: 0.35rem 0.65rem; }
 .timeline-date b { background: var(--ink); color: #fff; font-weight: 700; padding: 0.35rem 0.65rem; }
 .timeline-head h3 { font-family: var(--head); font-size: 1.15rem; font-weight: 700; margin: 0; }
-.timeline > li > p { color: var(--muted); margin: 0.6rem 0 0; }
-.timeline p a {
+.timeline > li > p, .timeline-body { color: var(--muted); margin: 0.6rem 0 0; }
+.timeline-body a {
   text-decoration: underline; text-underline-offset: 3px;
   text-decoration-color: var(--accent); text-decoration-thickness: 2px;
 }
-.timeline p a:hover { color: #000; }
+.timeline-body a:hover { color: #000; }
 
 /* Expand control for older entries */
 .timeline-more {
@@ -1636,9 +1624,9 @@ main > p.session-back { margin-top: 2.5rem; }
    clicking the focused photo opens the lightbox. */
 .gallery {
   margin-top: clamp(3.5rem, 8vw, 5.5rem);
-  /* Full-bleed off-white band: break out of <main>'s padding to the viewport
+  /* Full-bleed off-white band: break out of .page's padding to the viewport
      edges, then re-pad inside so content still lines up with the page. The
-     negative bottom margin cancels <main>'s bottom padding so the band runs
+     negative bottom margin cancels .page's bottom padding so the band runs
      straight into the footer with no white stripe between. */
   background: var(--bg-alt);
   margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);

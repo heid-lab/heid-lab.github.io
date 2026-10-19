@@ -1,28 +1,35 @@
-/* ============================================================
-   Heid Lab — news items
-   This is the only file you edit to add news.
+// News items, shown on the home page (the newest three) and the News page (all
+// of them, grouped by month). This is the only file you edit to add news.
+// Order does not matter — items are sorted by date automatically.
+//
+// Fields:
+//   date    Full ISO date ("2026-07-08") or month only ("2026-07").
+//           Month-only items show just the month in the date chip.
+//   title   Plain text; inline HTML such as <em> for italics is allowed.
+//   body    May contain HTML, so links work as usual.
+//   images  Optional, 1–3 entries: { src, alt }. They render as a row of
+//           thumbnails under the item that open full size on click, and also
+//           appear in the "Life in the lab" gallery on the News page. Add
+//           credit: "Name" to photos we don't own; it shows as
+//           "Photo: © Name" under the photos and in the captions.
+//
+// Image src values are written relative to the site root ("imgs/..."), i.e.
+// the file public/imgs/news/x.jpg is "imgs/news/x.jpg".
 
-   date   Full ISO date ("2026-07-08") or month only ("2026-07").
-          Month-only items show just the month in the date chip.
-          Order does not matter — items are sorted automatically.
-   title  Plain text; inline HTML such as <em> for italics is allowed.
-   body   May contain HTML, so links work as usual.
-   images Optional, 1–3 entries: { src, alt }. They render as a small
-          row under the item; one photo fills the width, two or three
-          share the row. Add credit: "Name" to photos we don't own; it
-          shows as "Photo: © Name" under the photos and in the captions.
+export interface NewsImage {
+  src: string;
+  alt: string;
+  credit?: string;
+}
 
-   The landing page shows the newest three; news.html shows all.
+export interface NewsItem {
+  date: string;
+  title: string;
+  body?: string;
+  images?: NewsImage[];
+}
 
-   !! Items below contain [bracketed] placeholders where details were
-      missing. Search for "[" to find them all.
-
-   Image src values are written relative to the site root ("imgs/..."); the
-   renderers prefix them with the deploy base path at render time, so they
-   resolve correctly no matter which page shows them.
-   ============================================================ */
-
-window.NEWS = [
+export const news: NewsItem[] = [
   /*{
     date: "2026-10-01",
     title: 'Our Seminar Series "Interdisciplinary Foundations of Deep Learning in Chemistry" opens its doors',
@@ -56,7 +63,7 @@ window.NEWS = [
   {
     date: "2026-07",
     title: "Max receives a DOC fellowship",
-    body: 'Max has been awarded the competitive DOC Fellowship of the Austrian Academy of Sciences. From Sempember onwards, he will be able to focus on his research project, which focuses on curating high-quality chemical reaction datasets that meaningfully cover reaction space to train more reliable AI models for synthetic chemistry. Congratulations, Max! \
+    body: 'Max has been awarded the competitive DOC Fellowship of the Austrian Academy of Sciences. From September onwards, he will be able to focus on his research project, which focuses on curating high-quality chemical reaction datasets that meaningfully cover reaction space to train more reliable AI models for synthetic chemistry. Congratulations, Max! \
     Read the full press release <a href="https://stipendien.oeaw.ac.at/en/stipendien/doc/doc-gefoerderte-personen">here</a>.',
     images: [
       { src: "imgs/news/2026-07-max-1.jpeg", alt: "" },
@@ -384,3 +391,25 @@ window.NEWS = [
   }
   ── end of drafts ─────────────────────────────────────────────────── */
 ];
+
+// Newest first. ISO dates sort correctly as plain strings; a month-only date
+// ("2026-07") is treated as the start of that month.
+export function newsByDate(): NewsItem[] {
+  const sortKey = (date: string) => (date.length === 7 ? `${date}-00` : date);
+  return [...news].sort((a, b) => sortKey(b.date).localeCompare(sortKey(a.date)));
+}
+
+// An image's URL on the site: "imgs/..." becomes "/imgs/...". Full URLs and
+// paths that already start with "/" pass through unchanged.
+export function imageUrl(src: string): string {
+  return /^(?:[a-z]+:)?\/\//i.test(src) || src.startsWith('/') ? src : `/${src}`;
+}
+
+// Titles may contain inline HTML (e.g. <em>); labels and captions need the
+// plain text.
+const ENTITIES: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'", nbsp: '\u00a0' };
+export function plainText(html: string): string {
+  return html
+    .replace(/<[^>]*>/g, '')
+    .replace(/&(amp|lt|gt|quot|#39|nbsp);/g, (_, name: string) => ENTITIES[name]);
+}

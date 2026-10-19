@@ -1,19 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import IconSprite from '../components/IconSprite.astro';
+import SocialLinks from '../components/SocialLinks.astro';
 import TeamCard from '../components/TeamCard.astro';
-import { members, groupSections, alumni } from '../data/team';
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+import { members, groupSections, alumni, pi } from '../data/team';
 ---
-<Layout title="Heid Lab — Team" active="team" noJs={true} scripts={["header.js", "team.js"]}>
-  <IconSprite slot="pre-header" />
-
+<Layout
+  title="Heid Lab — Team"
+  description="Meet the Heid Lab at TU Wien: an interdisciplinary team of computer scientists, chemists, and mathematicians working on machine learning for chemical reactions."
+  active="team"
+  noJs={true}
+>
   <!-- Full-bleed page hero -->
   <section class="page-hero" style="--hero-zoom: 90vw; --photo-w: 1600; --photo-h: 1200;">
     <div class="hero-media">
-      <img class="hero-edge hero-edge--l" src={`${base}/imgs/news/2026-09-zotter.jpg`} alt="" aria-hidden="true" />
-      <img class="hero-bg" src={`${base}/imgs/news/2026-09-zotter.jpg`} alt="The Heid Lab group on a summer outing" />
-      <img class="hero-edge hero-edge--r" src={`${base}/imgs/news/2026-09-zotter.jpg`} alt="" aria-hidden="true" />
+      <img class="hero-edge hero-edge--l" src="/imgs/news/2026-09-zotter.jpg" alt="" aria-hidden="true" />
+      <img class="hero-bg" src="/imgs/news/2026-09-zotter.jpg" alt="The Heid Lab group on a summer outing" />
+      <img class="hero-edge hero-edge--r" src="/imgs/news/2026-09-zotter.jpg" alt="" aria-hidden="true" />
     </div>
     <div class="hero-content">
       <div class="hero-text">
@@ -32,31 +34,17 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <ul class="roster roster--lead">
         <li id="esther-heid">
           <div class="person-photo">
-            <img src={`${base}/imgs/team_members/esther-heid.jpg`} alt="Esther Heid" />
-            <p class="photo-credit">Photo: © Ulrich Zinell</p>
+            <img src={`/imgs/team_members/${pi.photo}`} alt={pi.name} />
+            <p class="photo-credit">Photo: © {pi.photoCredit}</p>
           </div>
           <div class="person-body">
             <p class="eyebrow">Principal Investigator</p>
-            <h3>Esther Heid</h3>
+            <h3>{pi.name}</h3>
             <p class="person-role">Assistant Professor · Group Leader</p>
-            <p>
-              Esther Heid is an Assistant Professor for Machine Learning for
-              Sustainable Chemistry in the Faculty of Technical Chemistry, TU Wien,
-              Austria, and head of the TU-wide dataTUdiscovery AI/ML service center.
-              She received her Ph.D. in Theoretical Chemistry from the University of
-              Vienna in 2019. She subsequently held postdoctoral positions at MIT
-              (2020–2022) and TU Wien (2022–2024), where she advanced her work at the
-              interface of chemistry and machine learning. In 2024, she was awarded a
-              prestigious ERC Starting Grant along with an FWF START Prize, and started
-              her own research group at TU Wien.
-            </p>
+            <p set:html={pi.bio[0]} />
             <div class="pi-cta-box">
-              <a class="btn btn-outline btn-outline--light" href={`${base}/pi`}>Full profile <span class="arrow">→</span></a>
-              <p class="person-links">
-                <a href="https://github.com/hesther"><svg class="icon" role="img" aria-label="GitHub"><use href="#i-github"></use></svg></a>
-                <a href="https://www.linkedin.com/in/esther-heid-ab20001a6/"><svg class="icon" role="img" aria-label="LinkedIn"><use href="#i-linkedin"></use></svg></a>
-                <a href="https://scholar.google.com/citations?user=NDE5issAAAAJ&hl=en"><svg class="icon" role="img" aria-label="Google Scholar"><use href="#i-scholar"></use></svg></a>
-              </p>
+              <a class="btn btn-outline btn-outline--light" href="/pi">Full profile <span class="arrow">→</span></a>
+              <SocialLinks links={pi.links} />
             </div>
           </div>
         </li>
@@ -128,7 +116,47 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           computer science, or anything in between — drop us a line.
         </p>
       </div>
-      <a class="btn btn-primary" href={`${base}/contact`}>Get in touch <span class="arrow">→</span></a>
+      <a class="btn btn-primary" href="/contact">Get in touch <span class="arrow">→</span></a>
     </div>
   </section>
+  <script>
+    // Group filter tabs. Progressive enhancement — without this script every
+    // card is shown and the filter bar is hidden (see the .no-js rule in
+    // style.css). We flip <html class="no-js"> to "has-js" here so the filters
+    // appear only once JS actually runs.
+    const root = document.documentElement;
+    root.classList.remove('no-js');
+    root.classList.add('has-js');
+
+    const section = document.querySelector('.team-filter');
+    if (section) {
+      const buttons = Array.from(section.querySelectorAll<HTMLButtonElement>('button[data-filter]'));
+      const groups = Array.from(document.querySelectorAll<HTMLElement>('.team-group'));
+
+      // Show a live count next to each tab label.
+      buttons.forEach((btn) => {
+        const f = btn.dataset.filter;
+        const n = f === 'all'
+          ? document.querySelectorAll('.team-card').length
+          : document.querySelectorAll(`.team-group[data-group="${f}"] .team-card`).length;
+        const count = document.createElement('span');
+        count.className = 'count';
+        count.textContent = String(n);
+        btn.append(' ', count);
+      });
+
+      const applyFilter = (filter: string) => {
+        groups.forEach((group) => {
+          group.hidden = !(filter === 'all' || group.dataset.group === filter);
+        });
+        buttons.forEach((btn) => {
+          btn.setAttribute('aria-pressed', String(btn.dataset.filter === filter));
+        });
+      };
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => applyFilter(btn.dataset.filter ?? 'all'));
+      });
+    }
+  </script>
 </Layout>

@@ -7,8 +7,12 @@ import { publications } from '../data/publications';
 // this year and older start collapsed. Change it to move the cut-off.
 const COLLAPSE_FROM = 2021;
 ---
-<Layout title="Heid Lab — Publications" active="publications" scripts={["header.js"]}>
-  <main>
+<Layout
+  title="Heid Lab — Publications"
+  description="A complete list of papers and preprints from the Heid Lab at TU Wien, newest first."
+  active="publications"
+>
+  <div class="page">
     <p class="eyebrow">Papers & preprints</p>
     <h1>Publications</h1>
     <p>A complete list of work from the lab.</p>
@@ -24,5 +28,5 @@ const COLLAPSE_FROM = 2021;
         </details>
       ))}
     </div>
-  </main>
+  </div>
 </Layout>

@@ -1,28 +1,25 @@
 ---
 // Site header + primary navigation. Rendered on every page via Layout.
 // Pass the current page's key so its nav link gets the "active" style.
-//
-// Before Astro this markup was copy-pasted into all 11 HTML files; now it
-// lives here once. To change the nav, edit this file only.
+// To change the nav, edit this file only.
 interface Props {
   active?: string;
 }
 const { active } = Astro.props;
 
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const links = [
-  { key: 'home', label: 'Home', href: `${base}/` },
-  { key: 'team', label: 'About us', href: `${base}/team` },
-  { key: 'news', label: 'News', href: `${base}/news` },
-  { key: 'research', label: 'Research', href: `${base}/research` },
-  { key: 'publications', label: 'Publications', href: `${base}/publications` },
-  { key: 'teaching', label: 'Teaching', href: `${base}/teaching` },
-  { key: 'contact', label: 'Contact', href: `${base}/contact`, cta: true },
+  { key: 'home', label: 'Home', href: '/' },
+  { key: 'team', label: 'About us', href: '/team' },
+  { key: 'news', label: 'News', href: '/news' },
+  { key: 'research', label: 'Research', href: '/research' },
+  { key: 'publications', label: 'Publications', href: '/publications' },
+  { key: 'teaching', label: 'Teaching', href: '/teaching' },
+  { key: 'contact', label: 'Contact', href: '/contact', cta: true },
 ];
 ---
 <header class="site-header">
   <div class="nav-wrap">
-    <a class="brand" href={`${base}/`}>Heid <span>Lab</span></a>
+    <a class="brand" href="/">Heid <span>Lab</span></a>
     <nav class="main-nav">
       {links.map((l) => (
         <a
@@ -33,3 +30,23 @@ const links = [
     </nav>
   </div>
 </header>
+
+<script>
+  // Condenses the sticky header once the page is scrolled.
+  const header = document.querySelector<HTMLElement>('.site-header');
+  if (header) {
+    const THRESHOLD = 40;
+    let ticking = false;
+
+    const update = () => {
+      header.classList.toggle('is-scrolled', window.scrollY > THRESHOLD);
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+
+    update();
+  }
+</script>

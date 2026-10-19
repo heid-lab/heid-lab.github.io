@@ -1,23 +1,22 @@
 ---
 import type { Member } from '../data/team';
 import { initials, slug } from '../data/team';
+import SocialLinks from './SocialLinks.astro';
 
 interface Props {
   member: Member;
 }
 const { member } = Astro.props;
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const avatarClass = ['team-card-avatar', member.avatar && `team-card-avatar--${member.avatar}`]
   .filter(Boolean)
   .join(' ');
-const hasLinks = member.links && (member.links.github || member.links.linkedin || member.links.scholar);
 ---
 <li id={slug(member.name)} class:list={['team-card', { 'team-card--colbreak': member.colbreak }]}>
   <div class="team-card-head">
     <div class={avatarClass}>
       {member.photo ? (
-        <img src={`${base}/imgs/team_members/${member.photo}`} alt={member.name} />
+        <img src={`/imgs/team_members/${member.photo}`} alt={member.name} />
       ) : (
         <>
           {member.photoTodo && <Fragment set:html={`<!-- TODO: ${member.photoTodo} -->`} />}
@@ -34,19 +33,5 @@ const hasLinks = member.links && (member.links.github || member.links.linkedin |
     {(member.bio ?? []).map((para) => <p set:html={para} />)}
     {(!member.bio || member.bio.length === 0) && <p><!-- TODO: project topic. --></p>}
   </div>
-  {hasLinks ? (
-    <p class="person-links">
-      {member.links!.github && (
-        <a href={member.links!.github}><svg class="icon" role="img" aria-label="GitHub"><use href="#i-github"></use></svg></a>
-      )}
-      {member.links!.linkedin && (
-        <a href={member.links!.linkedin}><svg class="icon" role="img" aria-label="LinkedIn"><use href="#i-linkedin"></use></svg></a>
-      )}
-      {member.links!.scholar && (
-        <a href={member.links!.scholar}><svg class="icon" role="img" aria-label="Google Scholar"><use href="#i-scholar"></use></svg></a>
-      )}
-    </p>
-  ) : (
-    <p class="person-links"></p>
-  )}
+  <SocialLinks links={member.links} />
 </li>
