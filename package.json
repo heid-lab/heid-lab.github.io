@@ -8,9 +8,15 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "photos": "node tools/photos.mjs",
+    "photos:check": "node tools/photos.mjs --check",
+    "prepare": "git config core.hooksPath .githooks"
   },
   "dependencies": {
     "astro": "^4.16.18"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
   }
 }
