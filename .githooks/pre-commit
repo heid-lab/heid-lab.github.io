@@ -1,0 +1,5 @@
+#!/bin/sh
+# Stops a commit that adds images which are too large or still carry hidden
+# metadata (e.g. the GPS location of a phone photo). Switched on for this repo
+# by `npm install` (see "prepare" in package.json). Fix with: npm run photos
+exec node tools/photos.mjs --check --staged

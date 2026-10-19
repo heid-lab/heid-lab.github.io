@@ -1,0 +1,31 @@
+name: Check
+
+# Runs on every push (any branch) and every pull request: checks that all
+# images follow the photo rules (size and hidden metadata, see tools/photos.mjs)
+# and that the site still builds.
+#
+# To make a failing check block merging into main: Settings → Branches →
+# add a branch protection rule for "main" → "Require status checks to pass
+# before merging" → select "check".
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Check photos
+        run: npm run photos:check
+      - name: Build
+        run: npm run build
