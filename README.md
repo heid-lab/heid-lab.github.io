@@ -160,8 +160,9 @@ field decides which section (and filter tab) they appear under.
 },
 ```
 
-**Their photo:** put the file in `public/imgs/team_members/` and set `photo` to
-its filename. If you leave `photo` out, the card shows a placeholder with their
+**Their photo:** put the file in `public/imgs/team_members/`, run
+`npm run photos` (see [Adding photos](#adding-photos)), and set `photo` to its
+filename. If you leave `photo` out, the card shows a placeholder with their
 initials.
 
 To remove someone or move them to **Alumni**, delete their entry from `members`
@@ -208,9 +209,26 @@ to news items and they show up there too. (The first photo is fixed and set in
 `public/js/news-gallery.js`.)
 
 1. Put the image files in `public/imgs/news/`.
-2. Reference them from a news item's `images` array in
+2. Run **`npm run photos`** (see below).
+3. Reference them from a news item's `images` array in
    `public/js/news-data.js`, using the path **`imgs/news/your-file.jpg`**
    (root-relative).
+
+<a id="adding-photos"></a>**Every new or replaced image** (news, team, group,
+research, …) must go through `npm run photos` before you commit it. Photos
+straight from a phone are several MB, may be stored sideways, and contain the
+GPS location where they were taken. The command fixes that in place:
+
+- It removes hidden metadata (camera info, GPS location) from every image
+  without re-saving it, so the picture itself stays exactly the same.
+- Only images over 1.5 MB, or stored sideways, are re-saved: turned upright
+  and shrunk to at most 2400 px on the long edge, at high quality.
+
+Images that are already fine are left alone.
+
+If you forget, the commit is stopped with a message telling you to run it
+(`npm install` switches this check on), and GitHub runs the same check on
+every push.
 
 </details>
 
@@ -296,14 +314,24 @@ public/                   Copied as-is to the site root.
 └── js/                   Vanilla scripts (header, slideshow, news, gallery,
     │                     team filters, research tabs, funding tiles).
     └── news-data.js      News items live here.
+
+tools/
+└── photos.mjs            `npm run photos`: strips metadata, shrinks big images.
+.githooks/
+└── pre-commit            Runs the photo check before each commit.
 ```
 
 
 ## Deployment
 
 Every push to `main`, including merging a pull request, triggers
-`.github/workflows/deploy.yml`, which builds the site and publishes it to
-GitHub Pages.
+`.github/workflows/deploy.yml`, which checks the photos, builds the site and
+publishes it to GitHub Pages. If the photo check or the build fails, nothing is
+published and the live site stays on the previous version.
+
+Every push to any branch, and every pull request, also runs
+`.github/workflows/check.yml` (photo check + build), so problems show up on the
+pull request before anything is merged.
 
 One-time setup in the GitHub repo (only if Pages isn't already configured):
 **Settings → Pages → Build and deployment → Source → "GitHub Actions"**.
