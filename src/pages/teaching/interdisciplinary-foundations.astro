@@ -1,0 +1,175 @@
+---
+// Page for the seminar "Interdisciplinary Foundations of Deep Learning in
+// Chemistry". It doubles as the landing page for visitors who want to drop in
+// on a single session, so the current semester's schedule comes first and
+// earlier semesters follow below.
+//
+// Each semester:
+//   sem       TISS semester code: '2026W' is winter 2026/27, '2026S' summer 2026.
+//   label     Heading shown on the page.
+//   note      Optional one-liner under the heading (e.g. "the closed beta").
+//   when      Optional weekday and time, e.g. 'Thursdays, 16:00–18:00'.
+//   where     Optional room, e.g. 'Seminar room BC 02 B9, Getreidemarkt 9'.
+//   whereHref Optional link for the room (e.g. TU Wien room map).
+//   time      Optional usual start time, e.g. '17:00 s.t.'; adds a Time
+//             column. A session's own `time` overrides it (e.g. '17:00 c.t.').
+//   tiss      Set true if the course ran on TISS that semester (adds a link).
+//   sessions  One entry per session, in the order they take place:
+//               { date: '2026-10-08', title: 'Machine-readable molecules',
+//                 speaker: 'Max Kovar', role: 'group' }
+//             role      'group' (group member), 'student' or 'invited'.
+//             speaker   Name shown next to the role. NEVER for students: their
+//                       names stay off the public site (only "Student" shows).
+//             materials Optional, only if the speaker agreed to share them:
+//                         materials: [{ type: 'pdf', href: 'teaching/ifdl/2026W/hike.pdf' }]
+//                       type: 'pdf' | 'pptx' | 'notebook' (downloads) or
+//                       'html' (opens in a new tab). href is a file under
+//                       public/ (no leading slash) or a full URL.
+//             New semesters go at the TOP of the list.
+import Layout from '../../layouts/Layout.astro';
+import SessionTable, { type Session } from '../../components/SessionTable.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const course = { nr: '165.169', type: 'SE', ects: '3.0', title: 'Interdisciplinary Foundations of Deep Learning in Chemistry' };
+
+type Semester = {
+  sem: string; label: string; note?: string; when?: string; where?: string;
+  whereHref?: string; time?: string; tiss?: boolean; sessions: Session[];
+};
+
+const semesters: Semester[] = [
+  {
+    sem: '2026W',
+    label: 'Winter 2026/27',
+    note: 'The first semester open to everyone.',
+    when: 'Thursdays, 17:00 s.t. (unless stated otherwise)',
+    time: '17:00 s.t.',
+    where: 'BC Seminar Room Lehar 01',
+    whereHref: 'https://maps.tuwien.ac.at/?q=BC01A46',
+    tiss: true,
+    sessions: [
+      { date: '2026-10-01', title: 'A Hike on the Potential Energy Surface', speaker: 'Max Kovar', role: 'group' },
+      { date: '2026-10-08', title: 'Thermodynamics of Deep Learning', speaker: 'Konstantin Mark', role: 'group' },
+      { date: '2026-10-15', title: 'Matrix Isolation FTIR', role: 'student' },
+      { date: '2026-10-22', time: '17:00 c.t.', title: 'Fundamentals of Large Language Models', speaker: 'Esther Heid', role: 'group' },
+      { date: '2026-10-29', time: '17:00 c.t.', title: 'Designing Cathode Materials', role: 'student' },
+      { date: '2026-11-05', title: 'Solvent-Free Polymer Compounding for Battery Electrolytes', role: 'student' },
+      { date: '2026-11-12', title: 'An ML Workflow to Predict Rate Constants', role: 'student' },
+      { date: '2026-11-19', title: 'Work Backwards to Go Forwards: The Logic of Retrosynthesis', role: 'student' },
+      { date: '2026-11-26', title: 'Semiconductor Band Structure Prediction', role: 'student' },
+      { date: '2026-12-03', title: 'To be announced', role: 'invited' },
+      { date: '2026-12-10', title: 'Bayesian Optimization in Chemistry', speaker: 'Leonard Galustian', role: 'group' },
+      { date: '2026-12-17', title: 'How Do Synthetic Organic Chemists Approach Their Projects?', speaker: 'Sebastian-Felix Fritz', role: 'invited' },
+      { date: '2027-01-07', title: 'Conformer Sampling Schemes', role: 'student' },
+      { date: '2027-01-14', title: 'Large Language Models in Chemistry?', speaker: 'Charlotte Gerhaher', role: 'group' },
+      { date: '2027-01-21', title: 'Kinetic Monte Carlo Simulation', role: 'student' },
+    ],
+  },
+  {
+    sem: '2026S',
+    label: 'Summer 2026',
+    note: 'The “closed beta”: the group seminar became a course, with ourselves as participants and the first invited talks.',
+    tiss: true,
+    sessions: [
+      { date: '2026-03-10', title: 'A Hike on the Potential Energy Surface', speaker: 'Max Kovar', role: 'group' },
+      { date: '2026-03-17', title: 'Basics of Machine Learning', speaker: 'Jasper De Landsheere', role: 'group' },
+      { date: '2026-04-14', title: 'Chemical Representations on a Computer', speaker: 'Jonathan Zheng', role: 'group' },
+      { date: '2026-04-21', title: 'Basics of 2D Chromatography', speaker: 'Synnöve Lemke', role: 'group' },
+      { date: '2026-04-28', title: 'Highly Accurate Post-Hartree–Fock Methods', speaker: 'Isabel Eder', role: 'invited' },
+      { date: '2026-05-05', title: 'Basics of Mass Spectrometry in Synthetic Chemistry', speaker: 'Leon Ganser', role: 'group' },
+      { date: '2026-05-12', title: 'Basics of Statistical Thermodynamics', role: 'student' },
+      { date: '2026-05-19', title: 'Molecular Partition Functions', speaker: 'Martín Otero Lema', role: 'invited' },
+      { date: '2026-05-26', title: 'Introduction to Explainable AI', speaker: 'Sebastian Pinter', role: 'group' },
+      { date: '2026-06-09', title: 'Solvation Effects in Molecular Modeling', speaker: 'Jonathan Zheng', role: 'group' },
+      { date: '2026-06-16', title: 'Conditional Probabilities and Expectation Values', speaker: 'Konstantin Mark', role: 'group' },
+    ],
+  },
+  {
+    sem: '2025S',
+    label: 'Summer 2025',
+    note: 'The “alpha version”: an internal group seminar, where we taught each other the basics of our fields.',
+    sessions: [
+      { date: '2025-03-05', title: 'Thermodynamic and Kinetic Products in Synthesis, Thermodynamics Basics', speaker: 'Max Kovar', role: 'group' },
+      { date: '2025-03-12', title: 'Bias-Variance Tradeoff', speaker: 'Leonard Galustian', role: 'group' },
+      { date: '2025-03-12', title: 'Atomic and Molecular Orbitals and Bonds', speaker: 'Leon Ganser', role: 'group' },
+      { date: '2025-03-19', title: 'Hybridization and more Molecular Orbitals', speaker: 'Leon Ganser', role: 'group' },
+      { date: '2025-03-26', title: 'Competing Reactions (SN2/E2), Basicity and Nucleophilicity', speaker: 'Max Kovar', role: 'group' },
+      { date: '2025-04-02', title: 'Basics of Large Language Models', speaker: 'Esther Heid', role: 'group' },
+      { date: '2025-04-16', title: 'Basics of Flow Matching', speaker: 'Konstantin Mark', role: 'group' },
+      { date: '2025-04-30', title: 'Basics of Deep Learning', speaker: 'Jasper De Landsheere', role: 'group' },
+      { date: '2025-05-07', title: 'Carbonyl Chemistry, Stereoelectronics', speaker: 'Leon Ganser', role: 'group' },
+      { date: '2025-05-07', title: 'Abstraction in Mathematics', speaker: 'Konstantin Mark', role: 'group' },
+      { date: '2025-05-21', title: 'Out-of-Distribution Generalization', speaker: 'Leonard Galustian', role: 'group' },
+      { date: '2025-05-28', title: 'Quantum Chemistry Basics 1', speaker: 'Max Kovar', role: 'group' },
+      { date: '2025-06-05', title: 'Quantum Chemistry Basics 2', speaker: 'Max Kovar', role: 'group' },
+      { date: '2025-06-11', title: 'Wittig Reactions and Arrow Pushing', speaker: 'Leon Ganser', role: 'group' },
+      { date: '2025-06-18', title: 'Thermodynamics (statistical, not phenomenological this time)', speaker: 'Max Kovar', role: 'group' },
+      { date: '2025-07-16', title: 'Quantum Chemistry Basics 3', speaker: 'Max Kovar', role: 'group' },
+    ],
+  },
+];
+
+const [current, ...past] = semesters;
+const tissUrl = (sem: string) =>
+  `https://www.tiss.tuwien.ac.at/course/courseDetails.xhtml?semester=${sem}&locale=en&courseNr=${course.nr.replace('.', '')}`;
+---
+<Layout title={`Heid Lab — ${course.title}`} active="teaching" scripts={["header.js"]}>
+  <main>
+    <p class="eyebrow">{course.nr} · {course.type} · {course.ects} ECTS</p>
+    <h1>{course.title}</h1>
+
+    <p>
+      Machine learning for chemistry lives where several disciplines meet, and so
+      does our group. Yet chemists, physicists, mathematicians, data
+      and computer scientists often find it surprisingly hard to understand each other.
+      In our field, and increasingly in all of computational chemistry, that is
+      something one cannot afford.
+    </p>
+    <p>
+      That is why we started this seminar: first for our group, then for students,
+      and now for researchers from chemistry, physics, mathematics, data science,
+      computer science, chemical engineering, and more, who are interested in deep
+      learning in chemistry. Every week, we come together to listen, discuss, and
+      work through the foundations each of us is missing, taught by the people who
+      know them best.
+      Alongside talks from our group members and student participants, we invite external guests to share their perspective.
+      Curious what that looks like in practice? Have a look at the
+      <a href="#previous-semesters">schedules of past semesters</a> below.
+    </p>
+    <p>
+      <strong>All sessions are open to the public.</strong> You don't need to take
+      the course to join lectures: if a single talk catches your eye, just drop by. Students
+      who want to earn credits register on
+      <a href={tissUrl(current.sem)} target="_blank" rel="noopener">TISS</a>.
+    </p>
+
+    <h2>This semester · {current.label}</h2>
+    {current.note && <p>{current.note}</p>}
+    {(current.when || current.where) && (
+      <p>
+        {current.when && <span><strong>When:</strong> {current.when}</span>}
+        {current.when && current.where && <br />}
+        {current.where && (
+          <span><strong>Where:</strong> {current.whereHref
+            ? <a href={current.whereHref} target="_blank" rel="noopener">{current.where}</a>
+            : current.where}</span>
+        )}
+      </p>
+    )}
+    <SessionTable sessions={current.sessions} time={current.time} empty="The schedule will be posted here." />
+
+    <h2 id="previous-semesters">Previous semesters</h2>
+    {past.map((t) => (
+      <section>
+        <h3>{t.label}</h3>
+        {t.note && <p>{t.note}</p>}
+        <SessionTable sessions={t.sessions} time={t.time} empty="Schedule coming soon." />
+        {t.tiss && (
+          <p><a href={tissUrl(t.sem)} target="_blank" rel="noopener">{t.label} on TISS →</a></p>
+        )}
+      </section>
+    ))}
+
+    <p class="session-back"><a href={`${base}/teaching`}>← All courses</a></p>
+  </main>
+</Layout>

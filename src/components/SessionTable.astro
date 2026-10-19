@@ -1,0 +1,74 @@
+---
+// One semester's schedule on a course page (see
+// src/pages/teaching/interdisciplinary-foundations.astro for the data format).
+// Student speakers are never named publicly; only their role is shown.
+export type Role = 'group' | 'student' | 'invited';
+export type Material = { href: string; type: 'pdf' | 'pptx' | 'notebook' | 'html' };
+export type Session = {
+  date: string; time?: string; title: string; speaker?: string; role?: Role; materials?: Material[];
+};
+
+// `time` is the semester's usual start time (e.g. '17:00 s.t.'); a session's
+// own `time` overrides it. Without either, the Time column is left out.
+interface Props { sessions: Session[]; empty: string; time?: string }
+const { sessions, empty, time } = Astro.props;
+const showTime = Boolean(time) || sessions.some((s) => s.time);
+const cols = showTime ? 4 : 3;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const ROLE: Record<Role, string> = { group: 'Group member', student: 'Student', invited: 'Invited' };
+const LABEL: Record<Material['type'], string> = {
+  pdf: 'Slides (PDF)', pptx: 'Slides (PowerPoint)', notebook: 'Notebook', html: 'Slides',
+};
+// Files under public/ are given without a leading slash; full URLs stay as they are.
+const url = (href: string) => (/^https?:\/\//.test(href) ? href : `${base}/${href}`);
+// "2026-10-08" → "Thu, 8 Oct"; the semester heading already gives the year.
+const fmt = (iso: string) =>
+  new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+---
+<div class="table-scroll">
+  <table class="session-table">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        {showTime && <th scope="col">Time</th>}
+        <th scope="col">Topic</th>
+        <th scope="col">Speaker</th>
+      </tr>
+    </thead>
+    <tbody>
+      {sessions.length === 0 ? (
+        <tr><td colspan={cols} class="session-empty">{empty}</td></tr>
+      ) : sessions.map((s) => (
+        <tr>
+          <td class="session-date">{fmt(s.date)}</td>
+          {showTime && (
+            <td class="session-date">
+              {/* Only the "c.t." is bold: the hour is the usual one, the
+                  delayed start is what visitors must not miss. */}
+              {(s.time ?? time ?? '').split('c.t.').map((part, i) => (
+                <>{i > 0 && <strong>c.t.</strong>}{part}</>
+              ))}
+            </td>
+          )}
+          <td>
+            {s.title}
+            {s.materials && s.materials.length > 0 && (
+              <span class="session-materials">
+                {s.materials.map((m) => (
+                  m.type === 'html'
+                    ? <a href={url(m.href)} target="_blank" rel="noopener">{LABEL[m.type]} ↗</a>
+                    : <a href={url(m.href)} download>{LABEL[m.type]} ↓</a>
+                ))}
+              </span>
+            )}
+          </td>
+          <td>
+            {s.role === 'student' ? null : s.speaker}
+            {s.role && <span class="session-role">{ROLE[s.role]}</span>}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
