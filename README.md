@@ -8,9 +8,9 @@ The website for the Heid Lab at TU Wien (Faculty of Technical Chemistry, Institu
 ## Tech stack
 
 - **Framework:** [Astro](https://astro.build/) — builds to static HTML/CSS/JS
-- **Language:** TypeScript (`src/data/`), plain JS for news (`public/js/news-data.js`), `.astro` components
+- **Language:** TypeScript (`src/data/`), `.astro` components
 - **Styling:** one CSS file; Lato via Google Fonts
-- **Interactivity:** small vanilla-JS scripts (`public/js/`)
+- **Interactivity:** small `<script>` blocks inside the components and pages they belong to, bundled by Astro
 - **Hosting:** GitHub Pages, deployed by GitHub Actions
 - **Tooling:** [Node.js](https://nodejs.org/) + npm (build only)
 
@@ -182,7 +182,7 @@ and add a line to the `alumni` array further down the same file:
 <details>
 <summary><b>Adding a news item</b></summary>
 
-Edit `public/js/news-data.js` and add an object to the `NEWS` array. Order
+Edit `src/data/news.ts` and add an object to the `news` array. Order
 doesn't matter — items are sorted by date (newest first). The home page shows
 the newest three; the News page shows all.
 
@@ -206,12 +206,12 @@ the newest three; the News page shows all.
 The **"Life in the lab"** gallery on the News page fills itself: it collects
 every image from every news item, captioned with the item's title. Add photos
 to news items and they show up there too. (The first photo is fixed and set in
-`public/js/news-gallery.js`.)
+`src/components/NewsGallery.astro`.)
 
 1. Put the image files in `public/imgs/news/`.
 2. Run **`npm run photos`** (see below).
 3. Reference them from a news item's `images` array in
-   `public/js/news-data.js`, using the path **`imgs/news/your-file.jpg`**
+   `src/data/news.ts`, using the path **`imgs/news/your-file.jpg`**
    (root-relative).
 
 <a id="adding-photos"></a>**Every new or replaced image** (news, team, group,
@@ -301,19 +301,23 @@ src/
 │   ├── Footer.astro      Site footer with the TU logo.
 │   ├── TeamCard.astro    One team-member card.
 │   ├── PubList.astro     A list of publications (Publications + ERC page).
+│   ├── NewsList.astro    The news timeline (home page + News page).
+│   ├── NewsGallery.astro The "Life in the lab" photo carousel (News page).
+│   ├── SocialLinks.astro A person's GitHub / LinkedIn / Scholar icons.
+│   ├── GrantPeople.astro The people lists on the ERC grant page.
 │   └── IconSprite.astro  Social-media icon definitions.
 ├── data/
-│   ├── team.ts           Team members + alumni.
+│   ├── team.ts           The PI, team members, and alumni.
 │   ├── publications.ts   Publications, grouped by year.
+│   ├── news.ts           News items.
 │   └── funding.ts        Funders listed on the Research page.
+├── scripts/
+│   └── lightbox.ts       Full-size photo viewer shared by the news components.
 └── styles/
     └── style.css         All styling (one file).
 
 public/                   Copied as-is to the site root.
-├── imgs/                 All images (team_members/, news/, group/, grants/, …).
-└── js/                   Vanilla scripts (header, slideshow, news, gallery,
-    │                     team filters, research tabs, funding tiles).
-    └── news-data.js      News items live here.
+└── imgs/                 All images (team_members/, news/, group/, grants/, …).
 
 tools/
 └── photos.mjs            `npm run photos`: strips metadata, shrinks big images.
@@ -336,5 +340,6 @@ pull request before anything is merged.
 One-time setup in the GitHub repo (only if Pages isn't already configured):
 **Settings → Pages → Build and deployment → Source → "GitHub Actions"**.
 
-> **Note on the base path.** The repo is `heid-lab.github.io`, so Pages serves
-> the site at the domain root and `astro.config.mjs` sets `base: '/'`.
+> **Note on links.** The repo is `heid-lab.github.io`, so Pages serves the site
+> at the domain root. Internal links and images are therefore written as root
+> paths, e.g. `/team` or `/imgs/hero/esther-heid-hero.jpg`.

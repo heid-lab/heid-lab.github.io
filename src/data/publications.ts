@@ -9,8 +9,7 @@
 //   titleHtml Optional: use INSTEAD of `title` when the title needs markup
 //            (e.g. subscripts like SrTiO<sub>3</sub>). Rendered as raw HTML.
 //   href     Link to the paper / DOI.
-//   authors  Author list as raw HTML — wrap the group's names in …
-//            exactly as before (e.g. "E. Heid").
+//   authors  Author list (e.g. "J. Doe, E. Heid"). Rendered as raw HTML.
 //   funding  Optional grant tags this paper acknowledges (e.g. ['erc'] or
 //            ['erc', 'fwf']). Not shown on the Publications page — it only drives
 //            the per-grant "related publications" lists (see pubsByFunding()).

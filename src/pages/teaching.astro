@@ -1,12 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 // Courses taught this semester, each drawn as a card linking to TISS. A course
 // with its own page on this site sets `page` (its path under src/pages, e.g.
 // 'teaching/deep-learning-in-chemistry'), and its card links there as well.
 // New course pages start as a copy of src/pages/teaching/_course-template.astro.
-const semester = '2026W'; //update this each semester, e.g. '2025S' for summer 2025, '2025W' for winter 2025/26
+// `semester` is the TISS code (2026W = winter 2026/27, 2027S = summer 2027).
+// Update it each semester; the heading and intro sentence above the cards
+// follow it.
+const semester = '2026W';
 const currentCourses: { nr: string; type: string; ects: string; title: string; page?: string }[] = [
   { nr: '165.169', type: 'SE', ects: '3.0', title: 'Interdisciplinary Foundations of Deep Learning in Chemistry', page: 'teaching/interdisciplinary-foundations' },
   { nr: '165.144', type: 'VU', ects: '3.0', title: 'Simulation of condensed matter' },
@@ -55,16 +57,20 @@ const semesterLabel = (sem: string) => {
   return sem.endsWith('W') ? `Winter ${year}/${String(year + 1).slice(2)}` : `Summer ${year}`;
 };
 ---
-<Layout title="Heid Lab — Teaching" active="teaching" scripts={["header.js"]}>
-  <main>
+<Layout
+  title="Heid Lab — Teaching"
+  description="Courses taught by the Heid Lab at TU Wien, past and present, and how to do a thesis, project, or internship with us."
+  active="teaching"
+>
+  <div class="page">
     <p class="eyebrow">Courses & theses</p>
     <h1>Teaching</h1>
     <p>Courses offered by the lab and opportunities for students.</p>
 
     <section class="current-courses">
       <div class="current-courses-head">
-        <h2>Current courses {semester}</h2>
-        <p>During the winter semester we teach the following courses:</p>
+        <h2>Current courses · {semesterLabel(semester)}</h2>
+        <p>During the {semester.endsWith('W') ? 'winter' : 'summer'} semester we teach the following courses:</p>
       </div>
       <div class="course-cards">
         {currentCourses.map((c) => c.page ? (
@@ -72,7 +78,7 @@ const semesterLabel = (sem: string) => {
             <span class="course-meta">{c.nr} · {c.type} · {c.ects} ECTS</span>
             <h3>{c.title}</h3>
             <span class="course-links">
-              <a class="course-link" href={`${base}/${c.page}`}>Course details <span aria-hidden="true">→</span></a>
+              <a class="course-link" href={`/${c.page}`}>Course details <span aria-hidden="true">→</span></a>
               <a class="course-link" href={tissUrl(c.nr)} target="_blank" rel="noopener">View on TISS <span aria-hidden="true">→</span></a>
             </span>
           </div>
@@ -122,7 +128,7 @@ const semesterLabel = (sem: string) => {
     <p>
       We are always interested in motivated students. If you would like to do a
       thesis, project, or internship with us, please get in touch via the
-      <a href={`${base}/contact`}>contact page</a>.
+      <a href="/contact">contact page</a>.
     </p>
-  </main>
+  </div>
 </Layout>

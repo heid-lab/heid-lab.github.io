@@ -1,0 +1,178 @@
+---
+// "Life in the lab": a coverflow-style photo carousel on the News page. It
+// gathers every image across the news items (src/data/news.ts), so it grows
+// automatically as news items get photos — nothing to maintain here except
+// the fixed first photo below.
+//
+// One photo is in focus (large, centered, bright); its neighbors fan out
+// behind it, smaller and dimmed. Arrows / drag / trackpad swipe / arrow keys
+// move the focus, clicking a dimmed photo brings it to the middle, and
+// clicking the focused photo opens the lightbox.
+import { newsByDate, imageUrl, plainText } from '../data/news';
+
+// Always lead with the poster photo, then every news image, newest first.
+const pics: { src: string; alt: string; title: string; credit?: string }[] = [
+  { src: 'imgs/group/web/sel-7.jpg', alt: 'Three Heid Lab members posing in front of their research posters', title: 'Check out our posters!' },
+  ...newsByDate().flatMap((item) => (item.images ?? []).map((pic) => ({
+    src: pic.src,
+    alt: pic.alt || plainText(item.title),
+    title: plainText(item.title),
+    credit: pic.credit,
+  }))),
+];
+
+// How many photos fan out on each side of the focused one. The page arrives
+// laid out with the first photo in focus; the script redoes the same layout
+// (see layout() below) whenever the focus moves.
+const SPREAD = 3;
+const caption = (pic: (typeof pics)[number]) => pic.title + (pic.credit ? ` · Photo: © ${pic.credit}` : '');
+const arrow = { prev: 'M15 4 L7 12 L15 20', next: 'M9 4 L17 12 L9 20' };
+---
+<section class="gallery">
+  <h2 class="gallery-heading">Life in the lab</h2>
+  <div class="gallery-viewport" data-news-gallery data-spread={SPREAD}>
+    <button type="button" class="gallery-nav gallery-prev is-disabled" aria-label="Previous photo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d={arrow.prev} /></svg>
+    </button>
+    <div class="gallery-stage">
+      {pics.map((pic, i) => (
+        <button
+          type="button"
+          class:list={['gallery-slide', { 'is-active': i === 0, 'is-off': i > SPREAD }]}
+          style={`--i: ${Math.min(i, SPREAD)}; z-index: ${pics.length - i}`}
+          aria-label={`Photo ${i + 1} of ${pics.length} — ${pic.title}`}
+          aria-hidden={i === 0 ? 'false' : 'true'}
+          tabindex={i === 0 ? 0 : -1}
+          data-title={pic.title}
+          data-credit={pic.credit}
+        >
+          <img src={imageUrl(pic.src)} alt={pic.alt} loading="lazy" draggable="false" />
+        </button>
+      ))}
+    </div>
+    <button type="button" class:list={['gallery-nav gallery-next', { 'is-disabled': pics.length === 1 }]} aria-label="Next photo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d={arrow.next} /></svg>
+    </button>
+  </div>
+  <!-- The focused photo's news title, shown under the fan. It sits outside the
+       viewport, which clips to the photos' height. -->
+  <p class="gallery-caption">{caption(pics[0])}</p>
+</section>
+
+<script>
+  import { openLightbox, type LightboxPhoto } from '../scripts/lightbox';
+
+  const mount = document.querySelector<HTMLElement>('[data-news-gallery]');
+  if (mount) initGallery(mount);
+
+  function initGallery(mount: HTMLElement) {
+    const SPREAD = Number(mount.dataset.spread);
+    const stage = mount.querySelector<HTMLElement>('.gallery-stage')!;
+    const slides = Array.from(stage.querySelectorAll<HTMLButtonElement>('.gallery-slide'));
+    const prev = mount.querySelector<HTMLButtonElement>('.gallery-prev')!;
+    const next = mount.querySelector<HTMLButtonElement>('.gallery-next')!;
+    const caption = mount.parentElement!.querySelector<HTMLElement>('.gallery-caption')!;
+    const pics: LightboxPhoto[] = slides.map((slide) => {
+      const img = slide.querySelector('img')!;
+      return { src: img.src, alt: img.alt, title: slide.dataset.title, credit: slide.dataset.credit };
+    });
+    let active = 0;
+
+    function layout() {
+      slides.forEach((slide, i) => {
+        const offset = i - active;
+        const abs = Math.abs(offset);
+        // Photos beyond the spread pile up underneath the outermost one, like a
+        // deck at each end: leaving photos slide onto the pile, arriving ones
+        // are dealt off it. (Not display:none, so they can still animate.)
+        slide.style.setProperty('--i', String(Math.max(-SPREAD, Math.min(SPREAD, offset))));
+        slide.style.zIndex = String(pics.length - abs);
+        slide.classList.toggle('is-active', offset === 0);
+        slide.classList.toggle('is-off', abs > SPREAD);
+        slide.setAttribute('aria-hidden', offset === 0 ? 'false' : 'true');
+        slide.tabIndex = offset === 0 ? 0 : -1;
+      });
+      prev.classList.toggle('is-disabled', active === 0);
+      next.classList.toggle('is-disabled', active === pics.length - 1);
+      const pic = pics[active];
+      caption.textContent = (pic.title ?? '') + (pic.credit ? ` · Photo: © ${pic.credit}` : '');
+    }
+
+    function go(i: number) {
+      active = Math.max(0, Math.min(pics.length - 1, i));
+      layout();
+      // If a photo had keyboard focus, hand it to the new focused photo so the
+      // focus ring doesn't stay behind on one that slid off to the side.
+      if (stage.contains(document.activeElement)) slides[active].focus({ preventScroll: true });
+    }
+
+    slides.forEach((slide, i) => {
+      slide.addEventListener('click', () => {
+        if (dragged) return;                    // Ignore the click ending a drag.
+        if (i === active) openLightbox(pics, i); // Focused photo → open it large.
+        else go(i);                             // A neighbor → bring it to focus.
+      });
+    });
+    prev.addEventListener('click', () => go(active - 1));
+    next.addEventListener('click', () => go(active + 1));
+
+    // Pixels of drag / trackpad travel per photo. Lower = faster.
+    const STEP = 70;
+
+    // Drag / swipe left-right: the focus follows the pointer, one photo per
+    // STEP px, so a long drag moves through several photos.
+    let down = false, startX = 0, dragged = false;
+    stage.addEventListener('pointerdown', (e) => {
+      if (e.button !== 0) return;
+      down = true; dragged = false; startX = e.clientX;
+    });
+    stage.addEventListener('pointermove', (e) => {
+      if (!down) return;
+      const steps = Math.trunc((e.clientX - startX) / STEP);
+      if (!steps) return;
+      if (!dragged) {
+        dragged = true;
+        // Capture only once it's really a drag: capturing on pointerdown makes
+        // the browser send the click to the stage instead of the photo, so
+        // clicking a photo would do nothing.
+        stage.setPointerCapture(e.pointerId);
+      }
+      go(active - steps);
+      startX += steps * STEP;
+    });
+    const endDrag = (e: PointerEvent) => {
+      if (!down) return;
+      down = false;
+      try { stage.releasePointerCapture(e.pointerId); } catch {}
+      setTimeout(() => { dragged = false; }, 0);
+    };
+    stage.addEventListener('pointerup', endDrag);
+    stage.addEventListener('pointercancel', endDrag);
+
+    // Two-finger swipe on a trackpad (horizontal wheel), same feel as dragging.
+    // Mostly-vertical scrolling is left alone so the page still scrolls past.
+    let wheelX = 0, wheelIdle: ReturnType<typeof setTimeout> | undefined;
+    mount.addEventListener('wheel', (e) => {
+      const dx = e.deltaMode === 1 ? e.deltaX * 16 : e.deltaX;   // Lines → px.
+      if (Math.abs(dx) <= Math.abs(e.deltaY)) return;
+      e.preventDefault();   // Also stops the browser's swipe-to-go-back.
+      clearTimeout(wheelIdle);
+      wheelIdle = setTimeout(() => { wheelX = 0; }, 200);
+      if (wheelX * dx < 0) wheelX = 0;   // Changed direction: start fresh.
+      wheelX += dx;
+      const steps = Math.trunc(wheelX / STEP);
+      if (steps) {
+        go(active + steps);
+        wheelX -= steps * STEP;
+      }
+    }, { passive: false });
+
+    // Arrow keys when the carousel has focus.
+    mount.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { go(active - 1); e.preventDefault(); }
+      else if (e.key === 'ArrowRight') { go(active + 1); e.preventDefault(); }
+    });
+
+    layout();
+  }
+</script>

@@ -28,7 +28,6 @@
 //             New semesters go at the TOP of the list.
 import Layout from '../../layouts/Layout.astro';
 import SessionTable, { type Session } from '../../components/SessionTable.astro';
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const course = { nr: '165.169', type: 'SE', ects: '3.0', title: 'Interdisciplinary Foundations of Deep Learning in Chemistry' };
 
@@ -113,8 +112,12 @@ const [current, ...past] = semesters;
 const tissUrl = (sem: string) =>
   `https://www.tiss.tuwien.ac.at/course/courseDetails.xhtml?semester=${sem}&locale=en&courseNr=${course.nr.replace('.', '')}`;
 ---
-<Layout title={`Heid Lab — ${course.title}`} active="teaching" scripts={["header.js"]}>
-  <main>
+<Layout
+  title={`Heid Lab — ${course.title}`}
+  description={`${course.title} (${course.nr} ${course.type}), a seminar at TU Wien open to the public: this semester's schedule, past semesters, and how to join a session.`}
+  active="teaching"
+>
+  <div class="page">
     <p class="eyebrow">{course.nr} · {course.type} · {course.ects} ECTS</p>
     <h1>{course.title}</h1>
 
@@ -170,6 +173,6 @@ const tissUrl = (sem: string) =>
       </section>
     ))}
 
-    <p class="session-back"><a href={`${base}/teaching`}>← All courses</a></p>
-  </main>
+    <p class="session-back"><a href="/teaching">← All courses</a></p>
+  </div>
 </Layout>

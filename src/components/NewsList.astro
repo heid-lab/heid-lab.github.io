@@ -1,0 +1,198 @@
+---
+// The news timeline, newest first. Items come from src/data/news.ts.
+//
+// Props:
+//   limit    -> show only the newest few (the home page shows 3)
+//   months   -> group items under month headings (News page)
+//   collapse -> show only this many at first, with a "Show all" button that
+//               reveals the rest in one go
+import { newsByDate, imageUrl, plainText, type NewsItem } from '../data/news';
+
+interface Props {
+  limit?: number;
+  months?: boolean;
+  collapse?: number;
+}
+const { limit, months = false, collapse = 0 } = Astro.props;
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const MONTHS_LONG = ['January', 'February', 'March', 'April', 'May', 'June',
+                     'July', 'August', 'September', 'October', 'November', 'December'];
+
+const all = newsByDate();
+const shown = limit ? all.slice(0, limit) : all;
+const collapsible = collapse > 0 && shown.length > collapse;
+// Items past the first page start hidden; the script reveals them.
+const startsHidden = (index: number) => collapsible && index >= collapse;
+
+// Split into month groups (or one group when not grouping by month), so a
+// month heading can start hidden when all of its items do.
+const groups: { key: string; items: { item: NewsItem; index: number }[] }[] = [];
+shown.forEach((item, index) => {
+  const key = item.date.slice(0, 7);
+  const last = groups.at(-1);
+  if (last && (!months || last.key === key)) last.items.push({ item, index });
+  else groups.push({ key, items: [{ item, index }] });
+});
+
+const monthName = (key: string) => `${MONTHS_LONG[Number(key.slice(5, 7)) - 1]} ${key.slice(0, 4)}`;
+
+// "2026-07" → { month: "Jul" }; "2026-07-08" adds day: "8 Jul".
+function dateParts(date: string) {
+  const [year, month, day] = date.split('-');
+  const short = MONTHS[Number(month) - 1];
+  return { year, month: short, day: day ? `${Number(day)} ${short}` : undefined };
+}
+
+// Copyright line for photos we don't own, e.g. press portraits.
+function credits(item: NewsItem): string[] {
+  return [...new Set((item.images ?? []).map((pic) => pic.credit).filter((c): c is string => !!c))];
+}
+---
+<div data-news data-news-collapse={collapsible ? collapse : undefined}>
+  <ul class="timeline">
+    {groups.map((group) => (
+      <>
+        {months && (
+          <li class="timeline-month" hidden={group.items.every(({ index }) => startsHidden(index))}>
+            {monthName(group.key)}
+          </li>
+        )}
+        {group.items.map(({ item, index }) => {
+          const title = plainText(item.title);
+          const { year, month, day } = dateParts(item.date);
+          const itemCredits = credits(item);
+          return (
+            <li hidden={startsHidden(index)}>
+              <div class="timeline-head">
+                {/* Under month headings the year is already stated there, so
+                    a chip is only worth showing for day-precision dates. */}
+                {months
+                  ? day && <time class="timeline-date timeline-date--day" datetime={item.date}><span>{day}</span></time>
+                  : <time class="timeline-date" datetime={item.date}><span>{day ?? month}</span><b>{year}</b></time>}
+                <h3 set:html={item.title} />
+              </div>
+              {/* A <div>, not a <p>: bodies may contain lists. */}
+              {item.body && <div class="timeline-body" set:html={item.body} />}
+              {item.images && item.images.length > 0 && (
+                <div class="timeline-media" data-title={title}>
+                  {item.images.map((pic, i) => (
+                    <button
+                      type="button"
+                      class="timeline-thumb"
+                      aria-label={`Open photo ${i + 1} of ${item.images!.length} — ${title}`}
+                      data-credit={pic.credit}
+                    >
+                      <img src={imageUrl(pic.src)} alt={pic.alt} loading="lazy" />
+                    </button>
+                  ))}
+                </div>
+              )}
+              {itemCredits.length > 0 && <p class="photo-credit">Photo: © {itemCredits.join(', ')}</p>}
+            </li>
+          );
+        })}
+      </>
+    ))}
+  </ul>
+
+  {collapsible && (
+    <div class="timeline-more">
+      <button type="button" class="timeline-toggle" aria-expanded="false">
+        <span>Show all</span><span class="chev" aria-hidden="true">▾</span>
+      </button>
+      <button type="button" class="link-arrow timeline-top" hidden>
+        Back to top <span class="arrow" aria-hidden="true">↑</span>
+      </button>
+    </div>
+  )}
+</div>
+
+<script>
+  import { openLightbox, type LightboxPhoto } from '../scripts/lightbox';
+
+  document.querySelectorAll<HTMLElement>('[data-news]').forEach((mount) => {
+    // A news item's thumbnails open in the lightbox, as one set.
+    mount.querySelectorAll<HTMLElement>('.timeline-media').forEach((media) => {
+      const thumbs = Array.from(media.querySelectorAll<HTMLButtonElement>('.timeline-thumb'));
+      const photos: LightboxPhoto[] = thumbs.map((thumb) => {
+        const img = thumb.querySelector('img')!;
+        return { src: img.src, alt: img.alt, credit: thumb.dataset.credit };
+      });
+      thumbs.forEach((thumb, i) => {
+        thumb.addEventListener('click', () => openLightbox(photos, i, media.dataset.title));
+      });
+    });
+
+    const initial = Number(mount.dataset.newsCollapse);
+    if (initial > 0) initShowAll(mount, initial);
+  });
+
+  // The newest few show by default; one press reveals the whole archive. The
+  // list arrives with the first `initial` items shown and the rest hidden.
+  function initShowAll(mount: HTMLElement, initial: number) {
+    const list = mount.querySelector('.timeline')!;
+    const more = mount.querySelector<HTMLElement>('.timeline-more')!;
+    const toggle = more.querySelector<HTMLButtonElement>('.timeline-toggle')!;
+    const label = toggle.querySelector('span:not(.chev)')!;
+    const chev = toggle.querySelector('.chev')!;
+    const top = more.querySelector<HTMLButtonElement>('.timeline-top')!;
+
+    // Month headings with the items under each, so a heading can be hidden
+    // when all of its items are.
+    const groups: { marker: HTMLElement | null; items: HTMLElement[] }[] = [];
+    for (const li of Array.from(list.children) as HTMLElement[]) {
+      if (li.classList.contains('timeline-month')) {
+        groups.push({ marker: li, items: [] });
+      } else {
+        if (!groups.length) groups.push({ marker: null, items: [] });
+        groups[groups.length - 1].items.push(li);
+      }
+    }
+    const items = groups.flatMap((g) => g.items);
+    let visible = initial;
+
+    function apply() {
+      let i = 0;
+      groups.forEach((g) => {
+        let anyVisible = false;
+        g.items.forEach((li) => {
+          const hide = i >= visible;
+          li.hidden = hide;
+          if (!hide) anyVisible = true;
+          i++;
+        });
+        if (g.marker) g.marker.hidden = !anyVisible;
+      });
+
+      const all = visible >= items.length;
+      toggle.setAttribute('aria-expanded', String(visible > initial));
+      label.textContent = all ? 'Show less' : 'Show all';
+      chev.textContent = all ? '▴' : '▾';
+      // Only offer "back to top" once the list has actually grown.
+      top.hidden = visible <= initial;
+    }
+
+    toggle.addEventListener('click', () => {
+      if (visible >= items.length) {
+        // Everything is out — this press collapses back to the newest few.
+        visible = initial;
+        apply();
+        // Collapsing from far down the list would leave the viewport stranded.
+        more.scrollIntoView({ block: 'center' });
+        return;
+      }
+      const firstNew = items[visible];
+      visible = items.length;
+      apply();
+      // Keep the newly revealed items in view; the button moves down the page.
+      firstNew?.scrollIntoView({ block: 'nearest' });
+    });
+    top.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    apply();
+  }
+</script>

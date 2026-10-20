@@ -10,7 +10,7 @@ const { items } = Astro.props;
   {items.map((pub) => (
     <li class="pub">
       <span class="pub-meta">
-        {pub.preprint && <button class="pub-tag">Preprint</button>}
+        {pub.preprint && <span class="pub-tag">Preprint</span>}
         {pub.meta}
       </span>
       {pub.titleHtml
