@@ -5,11 +5,12 @@ import Layout from '../layouts/Layout.astro';
 // with its own page on this site sets `page` (its path under src/pages, e.g.
 // 'teaching/deep-learning-in-chemistry'), and its card links there as well.
 // New course pages start as a copy of src/pages/teaching/_course-template.astro.
-// `semester` is the TISS code (2026W = winter 2026/27, 2027S = summer 2027);
-// the heading and intro sentence above the cards follow it.
+// `semester` is the TISS code (2026W = winter 2026/27, 2027S = summer 2027).
+// Update it each semester; the heading and intro sentence above the cards
+// follow it.
 const semester = '2026W';
 const currentCourses: { nr: string; type: string; ects: string; title: string; page?: string }[] = [
-  { nr: '165.169', type: 'SE', ects: '3.0', title: 'Interdisciplinary Foundations of Deep Learning in Chemistry' },
+  { nr: '165.169', type: 'SE', ects: '3.0', title: 'Interdisciplinary Foundations of Deep Learning in Chemistry', page: 'teaching/interdisciplinary-foundations' },
   { nr: '165.144', type: 'VU', ects: '3.0', title: 'Simulation of condensed matter' },
   { nr: '164.385', type: 'VU', ects: '4.0', title: 'Programming for Chemistry and PE' },
   { nr: '165.164', type: 'PR', ects: '3.0', title: 'Selected Topics in Theoretical Chemistry' },

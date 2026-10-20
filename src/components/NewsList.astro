@@ -4,8 +4,8 @@
 // Props:
 //   limit    -> show only the newest few (the home page shows 3)
 //   months   -> group items under month headings (News page)
-//   collapse -> show only this many at first, with a "Show more" button that
-//               reveals the rest the same number at a time
+//   collapse -> show only this many at first, with a "Show all" button that
+//               reveals the rest in one go
 import { newsByDate, imageUrl, plainText, type NewsItem } from '../data/news';
 
 interface Props {
@@ -100,7 +100,7 @@ function credits(item: NewsItem): string[] {
   {collapsible && (
     <div class="timeline-more">
       <button type="button" class="timeline-toggle" aria-expanded="false">
-        <span>Show more</span><span class="chev" aria-hidden="true">▾</span>
+        <span>Show all</span><span class="chev" aria-hidden="true">▾</span>
       </button>
       <button type="button" class="link-arrow timeline-top" hidden>
         Back to top <span class="arrow" aria-hidden="true">↑</span>
@@ -125,14 +125,13 @@ function credits(item: NewsItem): string[] {
       });
     });
 
-    const pageSize = Number(mount.dataset.newsCollapse);
-    if (pageSize > 0) initShowMore(mount, pageSize);
+    const initial = Number(mount.dataset.newsCollapse);
+    if (initial > 0) initShowAll(mount, initial);
   });
 
-  // Reveal earlier news a page at a time rather than all at once, so the
-  // button stays a short step instead of dumping the whole archive. The list
-  // arrives with the first page shown and the rest hidden.
-  function initShowMore(mount: HTMLElement, pageSize: number) {
+  // The newest few show by default; one press reveals the whole archive. The
+  // list arrives with the first `initial` items shown and the rest hidden.
+  function initShowAll(mount: HTMLElement, initial: number) {
     const list = mount.querySelector('.timeline')!;
     const more = mount.querySelector<HTMLElement>('.timeline-more')!;
     const toggle = more.querySelector<HTMLButtonElement>('.timeline-toggle')!;
@@ -152,7 +151,7 @@ function credits(item: NewsItem): string[] {
       }
     }
     const items = groups.flatMap((g) => g.items);
-    let visible = pageSize;
+    let visible = initial;
 
     function apply() {
       let i = 0;
@@ -168,24 +167,24 @@ function credits(item: NewsItem): string[] {
       });
 
       const all = visible >= items.length;
-      toggle.setAttribute('aria-expanded', String(visible > pageSize));
-      label.textContent = all ? 'Show less' : 'Show more';
+      toggle.setAttribute('aria-expanded', String(visible > initial));
+      label.textContent = all ? 'Show less' : 'Show all';
       chev.textContent = all ? '▴' : '▾';
       // Only offer "back to top" once the list has actually grown.
-      top.hidden = visible <= pageSize;
+      top.hidden = visible <= initial;
     }
 
     toggle.addEventListener('click', () => {
       if (visible >= items.length) {
-        // Everything is out — this press collapses back to the first page.
-        visible = pageSize;
+        // Everything is out — this press collapses back to the newest few.
+        visible = initial;
         apply();
         // Collapsing from far down the list would leave the viewport stranded.
         more.scrollIntoView({ block: 'center' });
         return;
       }
       const firstNew = items[visible];
-      visible = Math.min(visible + pageSize, items.length);
+      visible = items.length;
       apply();
       // Keep the newly revealed items in view; the button moves down the page.
       firstNew?.scrollIntoView({ block: 'nearest' });

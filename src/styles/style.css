@@ -783,6 +783,11 @@ a.course-card:hover .course-link span { transform: translateX(4px); }
   white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--muted);
 }
 .session-table .session-area { color: var(--muted); }
+/* Speaker role ("Group member", "Student", "Invited"): its own small line,
+   or the whole cell when the speaker is a student and stays unnamed. */
+.session-table .session-role { display: block; font-size: 0.82rem; color: var(--muted); }
+/* Slides / notebook links under a session's topic. */
+.session-table .session-materials { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; margin-top: 0.3rem; font-size: 0.85rem; }
 .session-table tbody tr:hover td.session-empty { background: none; }
 .session-table .session-empty { color: var(--muted); }
 :where(.page) > p.session-back { margin-top: 2.5rem; }
