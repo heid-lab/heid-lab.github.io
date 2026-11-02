@@ -14,14 +14,13 @@ interface Props { sessions: Session[]; empty: string; time?: string }
 const { sessions, empty, time } = Astro.props;
 const showTime = Boolean(time) || sessions.some((s) => s.time);
 const cols = showTime ? 4 : 3;
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const ROLE: Record<Role, string> = { group: 'Group member', student: 'Student', invited: 'Invited' };
 const LABEL: Record<Material['type'], string> = {
   pdf: 'Slides (PDF)', pptx: 'Slides (PowerPoint)', notebook: 'Notebook', html: 'Slides',
 };
 // Files under public/ are given without a leading slash; full URLs stay as they are.
-const url = (href: string) => (/^https?:\/\//.test(href) ? href : `${base}/${href}`);
+const url = (href: string) => (/^https?:\/\//.test(href) ? href : `/${href}`);
 // "2026-10-08" → "Thu, 8 Oct"; the semester heading already gives the year.
 const fmt = (iso: string) =>
   new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });

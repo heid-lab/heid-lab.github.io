@@ -8,13 +8,12 @@
 //   photo     Filename in imgs/team_members/ (omit to show the initials fallback).
 //   avatar    Optional crop tweak class suffix: 'high' | 'low' | 'top' | 'zoom'
 //             | 'zoom-sm' (maps to team-card-avatar--<suffix>). Omit for default.
-//   colbreak  Set true to force a masonry column break before this card
-//             (was class team-card--colbreak).
+//   colbreak  Set true to force a masonry column break before this card.
 //   bio       One or more paragraphs (each an entry in the array). May contain
 //             HTML. Omit / empty for a placeholder.
 //   links     Social links: any of github, linkedin, scholar (URLs). Omit to hide.
 //   photoTodo Optional note kept as an HTML comment where the photo would go
-//             (e.g. the "TODO: add …" markers from the old markup).
+//             (e.g. which photo file is still missing).
 
 export type Group = 'postdoc' | 'phd' | 'project';
 
@@ -35,6 +34,33 @@ export interface Member {
   links?: Links;
   photoTodo?: string;
 }
+
+// The PI. The team page (first bio paragraph only) and her own page /pi (all
+// paragraphs) both read from here, so a change shows up on both.
+export const pi: {
+  name: string;
+  photo: string;
+  photoCredit: string;
+  email: string;
+  bio: string[];
+  links: Links;
+} = {
+  name: 'Esther Heid',
+  photo: 'esther-heid.jpg',
+  photoCredit: 'Ulrich Zinell',
+  email: 'esther.heid@tuwien.ac.at',
+  bio: [
+    'Esther Heid is an Assistant Professor for Machine Learning for Sustainable Chemistry in the Faculty of Technical Chemistry, TU Wien, Austria, and head of the TU-wide dataTUdiscovery AI/ML service center. She received her Ph.D. in Theoretical Chemistry from the University of Vienna in 2019. She subsequently held postdoctoral positions at MIT (2020–2022) and TU Wien (2022–2024), where she advanced her work at the interface of chemistry and machine learning. In 2024, she was awarded a prestigious ERC Starting Grant along with an FWF START Prize, and started her own research group at TU Wien.',
+    'As a scientist, teacher, and mentor, Esther Heid works at the interface of machine learning and chemistry, using computers to simulate, predict, and optimize chemical processes. Her current research focuses on machine-learned reaction property prediction, drawing on graph theory, cheminformatics, and deep learning to better understand chemical reactions and, in the longer term, to develop computational approaches for the eco-friendly synthesis of a wide range of target molecules.',
+    'She also develops and maintains scientific software, including a Python package that predicts molecule and reaction properties with graph-convolutional neural networks. Her further expertise spans the simulation of soft matter and the quantum-mechanical calculation of molecular and atomic properties.',
+  ],
+  // TODO: add the TU Wien staff profile URL.
+  links: {
+    github: 'https://github.com/hesther',
+    linkedin: 'https://www.linkedin.com/in/esther-heid-ab20001a6/',
+    scholar: 'https://scholar.google.com/citations?user=NDE5issAAAAJ&hl=en',
+  },
+};
 
 export const members: Member[] = [
   // ── Postdocs ──────────────────────────────────────────────────────────────
@@ -224,8 +250,8 @@ export const groupSections: { group: Group; id: string; heading: string }[] = [
 ];
 
 // Alumni, grouped by the year each person left (newest first). Reuses the
-// awards/award-year timeline styling. `note` is optional HTML shown after the
-// name (e.g. affiliation).
+// awards/award-year timeline styling. `note` (e.g. role and affiliation) is
+// shown after the name as plain text.
 export const alumni: { year: string; people: { name: string; note: string }[] }[] = [
   {
     year: '2026',
@@ -264,6 +290,15 @@ export function slug(name: string): string {
 // the team page is fixed everywhere. Returns undefined for the default crop.
 export function avatarCrop(name: string): Member['avatar'] {
   return members.find((m) => m.name === name)?.avatar;
+}
+
+// A person's photo filename, looked up by name, so other pages that show the
+// same headshots (e.g. the grant pages) use the team page's photo instead of
+// keeping their own copy. Returns undefined if they have no photo or aren't on
+// the team (the PI or `members`).
+export function memberPhoto(name: string): string | undefined {
+  if (name === pi.name) return pi.photo;
+  return members.find((m) => m.name === name)?.photo;
 }
 
 // Compute initials from a name for the photo fallback (e.g. "Leon Ganser" → "LG").

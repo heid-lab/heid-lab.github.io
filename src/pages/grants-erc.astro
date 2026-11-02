@@ -1,9 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PubList from '../components/PubList.astro';
-import { avatarCrop, initials, slug } from '../data/team';
+import GrantPeople from '../components/GrantPeople.astro';
+import { pi } from '../data/team';
 import { pubsByFunding } from '../data/publications';
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 // Publications acknowledging the ERC grant, grouped by year — tagged
 // funding: ['erc'] in publications.ts, so this list stays in sync when papers
@@ -56,40 +56,28 @@ const facts = [
   { label: 'Host institution', value: 'TU Wien — Institute of Materials Chemistry' },
 ];
 
-// People currently working on the ERC project. `photo` is a filename in
-// imgs/team_members/ (omit to fall back to the initials circle).
+// People currently working on the ERC project. Names link to the person's card
+// on the team page and photos come from team.ts (see GrantPeople.astro).
 const people = [
-  { name: 'Esther Heid', note: 'Principal investigator', href: `${base}/pi`, photo: 'esther-heid.jpg' },
-  { name: 'Jonathan Zheng', note: 'Postdoc · enzymatic reactions', href: `${base}/team#${slug('Jonathan Zheng')}`, photo: 'jonathan-zheng.jpg' },
-  { name: 'Jasper De Landsheere', note: 'Ph.D. · reaction property prediction', href: `${base}/team#${slug('Jasper De Landsheere')}`, photo: 'jasper-de-landsheere.jpg' },
-  { name: 'Leon Ganser', note: 'Ph.D. · asymmetric organocatalysis', href: `${base}/team#${slug('Leon Ganser')}` },
+  { name: pi.name, note: 'Principal investigator', href: '/pi' },
+  { name: 'Jonathan Zheng', note: 'Postdoc · enzymatic reactions' },
+  { name: 'Jasper De Landsheere', note: 'Ph.D. · reaction property prediction' },
+  { name: 'Leon Ganser', note: 'Ph.D. · asymmetric organocatalysis' },
 ];
-
-// Crop overrides for this page's small round frames. The team page's crops
-// (team.ts) are tuned for a large square; a circle also cuts the corners, so a
-// couple of photos need a tighter focal point here. Name -> class suffix.
-const cropOverrides: Record<string, string> = {
-  'Esther Heid': 'high',      // not in `members`; face sits high in the portrait
-  'Jasper De Landsheere': 'zoom-top', // wide shot: head high and small
-};
-
-// Class list for a headshot circle, adding the person's per-photo crop tweak
-// so faces stay centered in the circle.
-const photoClass = (name: string) => {
-  const crop = cropOverrides[name] ?? avatarCrop(name);
-  return ['grant-person-photo', crop && `grant-person-photo--${crop}`].filter(Boolean).join(' ');
-};
 
 // Former contributors to the project.
 const pastPeople = [
-  { name: 'Johannes Karwounopoulos', note: 'Postdoc (2025–2026)', href: `${base}/team#${slug('Johannes Karwounopoulos')}`, photo: 'johannes-karwounopoulos.jpg' },
-  { name: 'Charlotte Gerhaher', note: 'Ph.D. (2025–2026)', href: `${base}/team#${slug('Charlotte Gerhaher')}`, photo: 'charlotte-gerhaher.jpg' },
-  { name: 'Konstantin Mark', note: 'Ph.D. (2025–2026)', href: `${base}/team#${slug('Konstantin Mark')}`, photo: 'konstantin-mark.jpg' },
-  { name: 'Maximilian P.-P. Kovar', note: 'Ph.D. (2026)', href: `${base}/team#${slug('Maximilian P.-P. Kovar')}`, photo: 'maximilian-kovar.jpg' },
+  { name: 'Johannes Karwounopoulos', note: 'Postdoc (2025–2026)' },
+  { name: 'Charlotte Gerhaher', note: 'Ph.D. (2025–2026)' },
+  { name: 'Konstantin Mark', note: 'Ph.D. (2025–2026)' },
+  { name: 'Maximilian P.-P. Kovar', note: 'Ph.D. (2026)' },
 ];
 ---
-<Layout title="Heid Lab — ERC Starting Grant (DeepRxn)" scripts={["header.js"]}>
-  <main class="grant-page">
+<Layout
+  title="Heid Lab — ERC Starting Grant (DeepRxn)"
+  description="DeepRxn, an ERC Starting Grant project at TU Wien (2024–2029), develops deep learning frameworks that predict how organic and enzymatic reactions proceed."
+>
+  <div class="page grant-page">
     <section class="grant-hero">
       <div class="grant-hero-inner">
         <div class="grant-hero-text">
@@ -104,10 +92,10 @@ const pastPeople = [
         </div>
         <div class="grant-hero-logos">
           <span class="grant-hero-logo">
-            <img src={`${base}/imgs/grants/deeprxn-logo.png`} alt="DeepRxn — Deep learning of chemical reactions" />
+            <img src="/imgs/grants/deeprxn-logo.png" alt="DeepRxn — Deep learning of chemical reactions" />
           </span>
           <span class="grant-hero-logo grant-hero-logo--erc">
-            <img src={`${base}/imgs/grants/erc-eu-logo.png`} alt="Funded by the European Union — European Research Council" />
+            <img src="/imgs/grants/erc-eu-logo.png" alt="Funded by the European Union — European Research Council" />
           </span>
         </div>
         <div class="tags grant-tags">
@@ -178,40 +166,12 @@ const pastPeople = [
     </div>
 
     <h2>People on the project</h2>
-    <ul class="grant-people">
-      {people.map((p) => (
-        <li>
-          {p.photo
-            ? <span class={photoClass(p.name)}>
-                <img src={`${base}/imgs/team_members/${p.photo}`} alt={p.name} loading="lazy" />
-              </span>
-            : <span class="grant-person-initials">{initials(p.name)}</span>}
-          <span class="grant-person-text">
-            <strong><a href={p.href}>{p.name}</a></strong>
-            <span class="grant-person-note">{p.note}</span>
-          </span>
-        </li>
-      ))}
-    </ul>
+    <GrantPeople people={people} />
     <h3 class="grant-people-past-head">Past contributors</h3>
-    <ul class="grant-people grant-people--past">
-      {pastPeople.map((p) => (
-        <li>
-          {p.photo
-            ? <span class={photoClass(p.name)}>
-                <img src={`${base}/imgs/team_members/${p.photo}`} alt={p.name} loading="lazy" />
-              </span>
-            : <span class="grant-person-initials">{initials(p.name)}</span>}
-          <span class="grant-person-text">
-            <strong><a href={p.href}>{p.name}</a></strong>
-            <span class="grant-person-note">{p.note}</span>
-          </span>
-        </li>
-      ))}
-    </ul>
+    <GrantPeople people={pastPeople} past />
 
     <h2>Work supported by the ERC</h2>
-    <p>Publications funded by this grant. Our full list is on the <a href={`${base}/publications`}>Publications</a> page.</p>
+    <p>Publications funded by this grant. Our full list is on the <a href="/publications">Publications</a> page.</p>
     {relatedPubs.map((group) => (
       <Fragment>
         <h3 class="grant-pubs-year">{group.year}</h3>
@@ -226,5 +186,5 @@ const pastPeople = [
       those of the European Union or the European Research Council. Neither the European Union
       nor the granting authority can be held responsible for them.
     </p>
-  </main>
+  </div>
 </Layout>

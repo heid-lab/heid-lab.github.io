@@ -1,7 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { pi } from '../data/team';
 ---
-<Layout title="Heid Lab — Contact" active="contact" scripts={["header.js"]}>
+<Layout
+  title="Heid Lab — Contact"
+  description="How to join or work with the Heid Lab at TU Wien: Ph.D. and postdoc positions, student theses and internships, collaborations, and where to find us."
+  active="contact"
+>
   <section class="section contact-intro">
     <div class="wrap">
       <div class="section-head">
@@ -22,7 +27,7 @@ import Layout from '../layouts/Layout.astro';
         </ul>
         <p>Tell us what you would like to work on.</p>
         <div class="btn-row">
-          <a class="btn btn-primary" href="mailto:esther.heid@tuwien.ac.at">Email us<span class="arrow">→</span></a>
+          <a class="btn btn-primary" href={`mailto:${pi.email}`}>Email us<span class="arrow">→</span></a>
         </div>
       </div>
 

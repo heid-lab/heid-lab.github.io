@@ -9,7 +9,6 @@
 //      course's entry in `currentCourses`, e.g.
 //      page: 'teaching/deep-learning-in-chemistry'. Its card then links here.
 import Layout from '../../layouts/Layout.astro';
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const course = { nr: '000.000', type: 'SE', semester: '2026W', title: 'Course title' };
 const tissUrl = `https://www.tiss.tuwien.ac.at/course/courseDetails.xhtml?semester=${course.semester}&locale=en&courseNr=${course.nr.replace('.', '')}`;
@@ -19,8 +18,12 @@ const tissUrl = `https://www.tiss.tuwien.ac.at/course/courseDetails.xhtml?semest
 //   { date: '2026-10-08', title: 'Machine-readable molecules', area: 'Chemistry' },
 const sessions: { date: string; title: string; area: string }[] = [];
 ---
-<Layout title={`Heid Lab — ${course.title}`} active="teaching" scripts={["header.js"]}>
-  <main>
+<Layout
+  title={`Heid Lab — ${course.title}`}
+  description={`${course.title} (${course.nr} ${course.type}) at TU Wien, taught by the Heid Lab: sessions and schedule.`}
+  active="teaching"
+>
+  <div class="page">
     <p class="eyebrow">{course.nr} · {course.type} · {course.semester}</p>
     <h1>{course.title}</h1>
     <p>
@@ -52,6 +55,6 @@ const sessions: { date: string; title: string; area: string }[] = [];
       </table>
     </div>
 
-    <p class="session-back"><a href={`${base}/teaching`}>← All courses</a></p>
-  </main>
+    <p class="session-back"><a href="/teaching">← All courses</a></p>
+  </div>
 </Layout>

@@ -1,9 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
-<Layout title="Heid Lab — FWF START Prize" scripts={["header.js"]}>
-  <main>
+<Layout
+  title="Heid Lab — FWF START Prize"
+  description="The FWF START Prize, awarded to Esther Heid in 2024, supports the Heid Lab's long-term research on machine learning for sustainable chemistry."
+>
+  <div class="page">
     <p class="eyebrow">Austrian Science Fund (FWF) · Since 2024</p>
     <h1>START Prize</h1>
     <p>
@@ -27,7 +29,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </li>
       <li>
         <span class="pub-year">Principal investigator</span>
-        <strong><a href={`${base}/pi`}>Esther Heid</a></strong>
+        <strong><a href="/pi">Esther Heid</a></strong>
       </li>
       <!-- TODO: add FWF project number (e.g. Y-xxx), duration (start/end), and budget. -->
       <!-- TODO: add link to the FWF project database entry. -->
@@ -36,14 +38,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <h2>People on the project</h2>
     <p>
       START-funded positions in the group are listed on the
-      <a href={`${base}/team`}>Team</a> page.
+      <a href="/team">Team</a> page.
     </p>
     <p><!-- TODO: list the specific START-funded positions and people. --></p>
 
     <h2>Related publications</h2>
     <p>
       Output from the project appears on the
-      <a href={`${base}/publications`}>Publications</a> page.
+      <a href="/publications">Publications</a> page.
     </p>
     <p><!-- TODO: filter to the publications that acknowledge this grant. --></p>
 
@@ -52,5 +54,5 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       Supported by the Austrian Science Fund (FWF).
       <!-- TODO: confirm the exact acknowledgment wording and project number required by the FWF, and add the FWF logo. -->
     </p>
-  </main>
+  </div>
 </Layout>

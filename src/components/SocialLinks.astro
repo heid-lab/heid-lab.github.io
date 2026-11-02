@@ -1,0 +1,19 @@
+---
+// A person's social icons (GitHub, LinkedIn, Google Scholar), each shown only
+// when its link is set. Anything passed between the tags (e.g. an email link)
+// comes first. The icons are defined in IconSprite, which Layout puts on every
+// page.
+import type { Links } from '../data/team';
+
+interface Props {
+  links?: Links;
+}
+const { links = {} } = Astro.props;
+---
+<p class="person-links"><slot />{links.github && (
+  <a href={links.github}><svg class="icon" role="img" aria-label="GitHub"><use href="#i-github"></use></svg></a>
+)}{links.linkedin && (
+  <a href={links.linkedin}><svg class="icon" role="img" aria-label="LinkedIn"><use href="#i-linkedin"></use></svg></a>
+)}{links.scholar && (
+  <a href={links.scholar}><svg class="icon" role="img" aria-label="Google Scholar"><use href="#i-scholar"></use></svg></a>
+)}</p>

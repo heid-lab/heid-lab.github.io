@@ -1,25 +1,33 @@
 ---
 // The shared page skeleton: <head>, header, footer, and the global stylesheet.
-// Every page wraps its content in this, so the boilerplate that used to be
-// duplicated across 11 HTML files now lives here once.
+// Every page wraps its content in this.
 //
 // Props:
-//   title   -> <title> text
-//   active  -> nav key to highlight (see Header.astro)
-//   noJs    -> set <html class="no-js"> (team page progressive enhancement)
-//   scripts -> filenames from public/js to load at the end of <body>
+//   title       -> <title> text
+//   description -> one-sentence summary of the page, shown by search engines
+//                  under the title and in link previews (Slack, LinkedIn, …)
+//   active      -> nav key to highlight (see Header.astro)
+//   noJs        -> set <html class="no-js"> (team page progressive enhancement)
+//
+// Scripts live in a <script> tag in the component or page whose markup they
+// drive; Astro bundles them and loads each one only on pages that use it.
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import IconSprite from '../components/IconSprite.astro';
 import '../styles/style.css';
 
 interface Props {
   title: string;
+  description?: string;
   active?: string;
   noJs?: boolean;
-  scripts?: string[];
 }
-const { title, active, noJs = false, scripts = [] } = Astro.props;
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const {
+  title,
+  description = 'The Heid Lab at TU Wien develops machine learning methods for chemical reactions.',
+  active,
+  noJs = false,
+} = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en" class={noJs ? 'no-js' : undefined}>
@@ -27,21 +35,18 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <meta name="description" content={description} />
     <!-- Tab icon: SVG for modern browsers, .ico fallback. sizes="32x32" keeps
          Chrome from preferring the .ico over the SVG. -->
-    <link rel="icon" href={`${base}/imgs/favicon/favicon.ico`} sizes="32x32" />
-    <link rel="icon" href={`${base}/imgs/favicon/favicon.svg`} type="image/svg+xml" />
-    <!-- Expose the deploy base path so the vanilla scripts in public/js can
-         resolve root-relative asset paths ("imgs/...") correctly. -->
-    <script is:inline define:vars={{ base }}>
-      window.BASE_URL = base || '/';
-    </script>
+    <link rel="icon" href="/imgs/favicon/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/imgs/favicon/favicon.svg" type="image/svg+xml" />
   </head>
   <body>
-    <slot name="pre-header" />
+    <IconSprite />
     <Header active={active} />
-    <slot />
+    <main>
+      <slot />
+    </main>
     <Footer />
-    {scripts.map((s) => <script is:inline src={`${base}/js/${s}`}></script>)}
   </body>
 </html>

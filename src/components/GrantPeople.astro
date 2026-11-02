@@ -1,0 +1,56 @@
+---
+// A list of people on a grant page: a round headshot (or their initials), the
+// name linking to their card on the team page, and a short note.
+//
+// Photos and crops come from team.ts, so they always match the team page. Set
+// `photo` (a filename in imgs/team_members/) only for someone who is no longer
+// on the team, e.g. a past contributor who has left; without one the circle
+// shows their initials.
+import { avatarCrop, initials, memberPhoto, slug } from '../data/team';
+
+interface Person {
+  name: string;
+  note: string;
+  href?: string;  // defaults to the person's card on the team page
+  photo?: string;
+}
+
+interface Props {
+  people: Person[];
+  past?: boolean;
+}
+const { people, past = false } = Astro.props;
+
+// Crop overrides for these small round frames. The team page's crops
+// (team.ts) are tuned for a large square; a circle also cuts the corners, so a
+// couple of photos need a tighter focal point here. Name -> class suffix.
+const cropOverrides: Record<string, string> = {
+  'Esther Heid': 'high',      // the PI isn't in `members`; face sits high in the portrait
+  'Jasper De Landsheere': 'zoom-top', // wide shot: head high and small
+};
+
+// Class list for a headshot circle, adding the person's per-photo crop tweak
+// so faces stay centered in the circle.
+const photoClass = (name: string) => {
+  const crop = cropOverrides[name] ?? avatarCrop(name);
+  return ['grant-person-photo', crop && `grant-person-photo--${crop}`].filter(Boolean).join(' ');
+};
+---
+<ul class:list={['grant-people', { 'grant-people--past': past }]}>
+  {people.map((p) => {
+    const photo = p.photo ?? memberPhoto(p.name);
+    return (
+      <li>
+        {photo
+          ? <span class={photoClass(p.name)}>
+              <img src={`/imgs/team_members/${photo}`} alt={p.name} loading="lazy" />
+            </span>
+          : <span class="grant-person-initials">{initials(p.name)}</span>}
+        <span class="grant-person-text">
+          <strong><a href={p.href ?? `/team#${slug(p.name)}`}>{p.name}</a></strong>
+          <span class="grant-person-note">{p.note}</span>
+        </span>
+      </li>
+    );
+  })}
+</ul>
