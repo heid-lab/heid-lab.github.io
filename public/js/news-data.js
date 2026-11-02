@@ -72,9 +72,6 @@ window.NEWS = [
     date: "2026-10-15",
     title: "This website goes online",
     body: 'Charlotte finished building our website. Although it might seem longer to this newsfeed, the public version of the website launched on this day. Well done, Charlotte! Many thanks to you!',
-    images: [
-      { src: "imgs/favicon/favicon.svg", alt: "The Heid Lab logo" }
-    ]
   },
   {
     date: "2026-10-01",
