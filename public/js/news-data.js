@@ -23,6 +23,59 @@
    ============================================================ */
 
 window.NEWS = [
+  /* Not yet happened: uncomment once Sebastian has started his Ph.D.
+  {
+    date: "2026-12",
+    title: "Sebastian continues as a Ph.D. student",
+    body: 'We are happy to announce that Sebastian will be staying with us for his Ph.D. He will continue investigating the prediction of enzymatic reactions and their conditions.'
+  },
+  */
+  /* Not yet happened: uncomment after the defense and add photos
+  {
+    date: "2026-11-16",
+    title: "Sebastian successfully defends his master's thesis",
+    body: 'Congratulations to Sebastian, who successfully defended his master\'s thesis on “Engineering Enzymes using Multi-Marginal Flow Matching”. The examiners did not even need to question him for hours, since it was evident how proficiently he answered all their questions right away. We are proud!',
+    images: [
+      { src: "imgs/news/2026-11-16-Sebastian-defence-1.jpeg", alt: "" }
+    ]
+  },
+  */
+  /* Not yet happened: uncomment after the conference and add photos
+  {
+    date: "2026-11-10",
+    title: "Invited talk at the German Conference on Cheminformatics",
+    body: 'Another invited talk for Esther, this time at this year\'s German Conference on Cheminformatics (GCC), where Max also presented his poster.',
+    images: [
+      { src: "imgs/news/2026-11-10-GCC-1.jpeg", alt: "" }
+    ]
+  },
+  */
+  /* Waiting for a photo: uncomment once it is in imgs/news
+  {
+    date: "2026-11-01",
+    title: "Max writes an opinion piece for <em>Nachrichten aus der Chemie</em>",
+    body: 'Max was invited to write an opinion piece about how he thinks machine learning might affect synthetic chemistry in the future for the <em>Nachrichten aus der Chemie</em>, the official newspaper of the German Chemical Society (GDCh). If you are interested in his opinion (and speak German), you may read it <a href="https://www.gdch.de/my/article/wie-maschinelles-lernen-die-chemie-veraendert-4161536">here</a>.',
+    images: [
+      { src: "imgs/news/2026-11-01-NadC-Max.jpeg", alt: "" }
+    ]
+  },
+  */
+  {
+    date: "2026-10-28",
+    title: "Invited talk at the CHAIR Workshop for Structured Learning",
+    body: 'Esther gave an amazing invited talk at the Chalmers AI Research Centre (CHAIR) Workshop for Structured Learning in Gothenburg, and Max presented his poster there as well.',
+    images: [
+      { src: "imgs/news/2026_10_28_CHAIR-esther-talk.jpeg", alt: "Esther giving her invited talk on flow matching at the CHAIR Workshop for Structured Learning" }
+    ]
+  },
+  {
+    date: "2026-10-15",
+    title: "This website goes online",
+    body: 'Charlotte finished building our website. Although it might seem longer to this newsfeed, the public version of the website launched on this day. Well done, Charlotte! Many thanks to you!',
+    images: [
+      { src: "imgs/favicon/favicon.svg", alt: "The Heid Lab logo" }
+    ]
+  },
   {
     date: "2026-10-01",
     title: 'Our Seminar Series "Interdisciplinary Foundations of Deep Learning in Chemistry" opens its doors',
