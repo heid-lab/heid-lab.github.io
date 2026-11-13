@@ -12,6 +12,8 @@
 //           appear in the "Life in the lab" gallery on the News page. Add
 //           credit: "Name" to photos we don't own; it shows as
 //           "Photo: © Name" under the photos and in the captions.
+//           Add gallery: false to keep a photo out of the "Life in the
+//           lab" gallery; it then shows only under its news item.
 //
 // Image src values are written relative to the site root ("imgs/..."), i.e.
 // the file public/imgs/news/x.jpg is "imgs/news/x.jpg".
@@ -20,6 +22,7 @@ export interface NewsImage {
   src: string;
   alt: string;
   credit?: string;
+  gallery?: boolean; // default true; false = news feed only, not in "Life in the lab"
 }
 
 export interface NewsItem {
@@ -46,29 +49,29 @@ export const news: NewsItem[] = [
     ]
   },
   */
-  /* Not yet happened: uncomment after the conference and add photos
   {
     date: "2026-11-10",
-    title: "Invited talk at the German Conference on Cheminformatics",
-    body: 'Another invited talk for Esther, this time at this year\'s German Conference on Cheminformatics (GCC), where Max also presented his poster.',
+    title: "Keynote and poster at the German Conference on Cheminformatics",
+    body: 'Another invited talk, this time a keynote, for Esther, this time at this year\'s German Conference on Cheminformatics (GCC), where Max also presented his poster.',
     images: [
-      { src: "imgs/news/2026-11-10-GCC-1.jpeg", alt: "" }
+      { src: "imgs/news/2026-11-10-GCC_Esther_1.jpeg", alt: "Esther giving her invited talk at the German Conference on Cheminformatics" },
+      { src: "imgs/news/2026-11-10-GCC_Esther_2.jpeg", alt: "Esther giving her invited talk at the German Conference on Cheminformatics", gallery: false },
+      { src: "imgs/news/2026-11-10-GCC_Max.jpeg", alt: "Max presenting his poster at the German Conference on Cheminformatics" }
     ]
   },
-  */
-  /* Waiting for a photo: uncomment once it is in imgs/news
   {
     date: "2026-11-01",
-    title: "Max writes an opinion piece for <em>Nachrichten aus der Chemie</em>",
-    body: 'Max was invited to write an opinion piece about how he thinks machine learning might affect synthetic chemistry in the future for the <em>Nachrichten aus der Chemie</em>, the official newspaper of the German Chemical Society (GDCh). If you are interested in his opinion (and speak German), you may read it <a href="https://www.gdch.de/my/article/wie-maschinelles-lernen-die-chemie-veraendert-4161536">here</a>.',
+    title: "Max wrote an opinion piece for <em>Nachrichten aus der Chemie</em>",
+    body: 'Max was invited to write an opinion piece about how he thinks machine learning might affect synthetic chemistry in the future for the <em>Nachrichten aus der Chemie</em>, the official newspaper of the German Chemical Society (GDCh) and Austrian Chemical Society (GÖCh). If you are interested in his opinion (and speak German), you may read it <a href="https://www.gdch.de/my/article/wie-maschinelles-lernen-die-chemie-veraendert-4161536">here</a> (GDCh) or <a href="https://doi.org/10.1002/nadc.20264161536">here</a> (Wiley).',
     images: [
-      { src: "imgs/news/2026-11-01-NadC-Max.jpeg", alt: "" }
+      { src: "imgs/news/2026-11-NadCh_1.jpeg", alt: "Max's opinion piece in Nachrichten aus der Chemie" },
+      { src: "imgs/news/2026-11-NadCh_2.jpeg", alt: "Max's opinion piece in Nachrichten aus der Chemie", gallery: false },
+      { src: "imgs/news/2026-11-NadCh_3.jpeg", alt: "Max's opinion piece in Nachrichten aus der Chemie", gallery: false }
     ]
   },
-  */
   {
     date: "2026-10-28",
-    title: "Invited talk at the CHAIR Workshop for Structured Learning",
+    title: "Invited talk and poster at the CHAIR Workshop for Structured Learning",
     body: 'Esther gave an amazing invited talk at the Chalmers AI Research Centre (CHAIR) Workshop for Structured Learning in Gothenburg, and Max presented his poster there as well.',
     images: [
       { src: "imgs/news/2026_10_28_CHAIR-esther-talk.jpeg", alt: "Esther giving her invited talk on flow matching at the CHAIR Workshop for Structured Learning" }
@@ -77,7 +80,10 @@ export const news: NewsItem[] = [
   {
     date: "2026-10-15",
     title: "This website goes online",
-    body: 'Charlotte finished building our website. Although it might seem longer to this newsfeed, the public version of the website launched on this day. Well done, Charlotte! Many thanks to you!',
+    body: 'Charlotte finished building our website. Although it might seem longer due to this newsfeed, the public version of the website launched on that day. Well done, Charlotte! Many thanks to you!',
+    images: [
+      { src: "imgs/news/charlotte-recursive.png", alt: "The Heid Lab website presented by Charlotte" }
+    ]
   },
   {
     date: "2026-10-01",
@@ -103,7 +109,7 @@ export const news: NewsItem[] = [
       { src: "imgs/news/2026-09-21-Chemietage_Leo.jpeg", alt: "Leon presenting his poster on asymmetric organocatalysis" },
       { src: "imgs/news/2026-09-22-Chemietage_Synnoeve.jpeg", alt: "Synnöve presenting her poster on early lung cancer detection" },
       { src: "imgs/news/2026-09-22-Chemietage_Max_talk.jpeg", alt: "Max giving his talk at the Chemietage 2026" },
-      { src: "imgs/news/2026-09-23-Chemietage_Max_Prize.jpeg", alt: "Max receiving his prize at the Chemietage 2026" }
+      { src: "imgs/news/2026-09-23-Chemietage_Max_Prize.jpeg", alt: "Max receiving his prize at the Chemietage 2026", gallery: false }
     ]
   },
   {
@@ -134,7 +140,7 @@ export const news: NewsItem[] = [
     body: 'Max has been awarded the competitive DOC Fellowship of the Austrian Academy of Sciences. From September onwards, he will be able to focus on his research project, which focuses on curating high-quality chemical reaction datasets that meaningfully cover reaction space to train more reliable AI models for synthetic chemistry. Congratulations, Max! \
     Read the full press release <a href="https://stipendien.oeaw.ac.at/en/stipendien/doc/doc-gefoerderte-personen">here</a>.',
     images: [
-      { src: "imgs/news/2026-07-max-1.jpeg", alt: "" },
+      { src: "imgs/news/2026-07-max-1.jpeg", alt: "", gallery: false },
       { src: "imgs/news/2026-07-max-2.jpeg", alt: "" }
     ]
   },
@@ -159,9 +165,9 @@ export const news: NewsItem[] = [
     body: 'The <a href="https://www.tuwien.at/tch/yia/science-days/">Science Days</a> 2026 were a full success with a wide range of contributions from the group, including a talk by Esther, moderation by Max, posters and pitches by Leon and Synnöve, and to top it all off, Leon taking home the first poster prize. Congrats to all!',
     images: [
       { src: "imgs/news/2026-06-science-days-1.jpg", alt: "Science Days 2026" },
-      { src: "imgs/news/2026-06-science-days-2.jpg", alt: "Science Days 2026" },
+      { src: "imgs/news/2026-06-science-days-2.jpg", alt: "Science Days 2026", gallery: false },
       { src: "imgs/news/2026-06-science-days-3.jpg", alt: "Science Days 2026" },
-      { src: "imgs/news/2026-06-science-days-4.jpeg", alt: "At the image competition of the Science Days 2026" }
+      { src: "imgs/news/2026-06-science-days-4.jpeg", alt: "Science Days 2026" }
     ]
   },
   {
@@ -184,7 +190,7 @@ export const news: NewsItem[] = [
     title: "Synnöve and Charlotte participate in the Epistimi Leadership Program",
     body: 'Synnöve and Charlotte went to Athens for a week to take part in the <a href="https://www.epistimi.org/program">Epistimi Leadership Program</a>, led by former MIT professor Dr. Angeliki Rigos. Built on MIT\'s LEAPS program and created by women in STEMM for women in STEMM, the workshops help early-career researchers begin their leadership journey — from self-awareness and communication to leading teams, navigating conflict, and negotiation.',
     images: [
-      { src: "imgs/news/2026-05-epistimi-1.jpeg", alt: "Epistimi Leadership Program in Athens" },
+      { src: "imgs/news/2026-05-epistimi-1.jpeg", alt: "Epistimi Leadership Program in Athens", gallery: false },
       { src: "imgs/news/2026-05-epistimi-2.jpeg", alt: "Epistimi Leadership Program in Athens" },
       { src: "imgs/news/2026-05-epistimi-3.jpeg", alt: "Epistimi Leadership Program in Athens" }
     ]
@@ -207,7 +213,7 @@ export const news: NewsItem[] = [
     title: "Lecture Night at the Vienna Science Circle",
     body: 'Esther held a lecture at the <a href="https://viennasciencecircle.at/">Vienna Science Circle</a> about the use of artificial intelligence in chemistry.',
     images: [
-      { src: "imgs/news/2026-03-19-Science_Circle.jpeg", alt: "At the Vienna Science Circle" }
+      { src: "imgs/news/2026-03-19-Science_Circle.jpeg", alt: "At the Vienna Science Circle", gallery: false }
     ]
   },
   {
@@ -412,7 +418,7 @@ export const news: NewsItem[] = [
     title: "Esther receives an ERC Starting Grant",
     body: 'Just a few months after the FWF START Prize, more great news: the European Research Council (ERC) has awarded Esther a Starting Grant worth €1.5 million over five years for her project on “Deep learning of chemical reactions”. TU Wien is as proud as we are: read their <a href="https://www.tuwien.at/en/tu-wien/news/news-articles/news/esther-heid-kuenstliche-intelligenz-fuer-chemische-reaktionen">press release</a>.',
     images: [
-      { src: "imgs/news/2024-09-erc-esther.jpg", alt: "Esther Heid", credit: "Ulrich Zinell" }
+      { src: "imgs/news/2024-09-erc-esther.jpg", alt: "Esther Heid", credit: "Ulrich Zinell", gallery: false }
     ]
   },
   {
@@ -430,7 +436,7 @@ export const news: NewsItem[] = [
     title: "Esther receives the FWF START Prize",
     body: 'Esther has been awarded the START Prize of the Austrian Science Fund (FWF), Austria\'s most prestigious award for early-career researchers. Now, the Heid Lab may cease to be a one-woman show. Read the interview with Esther about her vision of the “virtual laboratory”: <a href="https://scilog.fwf.ac.at/en/magazine/a-virtual-laboratory-for-more-sustainability">A virtual laboratory for more sustainability</a>.',
     images: [
-      { src: "imgs/news/2024-06-fwf-start-esther.jpg", alt: "Esther Heid", credit: "FWF/Ulrich Zinell" }
+      { src: "imgs/news/2024-06-fwf-start-esther.jpg", alt: "Esther Heid", credit: "FWF/Ulrich Zinell", gallery: false }
     ]
   },
   {
