@@ -82,7 +82,7 @@ export const news: NewsItem[] = [
     title: "This website goes online",
     body: 'Charlotte finished building our website. Although it might seem longer due to this newsfeed, the public version of the website launched on that day. Well done, Charlotte! Many thanks to you!',
     images: [
-      { src: "imgs/news/charlotte-recursive.png", alt: "The Heid Lab website presented by Charlotte" }
+      { src: "imgs/news/charlotte-recursive.jpg", alt: "The Heid Lab website presented by Charlotte" }
     ]
   },
   {
