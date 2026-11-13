@@ -13,7 +13,7 @@ import { newsByDate, imageUrl, plainText } from '../data/news';
 // Always lead with the poster photo, then every news image, newest first.
 const pics: { src: string; alt: string; title: string; credit?: string }[] = [
   { src: 'imgs/group/web/sel-7.jpg', alt: 'Three Heid Lab members posing in front of their research posters', title: 'Check out our posters!' },
-  ...newsByDate().flatMap((item) => (item.images ?? []).map((pic) => ({
+  ...newsByDate().flatMap((item) => (item.images ?? []).filter((pic) => pic.gallery !== false).map((pic) => ({
     src: pic.src,
     alt: pic.alt || plainText(item.title),
     title: plainText(item.title),
