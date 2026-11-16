@@ -39,16 +39,16 @@ export const news: NewsItem[] = [
     body: 'We are happy to announce that Sebastian will be staying with us for his Ph.D. He will continue investigating the prediction of enzymatic reactions and their conditions.'
   },
   */
-  /* Not yet happened: uncomment after the defense and add photos
   {
     date: "2026-11-16",
     title: "Sebastian successfully defends his master's thesis",
     body: 'Congratulations to Sebastian, who successfully defended his master\'s thesis on “Engineering Enzymes using Multi-Marginal Flow Matching”. The examiners did not even need to question him for hours, since it was evident how proficiently he answered all their questions right away. We are proud!',
     images: [
-      { src: "imgs/news/2026-11-16-Sebastian-defence-1.jpeg", alt: "" }
+      { src: "imgs/news/2026-11-16-Sebastian_Defense_1.jpeg", alt: "Sebastian presenting his master's thesis" },
+      { src: "imgs/news/2026-11-16-Sebastian_Defense_2.jpeg", alt: "Sebastian and Esther after his defense" },
+      { src: "imgs/news/2026-11-16-Sebastian_Defense_3.jpeg", alt: "Sebastian and Jasper after his defense" }
     ]
   },
-  */
   {
     date: "2026-11-10",
     title: "Keynote and poster at the German Conference on Cheminformatics",
@@ -247,8 +247,8 @@ export const news: NewsItem[] = [
     body: 'Congratulations to Stephie, who successfully defended her master\'s thesis on “Integrating nudged elastic band with flow matching for enhanced transition state prediction”!',
     images: [
       { src: "imgs/news/2026-03-stephi-1.jpeg", alt: "Stephie's master's thesis defense" },
-      { src: "imgs/news/2026-03-stephi-2.jpeg", alt: "Stephie's master's thesis defense" },
-      { src: "imgs/news/2026-03-stephi-3.jpeg", alt: "Stephie's master's thesis defense" }
+      { src: "imgs/news/2026-03-stephi-2.jpeg", alt: "Stephie and Esther after her defense" },
+      { src: "imgs/news/2026-03-stephi-3.jpeg", alt: "Stephie and Jasper after her defense" }
     ]
   },
   {
