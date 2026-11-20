@@ -32,11 +32,42 @@ export interface NewsItem {
   images?: NewsImage[];
 }
 export const news: NewsItem[] = [
+  /*
+  {
+    date: "2026-12-10",
+    title: "Christmas Party at the Heid Lab",
+    body: 'Another great year at the Heid Lab is in the books, and of course we had to celebrate! Good food, drinks and even better company made for a wonderful evening to look back on everything we achieved and to look ahead to the new year. The highlight: the very first official Heid Lab awards, handed out to our most outstanding members!'
+  },
+  */
+  /*
+  {
+    date: "2026-12",
+    title: "Giulia is back once more",
+    body: 'Good news: Giulia is coming back to TU Wien for another round of research on excited states. Welcome back, Giulia!'
+  },
+  */
   /* Not yet happened: uncomment once Sebastian has started his Ph.D.
   {
     date: "2026-12",
     title: "Sebastian continues as a Ph.D. student",
-    body: 'We are happy to announce that Sebastian will be staying with us for his Ph.D. He will continue investigating the prediction of enzymatic reactions and their conditions.'
+    body: 'Fresh off his master\'s defense, Sebastian is staying with us for his Ph.D.! He will keep investigating the prediction of enzymatic reactions and their conditions.'
+  },
+  */
+  /*
+  {
+    date: "2026-12",
+    title: "Stephie returns to the lab",
+    body: 'Stephie just can\'t stay away and is joining us again for another stint of research. Great to have you back, Stephie!'
+  },
+  */
+  /*
+   {
+    date: "2026-12",
+    title: "Clara joins the group",
+    body: 'One more new face before the year is over! Please welcome:' +
+      '<ul>' +
+      '<li><strong>Clara</strong> — joining for a research internship with Jasper about comparative reaction property prediction</li>' +
+      '</ul>'
   },
   */
   {
